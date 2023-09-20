@@ -1,3 +1,28 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+	.img-box {
+		@apply flex items-center justify-center overflow-hidden;
+	}
+	img {
+		@apply w-full h-full object-contain;
+	}
+
+	input[type='text'] {
+		@apply border-none outline-none w-full bg-transparent;
+	}
+
+	.btn {
+		@apply flex items-center justify-center border-none outline-none;
+	}
+
+	.btn.icon {
+		@apply p-1;
+	}
+
+	.card {
+		@apply bg-white rounded-[20px] shadow-[0_18px_40px_0_#7090B01F];
+	}
+}
