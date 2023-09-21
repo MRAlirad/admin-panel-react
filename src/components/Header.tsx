@@ -3,10 +3,10 @@ import profileImg from '../assets/pics/Profile.png'
 const Header = () => {
 	const title = 'پروفایل';
 	return (
-		<div className="flex items-center justify-between w-full h-[160px] pr-4 pl-12">
+		<div className="flex items-center justify-between w-full h-[110px] pr-4 pl-12">
 			<div className="title-navigation-box">
 				<span className="navigation text-sm text-powderBlue"> صفحات / {title}</span>
-				<h1 className="page-title text-[34px] text-delftBlue font-bold">{title}</h1>
+				<h1 className="page-title text-3xl text-delftBlue font-bold">{title}</h1>
 			</div>
 			<div className="settings-search-box grid grid-cols-[1fr_max-content_max-content] items-center gap-2 w-[420px] h-16 p-2.5 bg-white rounded-[30px]">
 				<div className="search-box flex items-center gap-1 h-full py-1 px-3 rounded-[30px] bg-ghostWhite">
