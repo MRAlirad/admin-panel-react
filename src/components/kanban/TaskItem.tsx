@@ -6,7 +6,7 @@ interface Props {
 
 const TaskItem = ({ title, description, status }: Props) => {
 	return (
-		<div className="task-item card py-2.5 px-3 grid gap-5">
+		<div className="task-item card py-2.5 px-4 grid gap-3">
 			<div className="title-box flex items-center justify-between">
 				<h3 className="title text-sm font-bold">{title}</h3>
 				<button className="edit-btn btn icon rounded-lg text-lg text-powderBlue hover:bg-ghostWhite">
