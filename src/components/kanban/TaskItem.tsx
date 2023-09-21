@@ -1,19 +1,28 @@
 interface Props {
 	title: string;
+	img?: string;
 	description: string;
 	status: number;
 }
 
-const TaskItem = ({ title, description, status }: Props) => {
+const TaskItem = ({ title, description, status, img }: Props) => {
 	return (
 		<div className="task-item card py-2.5 px-4 grid gap-3">
-			<div className="title-box flex items-center justify-between">
-				<h3 className="title text-sm font-bold">{title}</h3>
+			<div className="title-box flex items-center justify-between gap-2">
+				<h3 className="title text-sm font-bold line-clamp-1">{title}</h3>
 				<button className="edit-btn btn icon rounded-lg text-lg text-powderBlue hover:bg-ghostWhite">
 					<i className="material-icons material-icons-round"> edit </i>
 				</button>
 			</div>
-			<p className="description text-xs text-powderBlue text-justify">{description}</p>
+			{
+				img ?
+					<div className="img-box rounded-md w-full h-max max-h-[200px]">
+						<img src={img} alt={title} />
+					</div>
+				:
+					null
+			}
+			<p className="description text-xs text-powderBlue text-justify line-clamp-3">{description}</p>
 			<div className="status-user-box">
 				<span
 					className={`staus flex items-center justify-center w-max py-1 px-2 rounded-md text-[9px] text-white ${

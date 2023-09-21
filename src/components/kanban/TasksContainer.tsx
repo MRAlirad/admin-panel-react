@@ -3,6 +3,7 @@ import TaskItem from './TaskItem';
 export interface Task {
 	id: number;
 	title: string;
+	img?: string;
 	desctiption: string;
 	status: number;
 }
@@ -30,6 +31,7 @@ const TasksContainer = ({ title, taskItems, onAddTask }: Props) => {
 					<TaskItem
 						key={task.id}
 						title={task.title}
+						img={task.img}
 						description={task.desctiption}
 						status={task.status}
 					/>
