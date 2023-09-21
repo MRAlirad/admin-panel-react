@@ -1,7 +1,9 @@
-import TaskItem from '../components/kanban/TaskItem';
+import { useState } from 'react';
+import TasksContainer from '../components/kanban/TasksContainer';
+import { Task } from '../components/kanban/TasksContainer';
 
 const Kanban = () => {
-	const tasks = [
+	const [tasks, setTasks] = useState([
 		{
 			id: Math.random(),
 			title: 'لورم  با تولید سادگی',
@@ -36,84 +38,82 @@ const Kanban = () => {
 				'لورم ایپسوم متن ساختگی با تولید سادگی نایک است، چاپگرها و متون بلکه روزنامه و مجله در ستون و سطر',
 			status: 2,
 		},
-	];
+	]);
 
-	function pendingTasks() {
+	function pendingTasks(): Array<Task> {
 		const pendingTasks = [];
 		for (const task of tasks) if (task.status === 0) pendingTasks.push(task);
 		return pendingTasks;
 	}
 
-	function runningTasks() {
+	function runningTasks(): Array<Task> {
 		const runningTasks = [];
 		for (const task of tasks) if (task.status === 1) runningTasks.push(task);
 		return runningTasks;
 	}
 
-	function doneTasks() {
+	function doneTasks(): Array<Task> {
 		const doneTasks = [];
 		for (const task of tasks) if (task.status === 2) doneTasks.push(task);
 		return doneTasks;
 	}
 
+	function addPendingTask() {
+		setTasks([
+			{
+				id: Math.random(),
+				title: 'لورم ایپسوم متن ساختگی با تولید سادگی',
+				desctiption:
+					'لورم ایپسوم متن ساختگی با تولید سادگی نایک است، چاپگرها و متون بلکه روزنامه و مجله در ستون و سطر',
+				status: 0,
+			},
+			...tasks,
+		]);
+	}
+
+	function addRunningTask() {
+		setTasks([
+			{
+				id: Math.random(),
+				title: 'لورم ایپسوم متن ساختگی با تولید سادگی',
+				desctiption:
+					'لورم ایپسوم متن ساختگی با تولید سادگی نایک است، چاپگرها و متون بلکه روزنامه و مجله در ستون و سطر',
+				status: 1,
+			},
+			...tasks,
+		]);
+	}
+
+	function addDoneTask() {
+		setTasks([
+			{
+				id: Math.random(),
+				title: 'لورم ایپسوم متن ساختگی با تولید سادگی',
+				desctiption:
+					'لورم ایپسوم متن ساختگی با تولید سادگی نایک است، چاپگرها و متون بلکه روزنامه و مجله در ستون و سطر',
+				status: 2,
+			},
+			...tasks,
+		]);
+	}
+
 	return (
 		<div className="kanban-page grid grid-cols-[1fr_1fr_1fr] gap-[1%]">
-			<div className="pending-tasks-container card grid gap-5 h-max px-5 py-4">
-				<div className="title-box flex items-center justify-between">
-					<h2 className="text-lg text-delftBlue font-bold">در انتظار تایید</h2>
-					<button className="btn w-14 h-7 text-blue bg-ghostWhite rounded-md">
-						<i className="material-icons material-icons-round"> add </i>
-					</button>
-				</div>
-				<div className="tasks-container grid gap-5">
-					{pendingTasks().map(task => (
-						<TaskItem
-							key={task.id}
-							title={task.title}
-							description={task.desctiption}
-							status={task.status}
-						/>
-					))}
-				</div>
-			</div>
-
-			<div className="pending-tasks-container card grid gap-5 h-max px-5 py-4">
-				<div className="title-box flex items-center justify-between">
-					<h2 className="text-lg text-delftBlue font-bold">در انتظار تایید</h2>
-					<button className="btn w-14 h-7 text-blue bg-ghostWhite rounded-md">
-						<i className="material-icons material-icons-round"> add </i>
-					</button>
-				</div>
-				<div className="tasks-container grid gap-5">
-					{runningTasks().map(task => (
-						<TaskItem
-							key={task.id}
-							title={task.title}
-							description={task.desctiption}
-							status={task.status}
-						/>
-					))}
-				</div>
-			</div>
-
-			<div className="pending-tasks-container card grid gap-5 h-max px-5 py-4">
-				<div className="title-box flex items-center justify-between">
-					<h2 className="text-lg text-delftBlue font-bold">در انتظار تایید</h2>
-					<button className="btn w-14 h-7 text-blue bg-ghostWhite rounded-md">
-						<i className="material-icons material-icons-round"> add </i>
-					</button>
-				</div>
-				<div className="tasks-container grid gap-5">
-					{doneTasks().map(task => (
-						<TaskItem
-							key={task.id}
-							title={task.title}
-							description={task.desctiption}
-							status={task.status}
-						/>
-					))}
-				</div>
-			</div>
+			<TasksContainer
+				title="در انتظار تایید"
+				taskItems={pendingTasks()}
+				onAddTask={addPendingTask}
+			/>
+			<TasksContainer
+				title="در حال انجام"
+				taskItems={runningTasks()}
+				onAddTask={addRunningTask}
+			/>
+			<TasksContainer
+				title="انجام شده"
+				taskItems={doneTasks()}
+				onAddTask={addDoneTask}
+			/>
 		</div>
 	);
 };
