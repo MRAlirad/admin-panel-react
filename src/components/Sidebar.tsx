@@ -1,4 +1,5 @@
 import logo from '../assets/pics/Logo.png';
+import { NavLink } from 'react-router-dom';
 
 const Sidebar = () => {
 	const sidevarLinks = [
@@ -45,14 +46,19 @@ const Sidebar = () => {
 
 			<div className="page-link-containers py-10 flex flex-col gap-5">
 				{sidevarLinks.map(link => (
-					<a
+					<NavLink
 						key={link.text}
-						href={link.to}
-						className="side-bar-link relative flex items-center gap-4 w-full h-9 text-base font-bold text-powderBlue pr-[12%] hover:text-[#6E80B7]"
+						to={link.to}
+						className={({ isActive }) =>
+							isActive
+								? 'side-bar-link relative flex items-center gap-4 w-full h-9 text-base font-bold text-delftBlue pr-[12%] border-l-4 border-delftBlue'
+								: 'side-bar-link relative flex items-center gap-4 w-full h-9 text-base font-bold text-powderBlue pr-[12%] hover:text-[#6E80B7]'
+						}
 					>
 						<i className="material-icons material-icons-round"> {link.icon} </i>
 						{link.text}
-					</a>
+						{/* <span className="left-line absolute left-0 top-0 w-1 h-full bg-transparent rounded-full"></span> */}
+					</NavLink>
 				))}
 			</div>
 		</div>
