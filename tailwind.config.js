@@ -11,6 +11,9 @@ export default {
                 blue: '#4318FF',
                 delftBlue: '#2B3674',
                 powderBlue: '#A3AED0',
+                jade : '#01B574',
+                neonBlue : '#3965FF',
+                hunyadiYellow : '#ffb547'
             }
         },
     },
