@@ -43,6 +43,7 @@ const Kanban = () => {
 			status: 2,
 		},
 	]);
+	const [showAddTaskModal, setShowAddTaskModal] = useState(false);
 
 	function pendingTasks(): Array<Task> {
 		const pendingTasks = [];
@@ -62,41 +63,13 @@ const Kanban = () => {
 		return doneTasks;
 	}
 
-	function addPendingTask() {
+	function addTask({ id, title, desctiption, status }: Task) {
 		setTasks([
 			{
-				id: Math.random(),
-				title: 'لورم ایپسوم متن ساختگی با تولید سادگی',
-				desctiption:
-					'لورم ایپسوم متن ساختگی با تولید سادگی نایک است، چاپگرها و متون بلکه روزنامه و مجله در ستون و سطر',
-				status: 0,
-			},
-			...tasks,
-		]);
-	}
-
-	function addRunningTask() {
-		setTasks([
-			{
-				id: Math.random(),
-				title: 'لورم ایپسوم متن ساختگی با تولید سادگی',
-				img: '/src/assets/pics/ProfileBg.png',
-				desctiption:
-					'لورم ایپسوم متن ساختگی با تولید سادگی نایک است، چاپگرها و متون بلکه روزنامه و مجله در ستون و سطر',
-				status: 1,
-			},
-			...tasks,
-		]);
-	}
-
-	function addDoneTask() {
-		setTasks([
-			{
-				id: Math.random(),
-				title: 'لورم ایپسوم متن ساختگی با تولید سادگی',
-				desctiption:
-					'لورم ایپسوم متن ساختگی با تولید سادگی نایک است، چاپگرها و متون بلکه روزنامه و مجله در ستون و سطر',
-				status: 2,
+				id: id,
+				title: title,
+				desctiption: desctiption,
+				status: status,
 			},
 			...tasks,
 		]);
@@ -107,21 +80,36 @@ const Kanban = () => {
 			<TasksContainer
 				title="در انتظار تایید"
 				taskItems={pendingTasks()}
-				onAddTask={addPendingTask}
+				onAddTask={() => setShowAddTaskModal(true)}
 			/>
 			<TasksContainer
 				title="در حال انجام"
 				taskItems={runningTasks()}
-				onAddTask={addRunningTask}
+				onAddTask={() => setShowAddTaskModal(true)}
 			/>
 			<TasksContainer
 				title="انجام شده"
 				taskItems={doneTasks()}
-				onAddTask={addDoneTask}
+				onAddTask={() => setShowAddTaskModal(true)}
 			/>
-			<Modal title='افزودن کار' onClose={()=> console.log('wow')}>
-				<AddTaskForm />
-			</Modal>
+			{showAddTaskModal ? (
+				<Modal
+					title="افزودن کار"
+					onClose={() => setShowAddTaskModal(false)}
+				>
+					<AddTaskForm
+						onAddTask={() => {
+							addTask({
+								id: Math.random(),
+								title: 'عنوان',
+								desctiption: 'توضیح',
+								status: 2,
+							});
+							setShowAddTaskModal(false);
+						}}
+					/>
+				</Modal>
+			) : null}
 		</div>
 	);
 };
