@@ -13,7 +13,8 @@ export default {
                 powderBlue: '#A3AED0',
                 jade : '#01B574',
                 neonBlue : '#3965FF',
-                hunyadiYellow : '#ffb547'
+                hunyadiYellow : '#FFB547',
+                red : '#E31A1A'
             }
         },
     },
