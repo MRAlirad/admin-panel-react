@@ -1,3 +1,9 @@
+import Button from "../Button";
+
+function AddTask(){
+
+}
+
 const AddTaskForm = () => {
 	return (
 		<div className="add-task-form flex flex-col items-center justify-center gap-3.5 min-w-[500px]">
@@ -17,7 +23,7 @@ const AddTaskForm = () => {
 					rows={5}
 				></textarea>
 			</div>
-			<button className="submit-btn">ثبت</button>
+			<Button type='primary' text='ثبت' onClick={AddTask} color='delftBlue' />
 		</div>
 	);
 };
