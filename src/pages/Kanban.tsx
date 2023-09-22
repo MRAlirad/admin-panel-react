@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import TasksContainer from '../components/kanban/TasksContainer';
+import AddTaskForm from '../components/kanban/AddTaskForm';
+import Modal from '../components/Modal';
 import { Task } from '../components/kanban/TasksContainer';
 
 const Kanban = () => {
@@ -37,7 +39,7 @@ const Kanban = () => {
 			title: 'لورم ایپسوم متن ساختگی با تولید سادگی',
 			desctiption:
 				'لورم ایپسوم متن ساختگی با تولید سادگی نایک است، چاپگرها و متون بلکه روزنامه و مجله در ستون و سطر',
-				img: '/src/assets/pics/DragDrop.png',
+			img: '/src/assets/pics/DragDrop.png',
 			status: 2,
 		},
 	]);
@@ -117,6 +119,9 @@ const Kanban = () => {
 				taskItems={doneTasks()}
 				onAddTask={addDoneTask}
 			/>
+			<Modal title='افزودن کار' onClose={()=> console.log('wow')}>
+				<AddTaskForm />
+			</Modal>
 		</div>
 	);
 };
