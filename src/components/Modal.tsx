@@ -1,4 +1,5 @@
 import { ReactNode } from 'react';
+import Button from './Button';
 
 interface Props {
 	title: string;
@@ -12,12 +13,7 @@ const Modal = ({ title, onClose, children }: Props) => {
 			<div className="modal-segment card flex flex-col items-center justify-center gap-5 p-5">
 				<div className="title-close-box flex items-center justify-between w-full">
 					<h3 className="title text-xl text-delftBlue font-bold">{title}</h3>
-					<button
-						onClick={onClose}
-						className="btn icon text-red"
-					>
-						<i className="material-icons material-icons-round">close</i>
-					</button>
+					<Button type='icon' text='close' onClick={onClose} color='red' />
 				</div>
 				<div className="modal-container">{children}</div>
 			</div>
