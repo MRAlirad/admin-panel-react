@@ -1,14 +1,14 @@
-import Button from "../Button";
+import Button from '../Button';
 
-function AddTask(){
-
+interface Props {
+	onAddTask: () => void;
 }
 
-const AddTaskForm = () => {
+const AddTaskForm = ({ onAddTask }: Props) => {
 	return (
 		<div className="add-task-form flex flex-col items-center justify-center gap-3.5 min-w-[500px]">
 			<div className="title-form-control grid gap-1.5 w-full ">
-				<label >عنوان</label>
+				<label>عنوان</label>
 				<input
 					type="text"
 					name="title"
@@ -23,7 +23,12 @@ const AddTaskForm = () => {
 					rows={5}
 				></textarea>
 			</div>
-			<Button type='primary' text='ثبت' onClick={AddTask} color='delftBlue' />
+			<Button
+				type="primary"
+				text="ثبت"
+				onClick={onAddTask}
+				color="delftBlue"
+			/>
 		</div>
 	);
 };
