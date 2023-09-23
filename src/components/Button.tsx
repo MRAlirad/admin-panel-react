@@ -15,9 +15,9 @@ const Button = ({ type, color, text, onClick, fluid = false, disabled = false}: 
 				${fluid ? 'w-full' : 'w-max'}
 				${
 					type === 'icon'
-						? `border-none outline-none p-1 text-${color} text-red`
+						? `border-none outline-none p-1 text-${color}`
 						: type === 'primary'
-						? `bg-${color} bg-delftBlue text-white py-2.5 px-10 border border-solid border-${color} rounded-lg`
+						? `bg-${color} text-white py-2.5 px-10 border border-solid border-${color} rounded-lg`
 						: type === 'secondary'
 						? `bg-white text-${color} py-2.5 px-10 border border-solid border-${color} rounded-lg`
 						: ''
