@@ -1,5 +1,5 @@
 interface Props {
-	type: 'icon' | 'btn-primary' | 'btn-outline-primary' | 'btn-white';
+	type?: 'icon' | 'primary' | 'outline-primary' | 'white' | 'simple';
 	color?: string;
 	text: string;
 	onClick: () => void;
@@ -7,7 +7,7 @@ interface Props {
 	disabled?: boolean;
 }
 
-const Button = ({ type, color, text, onClick, fluid = false, disabled = false}: Props) => {
+const Button = ({ type = 'primary', color, text, onClick, fluid = false, disabled = false}: Props) => {
 	return (
 		<button
 			className={`
@@ -15,21 +15,24 @@ const Button = ({ type, color, text, onClick, fluid = false, disabled = false}: 
 				${fluid ? 'w-full' : 'w-max'}
 				${
 					type !== 'icon' ?
-						'py-2.5 px-10 border border-solid rounded-lg'
+						'py-1.5 px-6 border border-solid rounded-lg'
 					:
-						''
+						'border-none outline-none p-1'
 				}
 				${
 					type === 'icon' ?
-						`border-none outline-none p-1 text-${color}`
+						`text-${color}`
 					:
-					type === 'btn-primary' ?
+					type === 'simple' ?
+						''
+					:
+					type === 'primary' ?
 						'bg-delftBlue text-white py-2.5 border-delftBlue'
 					:
-					type === 'btn-outline-primary' ?
+					type === 'outline-primary' ?
 						"bg-white text-delftBlue py-2.5 border-delftBlue"
 					:
-					type === 'btn-white' ?
+					type === 'white' ?
 						'bg-white text-delftBlue py-2.5 border-white'
 					:
 						''
