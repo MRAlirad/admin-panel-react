@@ -73,7 +73,7 @@ const AddTaskForm = ({ onAddTask, status }: Props) => {
 				</span>
 			</div>
 			<Button
-				type="btn-primary"
+				type="primary"
 				text="ثبت"
 				onClick={() => {
 					if(!titleRef.current?.value)
