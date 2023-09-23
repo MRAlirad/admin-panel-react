@@ -43,6 +43,7 @@ const Kanban = () => {
 			status: 2,
 		},
 	]);
+	const [taskStatus, setTaskStatus] = useState(0);
 	const [showAddTaskModal, setShowAddTaskModal] = useState(false);
 
 	function pendingTasks(): Array<Task> {
@@ -80,17 +81,26 @@ const Kanban = () => {
 			<TasksContainer
 				title="در انتظار تایید"
 				taskItems={pendingTasks()}
-				onAddTask={() => setShowAddTaskModal(true)}
+				onAddTask={() => {
+					setShowAddTaskModal(true);
+					setTaskStatus(0)
+				}}
 			/>
 			<TasksContainer
 				title="در حال انجام"
 				taskItems={runningTasks()}
-				onAddTask={() => setShowAddTaskModal(true)}
+				onAddTask={() => {
+					setShowAddTaskModal(true);
+					setTaskStatus(1)
+				}}
 			/>
 			<TasksContainer
 				title="انجام شده"
 				taskItems={doneTasks()}
-				onAddTask={() => setShowAddTaskModal(true)}
+				onAddTask={() => {
+					setShowAddTaskModal(true);
+					setTaskStatus(2)
+				}}
 			/>
 			{showAddTaskModal ? (
 				<Modal
@@ -98,15 +108,16 @@ const Kanban = () => {
 					onClose={() => setShowAddTaskModal(false)}
 				>
 					<AddTaskForm
-						onAddTask={() => {
+						onAddTask={(data) => {
 							addTask({
-								id: Math.random(),
-								title: 'عنوان',
-								desctiption: 'توضیح',
-								status: 2,
+								id: data.id,
+								title: data.title,
+								desctiption: data.desctiption,
+								status: data.status,
 							});
 							setShowAddTaskModal(false);
 						}}
+						status={taskStatus}
 					/>
 				</Modal>
 			) : null}
