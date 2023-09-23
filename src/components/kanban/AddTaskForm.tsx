@@ -73,9 +73,8 @@ const AddTaskForm = ({ onAddTask, status }: Props) => {
 				</span>
 			</div>
 			<Button
-				type="primary"
+				type="btn-primary"
 				text="ثبت"
-				color="delftBlue"
 				onClick={() => {
 					if(!titleRef.current?.value)
 						setTitleValidation(false);
