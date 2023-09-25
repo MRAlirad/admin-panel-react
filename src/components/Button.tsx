@@ -1,5 +1,5 @@
 interface Props {
-	type?: 'icon' | 'primary' | 'outline-primary' | 'white' | 'simple';
+	type?: 'icon' | 'primary' | 'outline-primary' | 'white' | 'whiteSimple' | 'blueSimple';
 	color?: string;
 	text: string;
 	onClick: () => void;
@@ -14,17 +14,26 @@ const Button = ({ type = 'primary', color, text, onClick, fluid = false, disable
 				flex items-center justify-center
 				${fluid ? 'w-full' : 'w-max'}
 				${
-					type !== 'icon' ?
+					type === 'icon' ?
+						'border-none outline-none p-1'
+					:
+					type === 'primary' || type === 'outline-primary' || type === 'white' ?
 						'py-1.5 px-6 border border-solid rounded-lg'
 					:
-						'border-none outline-none p-1'
+					type === 'whiteSimple' || type === 'blueSimple' ?
+						'p1'
+					:
+						''
 				}
 				${
 					type === 'icon' ?
 						`text-${color}`
 					:
-					type === 'simple' ?
-						''
+					type === 'whiteSimple' ?
+						'text-white'
+					:
+					type === 'blueSimple' ?
+						'text-delftBlue'
 					:
 					type === 'primary' ?
 						'bg-delftBlue text-white py-2.5 border-delftBlue'
