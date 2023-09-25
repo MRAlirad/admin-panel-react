@@ -77,7 +77,7 @@ const Kanban = () => {
 	}
 
 	return (
-		<div className="kanban-page grid grid-cols-[1fr_1fr_1fr] gap-[1%]">
+		<div className="kanban-page grid grid-cols-3 gap-[1%]">
 			<TasksContainer
 				title="در انتظار تایید"
 				taskItems={pendingTasks()}
