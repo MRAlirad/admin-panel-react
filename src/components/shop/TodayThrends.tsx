@@ -140,7 +140,7 @@ const TodayThrends = () => {
 					))}
 				</div>
 			</div>
-			<div className="thrends-container grid grid-cols-3 gap-[1%]">
+			<div className="thrends-container grid grid-cols-3 gap-[15px_1%]">
 				{thrends.map(thrend => (
 					<ThrendItem
 						key={thrend.price}
