@@ -40,7 +40,7 @@ const ThrendItem = ({ imageSrc, title, description, price, link, liked, group }:
 					<div className="price text-xs text-neonBlue">قیمت: {price} تومان</div>
 					<Link
 						to={link}
-						className="flex items-center justify-center text-sm text-white bg-delftBlue w-20 h-7 rounded-full"
+						className="flex items-center justify-center text-sm text-white bg-delftBlue w-20 h-7 rounded-full opacity-90 hover:opacity-100"
 					>
 						خرید
 					</Link>
