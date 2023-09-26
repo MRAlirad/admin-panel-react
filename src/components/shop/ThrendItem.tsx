@@ -16,7 +16,7 @@ const ThrendItem = ({ imageSrc, title, description, price, link, liked, group }:
 
 	return (
 		<div className="thrend-item card p-3">
-			<div className="img-box relative rounded-md">
+			<div className="img-box relative rounded-md max-h-36">
 				<img
 					src={imageSrc}
 					alt={title}
