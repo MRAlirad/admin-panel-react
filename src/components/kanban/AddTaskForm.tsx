@@ -1,6 +1,7 @@
 import { useRef, useState } from 'react';
 import Button from '../Button';
-import { Task } from './TasksContainer';
+import Task from '../../entities/Task';
+import axios from 'axios';
 
 interface Props {
 	onAddTask: (data: Task) => void;
@@ -85,12 +86,17 @@ const AddTaskForm = ({ onAddTask, status }: Props) => {
 					if(!titleRef.current?.value || !descRef.current?.value)
 						return;
 
-					onAddTask({
+					const newTask = {
 						id: Math.random(),
 						title: titleRef.current?.value ?? '',
-						desctiption: descRef.current?.value ?? '',
+						description: descRef.current?.value ?? '',
 						status: selectedStatus,
-					});
+						img: '/src/assets/pics/DragDrop.png'
+					}
+
+					axios.post('http://localhost:3500/tasks', newTask)
+						.then((res)=> onAddTask(res.data))
+					;
 				}}
 			/>
 		</div>
