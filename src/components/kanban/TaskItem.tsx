@@ -1,35 +1,44 @@
+import Task from '../../entities/Task';
+
 interface Props {
-	title: string;
-	img?: string;
-	description: string;
-	status: number;
+	task: Task;
 }
 
-const TaskItem = ({ title, description, status, img }: Props) => {
+const TaskItem = ({ task }: Props) => {
 	return (
-		<div className="task-item card py-2.5 px-4 grid gap-3">
+		<div
+			className="task-item card py-2.5 px-4 grid gap-3"
+			data-id={task.id}
+		>
 			<div className="title-box flex items-center justify-between gap-2">
-				<h3 className="title text-sm font-bold line-clamp-1">{title}</h3>
+				<h3 className="title text-sm font-bold line-clamp-1">{task.title}</h3>
 				<button className="edit-btn btn icon rounded-lg text-lg text-powderBlue hover:bg-ghostWhite">
 					<i className="material-icons material-icons-round"> edit </i>
 				</button>
 			</div>
-			{
-				img ?
-					<div className="img-box rounded-md w-full h-max max-h-[200px]">
-						<img src={img} alt={title} />
-					</div>
-				:
-					null
-			}
-			<p className="description text-xs text-powderBlue text-justify line-clamp-3">{description}</p>
+			{task.img ? (
+				<div className="img-box rounded-md w-full h-max max-h-[200px]">
+					<img
+						src={task.img}
+						alt={task.title}
+					/>
+				</div>
+			) : null}
+			<p className="description text-xs text-powderBlue text-justify line-clamp-3">{task.description}</p>
 			<div className="status-user-box">
 				<span
-					className={`staus flex items-center justify-center w-max py-1 px-2 rounded-md text-[9px] text-white ${
-						status === 0 ? 'bg-hunyadiYellow' : status === 1 ? 'bg-neonBlue' : 'bg-jade'
-					}`}
+					className={`
+						staus flex items-center justify-center w-max py-1 px-2 rounded-md text-[9px] text-white
+						${task.status === 0 ? 'bg-hunyadiYellow' : task.status === 1 ? 'bg-neonBlue' : task.status === 1 ? 'bg-jade' : ''}
+					`}
 				>
-					{status === 0 ? 'در انتظار تایید' : status === 1 ? 'در حال انجام' : 'انجام شده'}
+					{task.status === 0
+						? 'در انتظار تایید'
+						: task.status === 1
+						? 'در حال انجام'
+						: task.status === 2
+						? 'انجام شده'
+						: ''}
 				</span>
 				<div className="users"></div>
 			</div>
