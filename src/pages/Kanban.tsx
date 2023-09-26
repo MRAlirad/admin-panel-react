@@ -1,50 +1,20 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import TasksContainer from '../components/kanban/TasksContainer';
 import AddTaskForm from '../components/kanban/AddTaskForm';
 import Modal from '../components/Modal';
 import Task from '../entities/Task';
+import axios from 'axios';
 
 const Kanban = () => {
-	const [tasks, setTasks] = useState([
-		{
-			id: Math.random(),
-			title: 'لورم  با تولید تولید تولید سادگی لورم  با تولید تولید تولید سادگی لورم  با تولید تولید تولید سادگی لورم  با تولید تولید تولید سادگی لورم  با تولید تولید تولید سادگی لورم  با تولید تولید تولید سادگی',
-			description:
-				'لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در ستون و سطر',
-			img: '/src/assets/pics/DragDrop.png',
-			status: 0,
-		},
-		{
-			id: Math.random(),
-			title: 'لورم ایپسوم متن ساختگی با تولید سادگی',
-			description:
-				'لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت و متون بلکه روزنامه و مجله در ستون و سطر',
-			status: 0,
-		},
-		{
-			id: Math.random(),
-			title: 'لورم ایپسوم متن ساختگی با تولید سادگی',
-			description: 'لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم ا مجله در ستون و سطر',
-			status: 1,
-		},
-		{
-			id: Math.random(),
-			title: 'لورم ایپسوم متن ساختگی با تولید سادگی',
-			description:
-				'لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفااپگرها و متون بلکه روزنامه و مجله در ستون و سطر',
-			status: 1,
-		},
-		{
-			id: Math.random(),
-			title: 'لورم ایپسوم متن ساختگی با تولید سادگی',
-			description:
-				'لورم ایپسوم متن ساختگی با تولید سادگی نایک است، چاپگرها و متون بلکه روزنامه و مجله در ستون و سطر',
-			img: '/src/assets/pics/DragDrop.png',
-			status: 2,
-		},
-	]);
+	const [tasks, setTasks] = useState<Task[]>([]);
 	const [taskStatus, setTaskStatus] = useState(0);
 	const [showAddTaskModal, setShowAddTaskModal] = useState(false);
+
+	useEffect(()=> {
+		axios.get<Task[]>('http://localhost:3500/tasks')
+			.then((response)=> setTasks(response.data))
+		;
+	}, []);
 
 	function pendingTasks(): Array<Task> {
 		const pendingTasks = [];
@@ -64,16 +34,8 @@ const Kanban = () => {
 		return doneTasks;
 	}
 
-	function addTask({ id, title, description, status }: Task) {
-		setTasks([
-			{
-				id: id,
-				title: title,
-				description: description,
-				status: status,
-			},
-			...tasks,
-		]);
+	function addTask({ id, title, img, description, status }: Task) {
+		setTasks([{id,title,img ,description,status}, ...tasks]);
 	}
 
 	return (
@@ -112,6 +74,7 @@ const Kanban = () => {
 							addTask({
 								id: data.id,
 								title: data.title,
+								img : data.img,
 								description: data.description,
 								status: data.status,
 							});
