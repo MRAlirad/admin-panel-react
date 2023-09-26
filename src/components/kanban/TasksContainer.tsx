@@ -1,12 +1,5 @@
 import TaskItem from './TaskItem';
-
-export interface Task {
-	id: number;
-	title: string;
-	img?: string;
-	desctiption: string;
-	status: number;
-}
+import Task from '../../entities/Task';
 
 interface Props {
 	onAddTask: () => void;
@@ -30,10 +23,7 @@ const TasksContainer = ({ title, taskItems, onAddTask }: Props) => {
 				{taskItems.map(task => (
 					<TaskItem
 						key={task.id}
-						title={task.title}
-						img={task.img}
-						description={task.desctiption}
-						status={task.status}
+						task={task}
 					/>
 				))}
 			</div>
