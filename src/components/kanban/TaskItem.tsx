@@ -29,7 +29,7 @@ const TaskItem = ({ task }: Props) => {
 				<span
 					className={`
 						staus flex items-center justify-center w-max py-1 px-2 rounded-md text-[9px] text-white
-						${task.status === 0 ? 'bg-hunyadiYellow' : task.status === 1 ? 'bg-neonBlue' : task.status === 1 ? 'bg-jade' : ''}
+						${task.status === 0 ? 'bg-hunyadiYellow' : task.status === 1 ? 'bg-neonBlue' : task.status === 2 ? 'bg-jade' : ''}
 					`}
 				>
 					{task.status === 0
