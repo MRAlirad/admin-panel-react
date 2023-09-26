@@ -2,14 +2,14 @@ import { useState } from 'react';
 import TasksContainer from '../components/kanban/TasksContainer';
 import AddTaskForm from '../components/kanban/AddTaskForm';
 import Modal from '../components/Modal';
-import { Task } from '../components/kanban/TasksContainer';
+import Task from '../entities/Task';
 
 const Kanban = () => {
 	const [tasks, setTasks] = useState([
 		{
 			id: Math.random(),
 			title: 'لورم  با تولید تولید تولید سادگی لورم  با تولید تولید تولید سادگی لورم  با تولید تولید تولید سادگی لورم  با تولید تولید تولید سادگی لورم  با تولید تولید تولید سادگی لورم  با تولید تولید تولید سادگی',
-			desctiption:
+			description:
 				'لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در ستون و سطر',
 			img: '/src/assets/pics/DragDrop.png',
 			status: 0,
@@ -17,27 +17,27 @@ const Kanban = () => {
 		{
 			id: Math.random(),
 			title: 'لورم ایپسوم متن ساختگی با تولید سادگی',
-			desctiption:
+			description:
 				'لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت و متون بلکه روزنامه و مجله در ستون و سطر',
 			status: 0,
 		},
 		{
 			id: Math.random(),
 			title: 'لورم ایپسوم متن ساختگی با تولید سادگی',
-			desctiption: 'لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم ا مجله در ستون و سطر',
+			description: 'لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم ا مجله در ستون و سطر',
 			status: 1,
 		},
 		{
 			id: Math.random(),
 			title: 'لورم ایپسوم متن ساختگی با تولید سادگی',
-			desctiption:
+			description:
 				'لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفااپگرها و متون بلکه روزنامه و مجله در ستون و سطر',
 			status: 1,
 		},
 		{
 			id: Math.random(),
 			title: 'لورم ایپسوم متن ساختگی با تولید سادگی',
-			desctiption:
+			description:
 				'لورم ایپسوم متن ساختگی با تولید سادگی نایک است، چاپگرها و متون بلکه روزنامه و مجله در ستون و سطر',
 			img: '/src/assets/pics/DragDrop.png',
 			status: 2,
@@ -64,12 +64,12 @@ const Kanban = () => {
 		return doneTasks;
 	}
 
-	function addTask({ id, title, desctiption, status }: Task) {
+	function addTask({ id, title, description, status }: Task) {
 		setTasks([
 			{
 				id: id,
 				title: title,
-				desctiption: desctiption,
+				description: description,
 				status: status,
 			},
 			...tasks,
@@ -83,7 +83,7 @@ const Kanban = () => {
 				taskItems={pendingTasks()}
 				onAddTask={() => {
 					setShowAddTaskModal(true);
-					setTaskStatus(0)
+					setTaskStatus(0);
 				}}
 			/>
 			<TasksContainer
@@ -91,7 +91,7 @@ const Kanban = () => {
 				taskItems={runningTasks()}
 				onAddTask={() => {
 					setShowAddTaskModal(true);
-					setTaskStatus(1)
+					setTaskStatus(1);
 				}}
 			/>
 			<TasksContainer
@@ -99,7 +99,7 @@ const Kanban = () => {
 				taskItems={doneTasks()}
 				onAddTask={() => {
 					setShowAddTaskModal(true);
-					setTaskStatus(2)
+					setTaskStatus(2);
 				}}
 			/>
 			{showAddTaskModal ? (
@@ -108,11 +108,11 @@ const Kanban = () => {
 					onClose={() => setShowAddTaskModal(false)}
 				>
 					<AddTaskForm
-						onAddTask={(data) => {
+						onAddTask={data => {
 							addTask({
 								id: data.id,
 								title: data.title,
-								desctiption: data.desctiption,
+								description: data.description,
 								status: data.status,
 							});
 							setShowAddTaskModal(false);
