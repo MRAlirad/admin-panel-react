@@ -87,7 +87,7 @@ const AddTaskForm = ({ onAddTask, status }: Props) => {
 						return;
 
 					const newTask = {
-						id: Math.random(),
+						id: Date.now(),
 						title: titleRef.current?.value ?? '',
 						description: descRef.current?.value ?? '',
 						status: selectedStatus,
