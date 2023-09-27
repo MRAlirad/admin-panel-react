@@ -1,29 +1,8 @@
 import { useState } from 'react';
 import ProductItem from './ProductItem';
+import ProductCategory from '../../entities/ProductCategory';
 
 const TodayThrends = () => {
-	const groupingItems = [
-		{
-			type: 'music',
-			name: 'موزیک',
-			icon: 'music_note',
-		},
-		{
-			type: 'family',
-			name: 'خانواده',
-			icon: 'diversity_1',
-		},
-		{
-			type: 'art',
-			name: 'هنر',
-			icon: 'palette',
-		},
-		{
-			type: 'sport',
-			name: 'ورزش',
-			icon: 'emoji_events',
-		},
-	];
 	const [selectedGroup, setSelectedGroup] = useState('');
 	const [thrends, setThrends] = useState([
 		{
@@ -113,7 +92,7 @@ const TodayThrends = () => {
 			<div className="title-grouping-box flex items-center justify-between">
 				<h3 className="title text-xl">ترندهای روز</h3>
 				<div className="grouping-box flex items-center">
-					{groupingItems.map(group => (
+					{ProductCategory.map(group => (
 						<button
 							key={group.type}
 							className={`
