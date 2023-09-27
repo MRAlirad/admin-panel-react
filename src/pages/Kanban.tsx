@@ -38,6 +38,10 @@ const Kanban = () => {
 		setTasks([{id,title,img ,description,status}, ...tasks]);
 	}
 
+	function deleteTask(taskId:number) {
+		setTasks(tasks.filter(task => task.id !== taskId))
+	}
+
 	return (
 		<div className="kanban-page grid grid-cols-3 gap-[1%]">
 			<TasksContainer
@@ -48,6 +52,7 @@ const Kanban = () => {
 					setTaskStatus(0);
 				}}
 				onEditTask={(data)=> {console.log(data)}}
+				onDeleteTask={(taskId)=> deleteTask(taskId)}
 			/>
 			<TasksContainer
 				title="در حال انجام"
@@ -57,6 +62,7 @@ const Kanban = () => {
 					setTaskStatus(1);
 				}}
 				onEditTask={(data)=> {console.log(data)}}
+				onDeleteTask={(taskId)=> deleteTask(taskId)}
 			/>
 			<TasksContainer
 				title="انجام شده"
@@ -66,6 +72,7 @@ const Kanban = () => {
 					setTaskStatus(2);
 				}}
 				onEditTask={(data)=> {console.log(data)}}
+				onDeleteTask={(taskId)=> deleteTask(taskId)}
 			/>
 			{showAddTaskModal === 'show' ? (
 				<Modal

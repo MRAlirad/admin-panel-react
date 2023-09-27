@@ -4,11 +4,12 @@ import Task from '../../entities/Task';
 interface Props {
 	onAddTask: () => void;
 	onEditTask: (data: Task) => void;
+	onDeleteTask: (id:number) => void;
 	title: string;
 	taskItems: Array<Task>;
 }
 
-const TasksContainer = ({ title, taskItems, onAddTask, onEditTask }: Props) => {
+const TasksContainer = ({ title, taskItems, onAddTask, onEditTask, onDeleteTask }: Props) => {
 	return (
 		<div className="tasks-container card grid gap-4 h-max px-5 py-4">
 			<div className="title-box flex items-center justify-between">
@@ -26,6 +27,7 @@ const TasksContainer = ({ title, taskItems, onAddTask, onEditTask }: Props) => {
 						key={task.id}
 						task={task}
 						onEdit={(data)=> onEditTask(data)}
+						onDelete={(taskId)=> onDeleteTask(taskId)}
 					/>
 				))}
 			</div>

@@ -1,11 +1,19 @@
+import axios from 'axios';
 import Task from '../../entities/Task';
 
 interface Props {
 	task: Task;
-	onEdit: (data: Task)=> void; 
+	onEdit: (data: Task) => void;
+	onDelete: (id: number) => void;
 }
 
-const TaskItem = ({ task, onEdit }: Props) => {
+const TaskItem = ({ task, onEdit, onDelete }: Props) => {
+	function deleteTask() {
+		axios.delete(`http://localhost:3500/tasks/${task.id}`)
+			.then(() => onDelete(task.id))
+		;
+	}
+
 	return (
 		<div
 			className="task-item card py-2.5 px-4 grid gap-3"
@@ -13,12 +21,20 @@ const TaskItem = ({ task, onEdit }: Props) => {
 		>
 			<div className="title-box flex items-center justify-between gap-2">
 				<h3 className="title text-sm font-bold line-clamp-1">{task.title}</h3>
-				<button
-					className="edit-btn flex items-center justify-center p-1 rounded-lg text-lg text-powderBlue hover:bg-ghostWhite"
-					onClick={()=> onEdit(task)}
-				>
-					<i className="material-icons material-icons-round"> edit </i>
-				</button>
+				<div className="actions-box flex items-ceter gap-1">
+					<button
+						className="edit-btn btn icon rounded-lg text-lg text-powderBlue"
+						onClick={() => onEdit(task)}
+					>
+						<i className="material-icons material-icons-round"> edit </i>
+					</button>
+					<button
+						className="delete-btn btn icon rounded-lg text-lg text-red"
+						onClick={() => deleteTask()}
+					>
+						<i className="material-icons material-icons-outlined"> delete </i>
+					</button>
+				</div>
 			</div>
 			{task.img ? (
 				<div className="img-box rounded-md w-full h-max max-h-[200px]">
