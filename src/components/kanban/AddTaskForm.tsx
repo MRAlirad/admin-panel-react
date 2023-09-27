@@ -91,7 +91,7 @@ const AddTaskForm = ({ onAddTask, status }: Props) => {
 						title: titleRef.current?.value ?? '',
 						description: descRef.current?.value ?? '',
 						status: selectedStatus,
-						img: '/src/assets/pics/DragDrop.png'
+						img: '/src/assets/pics/DragDrop.png',
 					}
 
 					axios.post('http://localhost:3500/tasks', newTask)

@@ -1,102 +1,109 @@
 {
-	"tasks": [
-		{
-			"id": 1,
-			"title": "لورم  با تولید تولید تولید سادگی لورم  با تولید تولید تولید سادگی لورم  با تولید تولید تولید سادگی لورم  با تولید تولید تولید سادگی لورم  با تولید تولید تولید سادگی لورم  با تولید تولید تولید سادگی",
-			"description": "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در ستون و سطر",
-			"img": "/src/assets/pics/DragDrop.png",
-			"status": 0
-		},
-		{
-			"id": 2,
-			"title": "لورم ایپسوم متن ساختگی با تولید سادگی",
-			"description": "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت و متون بلکه روزنامه و مجله در ستون و سطر",
-			"status": 0
-		},
-		{
-			"id": 3,
-			"title": "لورم ایپسوم متن ساختگی با تولید سادگی",
-			"description": "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم ا مجله در ستون و سطر",
-			"status": 1
-		},
-		{
-			"id": 4,
-			"title": "لورم ایپسوم متن ساختگی با تولید سادگی",
-			"description": "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفااپگرها و متون بلکه روزنامه و مجله در ستون و سطر",
-			"status": 1
-		},
-		{
-			"id": 5,
-			"title": "لورم ایپسوم متن ساختگی با تولید سادگی",
-			"description": "لورم ایپسوم متن ساختگی با تولید سادگی نایک است، چاپگرها و متون بلکه روزنامه و مجله در ستون و سطر",
-			"img": "/src/assets/pics/DragDrop.png",
-			"status": 2
-		},
-		{
-			"id": 0.8108391190097348,
-			"title": "daf",
-			"desctiption": "adf",
-			"status": 1
-		},
-		{
-			"id": 0.3974340476938012,
-			"title": "درست کردن ماژول خدمت ",
-			"desctiption": "به آدرس\nhttps://google.com بروید و تغییرات را انجام دهید",
-			"status": 0
-		},
-		{
-			"id": 0.4895011668779472,
-			"title": "asdf",
-			"desctiption": "adf",
-			"status": 0
-		},
-		{
-			"id": 0.582906778008589,
-			"title": "sdfghgfds",
-			"description": "dfgfdsasdfg",
-			"status": 0
-		},
-		{
-			"id": 0.1476088741543422,
-			"title": "adsf",
-			"description": "adsf",
-			"status": 2,
-			"img": "/src/assets/pics/DragDrop.png"
-		},
-		{
-			"id": 0.6182002487099933,
-			"title": "asf",
-			"description": "asdf",
-			"status": 2,
-			"img": "/src/assets/pics/DragDrop.png"
-		},
-		{
-			"id": 0.3299684194132948,
-			"title": "asdf",
-			"description": "asdf",
-			"status": 0,
-			"img": "/src/assets/pics/DragDrop.png"
-		},
-		{
-			"id": 0.9890298810518128,
-			"title": "asdf",
-			"description": "asdf",
-			"status": 1,
-			"img": "/src/assets/pics/DragDrop.png"
-		},
-		{
-			"id": 0.3964066264224151,
-			"title": "asdf",
-			"description": "adsf",
-			"status": 2,
-			"img": "/src/assets/pics/DragDrop.png"
-		},
-		{
-			"id": 0.5164462463798691,
-			"title": "df",
-			"description": "df",
-			"status": 1,
-			"img": "/src/assets/pics/DragDrop.png"
-		}
-	]
+  "tasks": [
+    {
+      "id": 1,
+      "title": "لورم  با تولید تولید تولید سادگی لورم  با تولید تولید تولید سادگی لورم  با تولید تولید تولید سادگی لورم  با تولید تولید تولید سادگی لورم  با تولید تولید تولید سادگی لورم  با تولید تولید تولید سادگی",
+      "description": "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در ستون و سطر",
+      "img": "/src/assets/pics/DragDrop.png",
+      "status": 0
+    },
+    {
+      "id": 2,
+      "title": "لورم ایپسوم متن ساختگی با تولید سادگی",
+      "description": "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت و متون بلکه روزنامه و مجله در ستون و سطر",
+      "status": 0
+    },
+    {
+      "id": 3,
+      "title": "لورم ایپسوم متن ساختگی با تولید سادگی",
+      "description": "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم ا مجله در ستون و سطر",
+      "status": 1
+    },
+    {
+      "id": 4,
+      "title": "لورم ایپسوم متن ساختگی با تولید سادگی",
+      "description": "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفااپگرها و متون بلکه روزنامه و مجله در ستون و سطر",
+      "status": 1
+    },
+    {
+      "id": 5,
+      "title": "لورم ایپسوم متن ساختگی با تولید سادگی",
+      "description": "لورم ایپسوم متن ساختگی با تولید سادگی نایک است، چاپگرها و متون بلکه روزنامه و مجله در ستون و سطر",
+      "img": "/src/assets/pics/DragDrop.png",
+      "status": 2
+    },
+    {
+      "id": 0.8108391190097348,
+      "title": "daf",
+      "desctiption": "adf",
+      "status": 1
+    },
+    {
+      "id": 0.3974340476938012,
+      "title": "درست کردن ماژول خدمت ",
+      "desctiption": "به آدرس\nhttps://google.com بروید و تغییرات را انجام دهید",
+      "status": 0
+    },
+    {
+      "id": 0.4895011668779472,
+      "title": "asdf",
+      "desctiption": "adf",
+      "status": 0
+    },
+    {
+      "id": 0.582906778008589,
+      "title": "sdfghgfds",
+      "description": "dfgfdsasdfg",
+      "status": 0
+    },
+    {
+      "id": 0.1476088741543422,
+      "title": "adsf",
+      "description": "adsf",
+      "status": 2,
+      "img": "/src/assets/pics/DragDrop.png"
+    },
+    {
+      "id": 0.6182002487099933,
+      "title": "asf",
+      "description": "asdf",
+      "status": 2,
+      "img": "/src/assets/pics/DragDrop.png"
+    },
+    {
+      "id": 0.3299684194132948,
+      "title": "asdf",
+      "description": "asdf",
+      "status": 0,
+      "img": "/src/assets/pics/DragDrop.png"
+    },
+    {
+      "id": 0.9890298810518128,
+      "title": "asdf",
+      "description": "asdf",
+      "status": 1,
+      "img": "/src/assets/pics/DragDrop.png"
+    },
+    {
+      "id": 0.3964066264224151,
+      "title": "asdf",
+      "description": "adsf",
+      "status": 2,
+      "img": "/src/assets/pics/DragDrop.png"
+    },
+    {
+      "id": 0.5164462463798691,
+      "title": "df",
+      "description": "df",
+      "status": 1,
+      "img": "/src/assets/pics/DragDrop.png"
+    },
+    {
+      "id": 0.42075255438971326,
+      "title": "rtgsretg",
+      "description": "fgsgsdfgsfdsgs",
+      "status": 1,
+      "img": "/src/assets/pics/DragDrop.png"
+    }
+  ]
 }

@@ -2,9 +2,10 @@ import Task from '../../entities/Task';
 
 interface Props {
 	task: Task;
+	onEdit: (data: Task)=> void; 
 }
 
-const TaskItem = ({ task }: Props) => {
+const TaskItem = ({ task, onEdit }: Props) => {
 	return (
 		<div
 			className="task-item card py-2.5 px-4 grid gap-3"
@@ -12,7 +13,10 @@ const TaskItem = ({ task }: Props) => {
 		>
 			<div className="title-box flex items-center justify-between gap-2">
 				<h3 className="title text-sm font-bold line-clamp-1">{task.title}</h3>
-				<button className="edit-btn btn icon rounded-lg text-lg text-powderBlue hover:bg-ghostWhite">
+				<button
+					className="edit-btn flex items-center justify-center p-1 rounded-lg text-lg text-powderBlue hover:bg-ghostWhite"
+					onClick={()=> onEdit(task)}
+				>
 					<i className="material-icons material-icons-round"> edit </i>
 				</button>
 			</div>

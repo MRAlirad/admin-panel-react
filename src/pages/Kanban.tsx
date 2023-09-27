@@ -8,7 +8,7 @@ import axios from 'axios';
 const Kanban = () => {
 	const [tasks, setTasks] = useState<Task[]>([]);
 	const [taskStatus, setTaskStatus] = useState(0);
-	const [showAddTaskModal, setShowAddTaskModal] = useState(false);
+	const [showAddTaskModal, setAddTaskModalDisplay] = useState('hide');
 
 	useEffect(()=> {
 		axios.get<Task[]>('http://localhost:3500/tasks')
@@ -44,30 +44,33 @@ const Kanban = () => {
 				title="در انتظار تایید"
 				taskItems={pendingTasks()}
 				onAddTask={() => {
-					setShowAddTaskModal(true);
+					setAddTaskModalDisplay('show');
 					setTaskStatus(0);
 				}}
+				onEditTask={(data)=> {console.log(data)}}
 			/>
 			<TasksContainer
 				title="در حال انجام"
 				taskItems={runningTasks()}
 				onAddTask={() => {
-					setShowAddTaskModal(true);
+					setAddTaskModalDisplay('show');
 					setTaskStatus(1);
 				}}
+				onEditTask={(data)=> {console.log(data)}}
 			/>
 			<TasksContainer
 				title="انجام شده"
 				taskItems={doneTasks()}
 				onAddTask={() => {
-					setShowAddTaskModal(true);
+					setAddTaskModalDisplay('show');
 					setTaskStatus(2);
 				}}
+				onEditTask={(data)=> {console.log(data)}}
 			/>
-			{showAddTaskModal ? (
+			{showAddTaskModal === 'show' ? (
 				<Modal
 					title="افزودن کار"
-					onClose={() => setShowAddTaskModal(false)}
+					onClose={() => setAddTaskModalDisplay('hide')}
 				>
 					<AddTaskForm
 						onAddTask={data => {
@@ -78,7 +81,7 @@ const Kanban = () => {
 								description: data.description,
 								status: data.status,
 							});
-							setShowAddTaskModal(false);
+							setAddTaskModalDisplay('hide');
 						}}
 						status={taskStatus}
 					/>
