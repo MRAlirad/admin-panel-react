@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import ThrendItem from './ThrendItem';
+import ProductItem from './ProductItem';
 
 const TodayThrends = () => {
 	const groupingItems = [
@@ -27,6 +27,7 @@ const TodayThrends = () => {
 	const [selectedGroup, setSelectedGroup] = useState('');
 	const [thrends, setThrends] = useState([
 		{
+			id: Math.random(),
 			imageSrc: '/src/assets/pics/Thrend.png',
 			title: 'لورم ایپسوم متن ساختگی',
 			description: 'لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ',
@@ -36,6 +37,7 @@ const TodayThrends = () => {
 			liked: true,
 		},
 		{
+			id: Math.random(),
 			imageSrc: '/src/assets/pics/Thrend.png',
 			title: 'لورم ایپسوم متن ساختگی',
 			description: 'لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ',
@@ -45,6 +47,7 @@ const TodayThrends = () => {
 			liked: false,
 		},
 		{
+			id: Math.random(),
 			imageSrc: '/src/assets/pics/Thrend.png',
 			title: 'لورم ایپسوم متن ساختگی',
 			description: 'لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ',
@@ -54,6 +57,7 @@ const TodayThrends = () => {
 			liked: false,
 		},
 		{
+			id: Math.random(),
 			imageSrc: '/src/assets/pics/Thrend.png',
 			title: 'لورم ایپسوم متن ساختگی',
 			description: 'لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ',
@@ -63,6 +67,7 @@ const TodayThrends = () => {
 			liked: true,
 		},
 		{
+			id: Math.random(),
 			imageSrc: '/src/assets/pics/Thrend.png',
 			title: 'لورم ایپسوم متن ساختگی',
 			description: 'لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ',
@@ -72,6 +77,7 @@ const TodayThrends = () => {
 			liked: false,
 		},
 		{
+			id: Math.random(),
 			imageSrc: '/src/assets/pics/Thrend.png',
 			title: 'لورم ایپسوم متن ساختگی',
 			description: 'لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ',
@@ -81,6 +87,7 @@ const TodayThrends = () => {
 			liked: false,
 		},
 		{
+			id: Math.random(),
 			imageSrc: '/src/assets/pics/Thrend.png',
 			title: 'لورم ایپسوم متن ساختگی',
 			description: 'لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ',
@@ -90,6 +97,7 @@ const TodayThrends = () => {
 			liked: true,
 		},
 		{
+			id: Math.random(),
 			imageSrc: '/src/assets/pics/Thrend.png',
 			title: 'لورم ایپسوم متن ساختگی',
 			description: 'لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ',
@@ -97,24 +105,6 @@ const TodayThrends = () => {
 			link: 'total',
 			group : 'emoji_events',
 			liked: false,
-		},
-		{
-			imageSrc: '/src/assets/pics/Thrend.png',
-			title: 'لورم ایپسوم متن ساختگی',
-			description: 'لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ',
-			price: Math.floor(Math.random() * 1000),
-			link: 'total',
-			group : 'music_note',
-			liked: false,
-		},
-		{
-			imageSrc: '/src/assets/pics/Thrend.png',
-			title: 'لورم ایپسوم متن ساختگی',
-			description: 'لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ',
-			price: Math.floor(Math.random() * 1000),
-			link: 'total',
-			group : 'palette',
-			liked: true,
 		},
 	]);
 
@@ -122,13 +112,13 @@ const TodayThrends = () => {
 		<div className="today-thrends grid gap-3">
 			<div className="title-grouping-box flex items-center justify-between">
 				<h3 className="title text-xl">ترندهای روز</h3>
-				<div className="grouping">
+				<div className="grouping-box flex items-center">
 					{groupingItems.map(group => (
 						<button
 							key={group.type}
 							className={`
-								text-delftBlue text-sm w-16 p-1 rounded-full
-								${selectedGroup === group.type ? 'bg-white' : ''}
+								btn simple text-delftBlue text-sm w-16 rounded-full
+								${selectedGroup === group.type ? 'bg-white opacity-100' : ''}
 							`}
 							onClick={() => {
 								setSelectedGroup(group.type);
@@ -142,15 +132,9 @@ const TodayThrends = () => {
 			</div>
 			<div className="thrends-container grid grid-cols-3 gap-[15px_1%]">
 				{thrends.map(thrend => (
-					<ThrendItem
-						key={thrend.price}
-						title={thrend.title}
-						description={thrend.description}
-						imageSrc={thrend.imageSrc}
-						link={thrend.link}
-						liked={thrend.liked}
-						price={thrend.price}
-						group={thrend.group}
+					<ProductItem
+						product={thrend}
+						key={thrend.id}
 					/>
 				))}
 			</div>

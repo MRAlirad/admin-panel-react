@@ -18,7 +18,8 @@
 		@apply flex items-center justify-center border-none outline-none opacity-90 hover:opacity-100;
 	}
 
-	.btn.icon {
+	.btn.icon,
+	.btn.simple {
 		@apply p-1;
 	}
 
