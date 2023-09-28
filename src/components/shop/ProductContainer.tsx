@@ -2,7 +2,7 @@ import productCategory from '../../entities/ProductCategory';
 import Product from '../../entities/Product';
 import { useEffect, useState } from 'react';
 import ProductItem from './ProductItem';
-import axios from 'axios';
+import axios, { CanceledError } from 'axios';
 
 interface Props {
 	title: string;
@@ -15,10 +15,19 @@ const ProductContainer = ({ title, area }: Props) => {
 	const [error, setError] = useState('');
 
 	useEffect(()=> {
-		axios.get<Product[]>(`http://localhost:3500/${area}${selectedGroup ? `?group=${selectedGroup}` : ''}`)
+		const controller = new AbortController();
+		axios
+			.get<Product[]>(
+				`http://localhost:3500/${area}${selectedGroup ? `?group=${selectedGroup}` : ''}`,
+				{signal: controller.signal}
+			)
 			.then((response)=> setProducts(response.data))
-			.catch(err => setError(err.message))
+			.catch(err => {
+				if(err instanceof CanceledError) return;
+				setError(err.message)
+			})
 		;
+		return ()=> controller.abort()
 	},[area, selectedGroup]);
 
 	return (
