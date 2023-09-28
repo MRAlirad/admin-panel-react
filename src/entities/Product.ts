@@ -5,6 +5,6 @@ export default interface Product {
 	description: string;
 	price: number;
 	link: string;
-	liked: boolean;
+	favourite: boolean;
 	group: string;
 }
