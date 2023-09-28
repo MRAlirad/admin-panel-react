@@ -1,10 +1,9 @@
 import productCategory from '../../entities/ProductCategory';
 import Product from '../../entities/Product';
-import { useEffect, useState } from 'react';
 import ProductItem from './ProductItem';
-import  { CanceledError } from '../../services/api-client';
 import threndsProductsService from '../../services/thrends-products-service';
 import viewsProductService from '../../services/views-product-service';
+import useProducts from '../../hooks/useProducts';
 
 interface Props {
 	title: string;
@@ -12,28 +11,7 @@ interface Props {
 }
 
 const ProductContainer = ({ title, area }: Props) => {
-	const [selectedGroup, setSelectedGroup] = useState('');
-	const [products, setProducts] = useState<Product[]>([]);
-	const [error, setError] = useState('');
-	const [isLoading, setIsLoading] = useState(false);
-
-	useEffect(() => {
-		setIsLoading(true);
-		setError('');
-		const {request, cancel} = area === 'views' ? viewsProductService.get<Product>('group', selectedGroup) : threndsProductsService.get<Product>('group', selectedGroup);
-
-		request
-			.then(response => {
-				setProducts(response.data);
-				setIsLoading(false);
-			})
-			.catch(err => {
-				if (err instanceof CanceledError) return;
-				setError(err.message);
-				setIsLoading(false);
-			});
-		return () => cancel();
-	}, [area, selectedGroup]);
+	const {products, error, isLoading, selectedGroup, setProducts, setSelectedGroup} = useProducts(area)
 
 	const itemToggleFavourite = (product: Product) => {
 		const updatedProduct = { ...product, favourite: !product.favourite };
