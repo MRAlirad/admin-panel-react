@@ -3,7 +3,7 @@ import Product from '../../entities/Product';
 
 interface Props {
 	product: Product;
-	onToggleFavourite : (product: Product)=> void;
+	onToggleFavourite: (product: Product) => void;
 }
 
 const ProductItem = ({ product, onToggleFavourite }: Props) => {
@@ -16,9 +16,12 @@ const ProductItem = ({ product, onToggleFavourite }: Props) => {
 				/>
 				<button
 					className="like-btn btn w-6 h-6 bg-white absolute top-2 left-2 rounded-full text-base text-red"
-					onClick={()=> onToggleFavourite(product)}
+					onClick={() => onToggleFavourite(product)}
 				>
-					<i className="material-icons material-icons-round"> {product.favourite ? 'favorite' : 'favorite_border'} </i>
+					<i className="material-icons material-icons-round">
+						{' '}
+						{product.favourite ? 'favorite' : 'favorite_border'}{' '}
+					</i>
 				</button>
 				<span className="flex items-center justify-center w-5 h-5 bg-white absolute top-2 right-2 rounded-full text-sm text-delftBlue">
 					<i className="material-icons material-icons-round">
