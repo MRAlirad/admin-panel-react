@@ -90,7 +90,7 @@
       "price": 123,
       "link": "total",
       "group": "music",
-      "favourite": true
+      "favourite": false
     },
     {
       "id": 2,
@@ -100,7 +100,7 @@
       "price": 234,
       "link": "total",
       "group": "family",
-      "favourite": true
+      "favourite": false
     },
     {
       "id": 3,
@@ -120,7 +120,7 @@
       "price": 456,
       "link": "total",
       "group": "sport",
-      "favourite": true
+      "favourite": false
     }
   ]
 }
