@@ -1,4 +1,4 @@
-import ProductCategory from '../../entities/ProductCategory';
+import productCategory from '../../entities/ProductCategory';
 import Product from '../../entities/Product';
 import { useEffect, useState } from 'react';
 import ProductItem from './ProductItem';
@@ -14,17 +14,17 @@ const ProductContainer = ({ title, area }: Props) => {
 	const [products, setProducts] = useState<Product[]>([]);
 
 	useEffect(()=> {
-		axios.get<Product[]>(`http://localhost:3500/${area}`)
+		axios.get<Product[]>(`http://localhost:3500/${area}${selectedGroup ? `?group=${selectedGroup}` : ''}`)
 			.then((response)=> setProducts(response.data))
 		;
-	},[area]);
+	},[area, selectedGroup]);
 
 	return (
 		<div className="product-segment grid gap-3">
 			<div className="title-grouping-box flex items-center justify-between">
 				<h3 className="title text-xl">{title}</h3>
 				<div className="grouping-box flex items-center">
-					{ProductCategory.map(group => (
+					{productCategory.map(group => (
 						<button
 							key={group.type}
 							className={`

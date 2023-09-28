@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import Product from '../../entities/Product';
 
 interface Props {
-	product: Product
+	product: Product;
 }
 
 const ProductItem = ({ product }: Props) => {
@@ -23,7 +23,17 @@ const ProductItem = ({ product }: Props) => {
 					<i className="material-icons material-icons-round"> {like ? 'favorite' : 'favorite_border'} </i>
 				</button>
 				<span className="flex items-center justify-center w-5 h-5 bg-white absolute top-2 right-2 rounded-full text-sm text-delftBlue">
-					<i className="material-icons material-icons-round"> {product.group} </i>
+					<i className="material-icons material-icons-round">
+						{product.group === 'music'
+							? 'music_note'
+							: product.group === 'family'
+							? 'diversity_1'
+							: product.group === 'art'
+							? 'palette'
+							: product.group === 'sport'
+							? 'emoji_events'
+							: ''}
+					</i>
 				</span>
 			</div>
 			<div className="specs-box grid gap-4 pt-4 pb-2">

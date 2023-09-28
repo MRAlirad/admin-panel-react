@@ -1,8 +1,4 @@
-const ProductCategory = [
-    {
-        type: 'all',
-        name : 'همه',
-    },
+const productCategory = [
     {
         type: 'music',
         name: 'موزیک',
@@ -21,4 +17,4 @@ const ProductCategory = [
     },
 ];
 
-export default ProductCategory;
+export default productCategory;
