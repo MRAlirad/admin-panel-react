@@ -12,10 +12,12 @@ interface Props {
 const ProductContainer = ({ title, area }: Props) => {
 	const [selectedGroup, setSelectedGroup] = useState('');
 	const [products, setProducts] = useState<Product[]>([]);
+	const [error, setError] = useState('');
 
 	useEffect(()=> {
 		axios.get<Product[]>(`http://localhost:3500/${area}${selectedGroup ? `?group=${selectedGroup}` : ''}`)
 			.then((response)=> setProducts(response.data))
+			.catch(err => setError(err.message))
 		;
 	},[area, selectedGroup]);
 
@@ -41,6 +43,7 @@ const ProductContainer = ({ title, area }: Props) => {
 				</div>
 			</div>
 			<div className="product-container grid grid-cols-3 gap-[15px_1%]">
+				{error && <p className="text-red">{error}</p> }
 				{products.map(product => (
 					<ProductItem
 						product={product}
