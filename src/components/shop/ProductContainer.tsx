@@ -35,6 +35,18 @@ const ProductContainer = ({ title, area }: Props) => {
 		return () => controller.abort();
 	}, [area, selectedGroup]);
 
+	const itemToggleFavourite = (product: Product)=>
+	{
+
+		const updatedProduct = {...product, favourite: !product.favourite};
+
+		axios.patch(`http://localhost:3500/${area}/${product.id}`, updatedProduct)
+			.then(()=> setProducts(products.map(p => p.id === product.id ? updatedProduct : p)))
+			.catch((error)=> {
+				alert(error.message)
+			})
+	}
+
 	return (
 		<div className="product-segment grid gap-3">
 			<div className="title-grouping-box flex items-center justify-between">
@@ -67,8 +79,9 @@ const ProductContainer = ({ title, area }: Props) => {
 					!isLoading &&
 					products.map(product => (
 						<ProductItem
-							product={product}
 							key={product.id}
+							product={product}
+							onToggleFavourite={itemToggleFavourite}
 						/>
 					))}
 			</div>

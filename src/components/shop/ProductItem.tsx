@@ -1,25 +1,12 @@
-import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Product from '../../entities/Product';
-import axios from 'axios';
 
 interface Props {
 	product: Product;
+	onToggleFavourite : (product: Product)=> void;
 }
 
-const ProductItem = ({ product }: Props) => {
-	const [isFavourite, setIsFavourite] = useState(product.favourite);
-
-	const toggleFavourite = (product: Product)=>{
-		const updatedProduct = {...product, favourite: !product.favourite};
-
-		axios.patch(`http://localhost:3500/views/${product.id}`, updatedProduct)
-			.then(()=> setIsFavourite(!isFavourite))
-			.catch((error)=> {
-				console.log(error);
-			})
-	}
-
+const ProductItem = ({ product, onToggleFavourite }: Props) => {
 	return (
 		<div className="thrend-item card p-3">
 			<div className="img-box relative rounded-md max-h-36">
@@ -29,9 +16,9 @@ const ProductItem = ({ product }: Props) => {
 				/>
 				<button
 					className="like-btn btn w-6 h-6 bg-white absolute top-2 left-2 rounded-full text-base text-red"
-					onClick={()=> toggleFavourite(product)}
+					onClick={()=> onToggleFavourite(product)}
 				>
-					<i className="material-icons material-icons-round"> {isFavourite ? 'favorite' : 'favorite_border'} </i>
+					<i className="material-icons material-icons-round"> {product.favourite ? 'favorite' : 'favorite_border'} </i>
 				</button>
 				<span className="flex items-center justify-center w-5 h-5 bg-white absolute top-2 right-2 rounded-full text-sm text-delftBlue">
 					<i className="material-icons material-icons-round">
