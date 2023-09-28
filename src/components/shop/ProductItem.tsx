@@ -19,8 +19,7 @@ const ProductItem = ({ product, onToggleFavourite }: Props) => {
 					onClick={() => onToggleFavourite(product)}
 				>
 					<i className="material-icons material-icons-round">
-						{' '}
-						{product.favourite ? 'favorite' : 'favorite_border'}{' '}
+						{product.favourite ? 'favorite' : 'favorite_border'}
 					</i>
 				</button>
 				<span className="flex items-center justify-center w-5 h-5 bg-white absolute top-2 right-2 rounded-full text-sm text-delftBlue">

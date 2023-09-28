@@ -2,7 +2,7 @@ import productCategory from '../../entities/ProductCategory';
 import Product from '../../entities/Product';
 import { useEffect, useState } from 'react';
 import ProductItem from './ProductItem';
-import apiClient, {CanceledError} from '../../services/api-client';
+import apiClient, { CanceledError } from '../../services/api-client';
 
 interface Props {
 	title: string;
@@ -31,24 +31,20 @@ const ProductContainer = ({ title, area }: Props) => {
 				if (err instanceof CanceledError) return;
 				setError(err.message);
 				setIsLoading(false);
-			})
-		;
+			});
 		return () => controller.abort();
 	}, [area, selectedGroup]);
 
-	const itemToggleFavourite = (product: Product)=>
-	{
-
-		const updatedProduct = {...product, favourite: !product.favourite};
+	const itemToggleFavourite = (product: Product) => {
+		const updatedProduct = { ...product, favourite: !product.favourite };
 
 		apiClient
 			.patch(`/${area}/${product.id}`, updatedProduct)
-			.then(()=> setProducts(products.map(p => p.id === product.id ? updatedProduct : p)))
-			.catch((error)=> {
-				alert(error.message)
-			})
-		;
-	}
+			.then(() => setProducts(products.map(p => (p.id === product.id ? updatedProduct : p))))
+			.catch(error => {
+				alert(error.message);
+			});
+	};
 
 	return (
 		<div className="product-segment grid gap-3">
