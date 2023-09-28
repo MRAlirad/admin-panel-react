@@ -2,7 +2,8 @@ import productCategory from '../../entities/ProductCategory';
 import Product from '../../entities/Product';
 import { useEffect, useState } from 'react';
 import ProductItem from './ProductItem';
-import apiClient, { CanceledError } from '../../services/api-client';
+import  { CanceledError } from '../../services/api-client';
+import productService from '../../services/product-service';
 
 interface Props {
 	title: string;
@@ -16,13 +17,11 @@ const ProductContainer = ({ title, area }: Props) => {
 	const [isLoading, setIsLoading] = useState(false);
 
 	useEffect(() => {
-		const controller = new AbortController();
 		setIsLoading(true);
 		setError('');
-		apiClient
-			.get<Product[]>(`/${area}${selectedGroup ? `?group=${selectedGroup}` : ''}`, {
-				signal: controller.signal,
-			})
+		const {request, cancel} = productService.getProducts(area, selectedGroup);
+
+		request
 			.then(response => {
 				setProducts(response.data);
 				setIsLoading(false);
@@ -32,14 +31,15 @@ const ProductContainer = ({ title, area }: Props) => {
 				setError(err.message);
 				setIsLoading(false);
 			});
-		return () => controller.abort();
+		return () => cancel();
 	}, [area, selectedGroup]);
 
 	const itemToggleFavourite = (product: Product) => {
 		const updatedProduct = { ...product, favourite: !product.favourite };
 
-		apiClient
-			.patch(`/${area}/${product.id}`, updatedProduct)
+		// apiClient
+		// 	.patch(`/${area}/${product.id}`, updatedProduct)
+		productService.productToggleFavourite(area, updatedProduct)
 			.then(() => setProducts(products.map(p => (p.id === product.id ? updatedProduct : p))))
 			.catch(error => {
 				alert(error.message);
