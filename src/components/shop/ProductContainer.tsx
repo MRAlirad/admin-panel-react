@@ -3,7 +3,8 @@ import Product from '../../entities/Product';
 import { useEffect, useState } from 'react';
 import ProductItem from './ProductItem';
 import  { CanceledError } from '../../services/api-client';
-import productService from '../../services/product-service';
+import threndsProductsService from '../../services/thrends-products-service';
+import viewsProductService from '../../services/views-product-service';
 
 interface Props {
 	title: string;
@@ -19,7 +20,7 @@ const ProductContainer = ({ title, area }: Props) => {
 	useEffect(() => {
 		setIsLoading(true);
 		setError('');
-		const {request, cancel} = productService.getProducts(area, selectedGroup);
+		const {request, cancel} = area === 'views' ? viewsProductService.get<Product>('group', selectedGroup) : threndsProductsService.get<Product>('group', selectedGroup);
 
 		request
 			.then(response => {
@@ -36,10 +37,8 @@ const ProductContainer = ({ title, area }: Props) => {
 
 	const itemToggleFavourite = (product: Product) => {
 		const updatedProduct = { ...product, favourite: !product.favourite };
-
-		// apiClient
-		// 	.patch(`/${area}/${product.id}`, updatedProduct)
-		productService.productToggleFavourite(area, updatedProduct)
+		const request = area === 'views' ? viewsProductService : threndsProductsService;
+		request.update<Product>(updatedProduct)
 			.then(() => setProducts(products.map(p => (p.id === product.id ? updatedProduct : p))))
 			.catch(error => {
 				alert(error.message);

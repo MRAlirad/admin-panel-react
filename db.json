@@ -48,7 +48,7 @@
 			"price": 123,
 			"link": "total",
 			"group": "music",
-			"favourite": true
+			"favourite": false
 		},
 		{
 			"id": 2,
@@ -58,7 +58,7 @@
 			"price": 234,
 			"link": "total",
 			"group": "family",
-			"favourite": false
+			"favourite": true
 		},
 		{
 			"id": 3,
@@ -68,7 +68,7 @@
 			"price": 345,
 			"link": "total",
 			"group": "art",
-			"favourite": false
+			"favourite": true
 		},
 		{
 			"id": 4,
@@ -90,7 +90,7 @@
 			"price": 123,
 			"link": "total",
 			"group": "music",
-			"favourite": true
+			"favourite": false
 		},
 		{
 			"id": 2,
