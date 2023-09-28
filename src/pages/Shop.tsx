@@ -3,7 +3,7 @@ import ProductContainer from '../components/shop/ProductContainer';
 
 const Shop = () => {
 	return (
-		<div className="grid grid-cols-[2fr_1fr] gap-y-10">
+		<div className="grid grid-cols-[2fr_1fr] grid-rows-[max-content_max-content] gap-y-10">
 			<Banner />
 			<div></div>
 			<div className="product-containers grid gap-y-8">
