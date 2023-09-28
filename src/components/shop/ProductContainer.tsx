@@ -1,15 +1,23 @@
 import ProductCategory from '../../entities/ProductCategory';
 import Product from '../../entities/Product';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import ProductItem from './ProductItem';
+import axios from 'axios';
 
 interface Props {
 	title: string;
-	products: Product[];
+	area : string;
 }
 
-const ProductContainer = ({ title, products }: Props) => {
+const ProductContainer = ({ title, area }: Props) => {
 	const [selectedGroup, setSelectedGroup] = useState('');
+	const [products, setProducts] = useState<Product[]>([]);
+
+	useEffect(()=> {
+		axios.get<Product[]>(`http://localhost:3500/${area}`)
+			.then((response)=> setProducts(response.data))
+		;
+	},[area]);
 
 	return (
 		<div className="product-segment grid gap-3">
