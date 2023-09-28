@@ -6,29 +6,34 @@ import axios, { CanceledError } from 'axios';
 
 interface Props {
 	title: string;
-	area : string;
+	area: string;
 }
 
 const ProductContainer = ({ title, area }: Props) => {
 	const [selectedGroup, setSelectedGroup] = useState('');
 	const [products, setProducts] = useState<Product[]>([]);
 	const [error, setError] = useState('');
+	const [isLoading, setIsLoading] = useState(false);
 
-	useEffect(()=> {
+	useEffect(() => {
 		const controller = new AbortController();
+		setIsLoading(true);
+		setError('');
 		axios
-			.get<Product[]>(
-				`http://localhost:3500/${area}${selectedGroup ? `?group=${selectedGroup}` : ''}`,
-				{signal: controller.signal}
-			)
-			.then((response)=> setProducts(response.data))
-			.catch(err => {
-				if(err instanceof CanceledError) return;
-				setError(err.message)
+			.get<Product[]>(`http://localhost:3500/${area}${selectedGroup ? `?group=${selectedGroup}` : ''}`, {
+				signal: controller.signal,
 			})
-		;
-		return ()=> controller.abort()
-	},[area, selectedGroup]);
+			.then(response => {
+				setProducts(response.data);
+				setIsLoading(false);
+			})
+			.catch(err => {
+				if (err instanceof CanceledError) return;
+				setError(err.message);
+				setIsLoading(false);
+			});
+		return () => controller.abort();
+	}, [area, selectedGroup]);
 
 	return (
 		<div className="product-segment grid gap-3">
@@ -51,14 +56,21 @@ const ProductContainer = ({ title, area }: Props) => {
 					))}
 				</div>
 			</div>
+			{isLoading && (
+				<div className="flex items-center justify-center w-full h-full">
+					<span className="flex w-16 h-16 border-4 border-solid border-transparent border-t-delftBlue rounded-full animate-spin"></span>
+				</div>
+			)}
+			{error && <p className="text-red">{error}</p>}
 			<div className="product-container grid grid-cols-3 gap-[15px_1%]">
-				{error && <p className="text-red">{error}</p> }
-				{products.map(product => (
-					<ProductItem
-						product={product}
-						key={product.id}
-					/>
-				))}
+				{!error &&
+					!isLoading &&
+					products.map(product => (
+						<ProductItem
+							product={product}
+							key={product.id}
+						/>
+					))}
 			</div>
 		</div>
 	);
