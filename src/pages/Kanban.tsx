@@ -14,24 +14,6 @@ const Kanban = () => {
 		apiClient.get<Task[]>('/tasks').then(response => setTasks(response.data));
 	}, []);
 
-	function filterTask(status: number): Array<Task> {
-		const filteredTasks = [];
-		for (const task of tasks) if (task.status === status) filteredTasks.push(task);
-		return filteredTasks;
-	}
-
-	function pendingTasks(): Array<Task> {
-		return filterTask(0)
-	}
-
-	function runningTasks(): Array<Task> {
-		return filterTask(1)
-	}
-
-	function doneTasks(): Array<Task> {
-		return filterTask(2)
-	}
-
 	function addTask({ id, title, img, description, status }: Task) {
 		setTasks([{ id, title, img, description, status }, ...tasks]);
 	}
@@ -44,7 +26,7 @@ const Kanban = () => {
 		<div className="kanban-page grid grid-cols-3 gap-x-[1%]">
 			<TasksContainer
 				title="در انتظار تایید"
-				taskItems={pendingTasks()}
+				status={0}
 				onAddTask={() => {
 					setAddTaskModalDisplay('show');
 					setTaskStatus(0);
@@ -56,7 +38,7 @@ const Kanban = () => {
 			/>
 			<TasksContainer
 				title="در حال انجام"
-				taskItems={runningTasks()}
+				status={1}
 				onAddTask={() => {
 					setAddTaskModalDisplay('show');
 					setTaskStatus(1);
@@ -68,7 +50,7 @@ const Kanban = () => {
 			/>
 			<TasksContainer
 				title="انجام شده"
-				taskItems={doneTasks()}
+				status={2}
 				onAddTask={() => {
 					setAddTaskModalDisplay('show');
 					setTaskStatus(2);
