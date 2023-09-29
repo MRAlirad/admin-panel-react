@@ -23,8 +23,12 @@ class HttpService {
 		return { request, cancel: () => controller.abort() };
 	}
 
-	delete<T extends Entity>(entity: T) {
-		return apiClient.delete(`${this.endpoint}/${entity.id}`);
+	post<T>(entity: T) {
+		return apiClient.post(`${this.endpoint}`, entity);
+	}
+
+	delete(id: number) {
+		return apiClient.delete(`${this.endpoint}/${id}`);
 	}
 
 	update<T extends Entity>(entity: T) {
