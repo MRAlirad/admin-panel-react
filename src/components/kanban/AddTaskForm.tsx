@@ -16,13 +16,12 @@ interface FormData {
 }
 
 const AddTaskForm = ({ onAddTask, status }: Props) => {
+	const [selectedStatus, setSelectedStatus] = useState(status);
 	const {
 		register,
 		handleSubmit,
 		formState: { errors },
 	} = useForm<FormData>();
-	const [selectedStatus, setSelectedStatus] = useState(status);
-	console.log(errors);
 
 	const onSubmit = (data: FieldValues) => {
 		const newTask = {
@@ -45,6 +44,7 @@ const AddTaskForm = ({ onAddTask, status }: Props) => {
 				<label className="text-sm text-delftBlue">عنوان</label>
 				<input
 					type="text"
+					placeholder="عنوان را وارد کنید"
 					className={`
 						border !border-solid rounded-xl py-3 px-4 focus:border-delftBlue
 						${errors.title ? 'border-red' : 'border-[#E0E5F2]'}
@@ -59,6 +59,7 @@ const AddTaskForm = ({ onAddTask, status }: Props) => {
 						border !border-solid rounded-xl outline-none py-3 px-4 focus:border-delftBlue
 						${errors.description ? 'border-red' : 'border-[#E0E5F2]'}
 					`}
+					placeholder="توضیحات را وارد کنید"
 					rows={5}
 					{...register('description', { required: true })}
 				></textarea>
@@ -68,6 +69,7 @@ const AddTaskForm = ({ onAddTask, status }: Props) => {
 				<input
 					type="text"
 					className="border !border-solid border-[#E0E5F2] rounded-xl py-3 px-4 focus:border-delftBlue"
+					placeholder="آدرس عکس را وارد کنید"
 					{...register('img')}
 				/>
 			</div>
