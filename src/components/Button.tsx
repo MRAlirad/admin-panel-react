@@ -2,7 +2,7 @@ interface Props {
 	type?: 'icon' | 'primary' | 'outline-primary' | 'white' | 'whiteSimple' | 'blueSimple';
 	color?: string;
 	text: string;
-	onClick: () => void;
+	onClick?: () => void;
 	fluid?: boolean;
 	disabled?: boolean;
 }
