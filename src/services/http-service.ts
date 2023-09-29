@@ -13,10 +13,12 @@ class HttpService {
 
 	get<T>(filterProperty: string = '', filterEntity: string = '') {
 		const controller = new AbortController();
-        // ${selectedGroup ? `?group=${selectedGroup}` : ''}
-		const request = apiClient.get<T[]>(`${this.endpoint}${filterEntity ? `?${filterProperty}=${filterEntity}` : ''}`, {
-			signal: controller.signal,
-		});
+		const request = apiClient.get<T[]>(
+			`${this.endpoint}${filterEntity ? `?${filterProperty}=${filterEntity}` : ''}`,
+			{
+				signal: controller.signal,
+			}
+		);
 
 		return { request, cancel: () => controller.abort() };
 	}
