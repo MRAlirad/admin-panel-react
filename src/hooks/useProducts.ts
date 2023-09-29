@@ -23,9 +23,9 @@ const useProducts = (area: string) => {
 				setProducts(response.data);
 				setIsLoading(false);
 			})
-			.catch(err => {
-				if (err instanceof CanceledError) return;
-				setError(err.message);
+			.catch(error => {
+				if (error instanceof CanceledError) return;
+				setError(error.message);
 				setIsLoading(false);
 			});
 		return () => cancel();
