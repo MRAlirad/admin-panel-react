@@ -1,47 +1,75 @@
-import { useRef, useState } from 'react';
+import { useState } from 'react';
 import Button from '../Button';
 import Task from '../../entities/Task';
-import axios from 'axios';
+import apiClient from '../../services/api-client';
+import { FieldValues, useForm } from 'react-hook-form';
 
 interface Props {
 	onAddTask: (data: Task) => void;
 	status: number;
 }
 
+interface FormData {
+	title: string;
+	description: string;
+	img: string;
+}
+
 const AddTaskForm = ({ onAddTask, status }: Props) => {
+	const {
+		register,
+		handleSubmit,
+		formState: { errors },
+	} = useForm<FormData>();
 	const [selectedStatus, setSelectedStatus] = useState(status);
-	const [titleValidation, setTitleValidation] = useState(true);
-	const [descValidation, setDescValidation] = useState(true);
-	const titleRef = useRef<HTMLInputElement>(null);
-	const descRef = useRef<HTMLTextAreaElement>(null);
+	console.log(errors);
+
+	const onSubmit = (data: FieldValues) => {
+		const newTask = {
+			id: Date.now(),
+			title: data.title,
+			description: data.description,
+			status: selectedStatus,
+			img: data.img,
+		};
+
+		apiClient.post('/tasks', newTask).then(res => onAddTask(res.data));
+	};
 
 	return (
-		<div className="add-task-form flex flex-col items-center justify-center gap-3.5 min-w-[500px]">
+		<form
+			onSubmit={handleSubmit(onSubmit)}
+			className="add-task-form flex flex-col items-center justify-center gap-3.5 min-w-[500px]"
+		>
 			<div className="title-form-control grid gap-1.5 w-full ">
 				<label className="text-sm text-delftBlue">عنوان</label>
 				<input
 					type="text"
-					name="title"
 					className={`
-						border !border-solid border-[#E0E5F2] rounded-xl py-3 px-4 focus:border-delftBlue
-						${titleValidation ? 'border-[#E0E5F2]' : 'border-red'}
+						border !border-solid rounded-xl py-3 px-4 focus:border-delftBlue
+						${errors.title ? 'border-red' : 'border-[#E0E5F2]'}
 					`}
-					ref={titleRef}
-					onFocus={()=> setTitleValidation(true)}
+					{...register('title', { required: true })}
 				/>
 			</div>
 			<div className="desc-form-control grid gap-1.5 w-full">
 				<label className="text-sm text-delftBlue">توضیحات</label>
 				<textarea
-					name="description"
 					className={`
 						border !border-solid rounded-xl outline-none py-3 px-4 focus:border-delftBlue
-						${descValidation ? 'border-[#E0E5F2]' : 'border-red'}
+						${errors.description ? 'border-red' : 'border-[#E0E5F2]'}
 					`}
 					rows={5}
-					ref={descRef}
-					onFocus={()=> setDescValidation(true)}
+					{...register('description', { required: true })}
 				></textarea>
+			</div>
+			<div className="img-form-control grid gap-1.5 w-full ">
+				<label className="text-sm text-delftBlue">آدرس عکس</label>
+				<input
+					type="text"
+					className="border !border-solid border-[#E0E5F2] rounded-xl py-3 px-4 focus:border-delftBlue"
+					{...register('img')}
+				/>
 			</div>
 			<div className="status-form-control flex items-center w-full gap-1.5">
 				<label className="text-sm text-delftBlue">وضعیت</label>
@@ -76,30 +104,8 @@ const AddTaskForm = ({ onAddTask, status }: Props) => {
 			<Button
 				type="primary"
 				text="ثبت"
-				onClick={() => {
-					if(!titleRef.current?.value)
-						setTitleValidation(false);
-
-					if(!descRef.current?.value)
-						setDescValidation(false);
-
-					if(!titleRef.current?.value || !descRef.current?.value)
-						return;
-
-					const newTask = {
-						id: Date.now(),
-						title: titleRef.current?.value ?? '',
-						description: descRef.current?.value ?? '',
-						status: selectedStatus,
-						img: '/src/assets/pics/DragDrop.png',
-					}
-
-					axios.post('http://localhost:3500/tasks', newTask)
-						.then((res)=> onAddTask(res.data))
-					;
-				}}
 			/>
-		</div>
+		</form>
 	);
 };
 
