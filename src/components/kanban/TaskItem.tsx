@@ -1,5 +1,6 @@
 import axios from 'axios';
 import Task from '../../entities/Task';
+import Button from '../Button';
 
 interface Props {
 	task: Task;
@@ -9,9 +10,7 @@ interface Props {
 
 const TaskItem = ({ task, onEdit, onDelete }: Props) => {
 	function deleteTask() {
-		axios.delete(`http://localhost:3500/tasks/${task.id}`)
-			.then(() => onDelete(task.id))
-		;
+		axios.delete(`http://localhost:3500/tasks/${task.id}`).then(() => onDelete(task.id));
 	}
 
 	return (
@@ -22,18 +21,18 @@ const TaskItem = ({ task, onEdit, onDelete }: Props) => {
 			<div className="title-box flex items-center justify-between gap-2">
 				<h3 className="title text-sm font-bold line-clamp-1">{task.title}</h3>
 				<div className="actions-box flex items-ceter gap-1">
-					<button
-						className="edit-btn btn icon rounded-lg text-lg text-powderBlue"
+					<Button
+						type="icon"
+						text="edit"
+						color="powderBlue"
 						onClick={() => onEdit(task)}
-					>
-						<i className="material-icons material-icons-round"> edit </i>
-					</button>
-					<button
-						className="delete-btn btn icon rounded-lg text-lg text-red"
+					/>
+					<Button
+						type="icon"
+						text="delete outlined"
+						color="red"
 						onClick={() => deleteTask()}
-					>
-						<i className="material-icons material-icons-outlined"> delete </i>
-					</button>
+					/>
 				</div>
 			</div>
 			{task.img ? (

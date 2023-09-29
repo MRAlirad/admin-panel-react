@@ -1,14 +1,14 @@
 interface Props {
 	type ?: 'primary' | 'outline' | 'icon' | 'simple',
 	text: string;
-	color: string;
+	color?: string;
 	onClick?: () => void;
 	fluid?: boolean;
 	disabled?: boolean;
 	className ?: string;
 }
 
-const Button = ({ type = 'primary', text, color, onClick, fluid = false, disabled = false, className = ''}: Props) => {
+const Button = ({ type = 'primary', text, color = 'delftBlue', onClick, fluid = false, disabled = false, className = ''}: Props) => {
 	return (
 		<button
 			className={`
@@ -41,7 +41,12 @@ const Button = ({ type = 'primary', text, color, onClick, fluid = false, disable
 			onClick={onClick}
 			disabled={disabled}
 		>
-			{type === 'icon' ? <i className="material-icons material-icons-round">{text}</i> : text}
+			{
+				type === 'icon' ?
+					<i className={`material-icons material-icons-${text.split(' ')[1] ?? 'round'}`}>{text.split(' ')[0]}</i>
+				: 
+					text
+			}
 		</button>
 	);
 };
