@@ -5,10 +5,10 @@ interface Props {
 	onClick?: () => void;
 	fluid?: boolean;
 	disabled?: boolean;
-	classes ?: string;
+	className ?: string;
 }
 
-const Button = ({ type = 'primary', text, color, onClick, fluid = false, disabled = false, classes = ''}: Props) => {
+const Button = ({ type = 'primary', text, color, onClick, fluid = false, disabled = false, className = ''}: Props) => {
 	return (
 		<button
 			className={`
@@ -36,7 +36,7 @@ const Button = ({ type = 'primary', text, color, onClick, fluid = false, disable
 						''
 				}
 				${disabled ? 'opacity-60' : 'opacity-95 hover:opacity-100'}
-				${classes}
+				${className}
 			`}
 			onClick={onClick}
 			disabled={disabled}

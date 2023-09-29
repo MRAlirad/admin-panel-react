@@ -1,5 +1,6 @@
 import TaskItem from './TaskItem';
 import Task from '../../entities/Task';
+import Button from '../Button';
 
 interface Props {
 	onAddTask: () => void;
@@ -14,12 +15,13 @@ const TasksContainer = ({ title, taskItems, onAddTask, onEditTask, onDeleteTask 
 		<div className="tasks-container card grid gap-4 h-max px-5 py-4">
 			<div className="title-box flex items-center justify-between">
 				<h2 className="text-lg text-delftBlue font-bold">{title}</h2>
-				<button
-					className="btn w-14 h-7 text-blue bg-ghostWhite rounded-md"
+				<Button
+					type="icon"
+					text="add"
+					color="blue"
 					onClick={onAddTask}
-				>
-					<i className="material-icons material-icons-round"> add </i>
-				</button>
+					className="!w-14 h-7 bg-ghostWhite rounded-md"
+				/>
 			</div>
 			{taskItems.length > 0 ? (
 				<div className="tasks-container grid gap-2">
