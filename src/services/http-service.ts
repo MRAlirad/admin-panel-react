@@ -14,7 +14,7 @@ class HttpService {
 	get<T>(filterProperty: string  = '', filterEntity: string | number = '') {
 		const controller = new AbortController();
 		const request = apiClient.get<T[]>(
-			`${this.endpoint}${filterEntity ? `?${filterProperty}=${filterEntity}` : ''}`,
+			`${this.endpoint}${filterEntity !== '' ? `?${filterProperty}=${filterEntity}` : ''}`,
 			{
 				signal: controller.signal,
 			}
