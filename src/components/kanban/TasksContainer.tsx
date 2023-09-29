@@ -7,6 +7,7 @@ import tasksService from '../../services/tasks-service';
 import Modal from '../Modal';
 import AddTaskForm from './AddTaskForm';
 import { useState } from 'react';
+import { IsEmpty } from '../../helpers/DataType';
 
 interface Props {
 	title: string;
@@ -16,29 +17,38 @@ interface Props {
 const TasksContainer = ({ title, status }: Props) => {
 	const {tasks, setTasks, error, isLoading} = useTasks(status);
 	const [addTaskModalDisplay, setAddTaskModalDisplay] = useState('hide');
-	const [taskStatus, setTaskStatus] = useState(0);
+	const [currentTask, setCurrentTask] = useState({
+		id: Date.now(),
+		title: '',
+		description: '',
+		status: status,
+		img: '',
+	})
 
 	const addTask = (task: Task)=> {
-		console.log(task);
 		tasksService
 			.post(task)
-			.then(()=> {
-				setTasks([task, ...tasks])
-			})
-			.catch((error)=> {
-				alert(error)
-			})
+			.then(()=> setTasks([task, ...tasks]))
+			.catch((error)=> alert(error))
 		;
 	}
 
-	const onDeleteTask = (id : number)=> {
+	const editTask = (task: Task)=> {
+		tasksService
+			.update<Task>(task)
+			.then(() => setTasks(tasks.map(t => (t.id === task.id ? task : t))))
+			.catch((error)=> alert(error))
+		;
+	}
+
+	const deleteTask = (id : number)=> {
 		tasksService
 			.delete(id)
 			.then(()=> {
 				setTasks(tasks.filter(task => task.id !== id))
 			})
-			.catch(()=> {
-				alert('موردی پیش آمد. لطفا دوباره امتحان کنید');
+			.catch((error)=> {
+				alert(error);
 			})
 		;
 	}
@@ -53,8 +63,14 @@ const TasksContainer = ({ title, status }: Props) => {
 						text="add"
 						color="blue"
 						onClick={()=> {
-							setTaskStatus(status);
 							setAddTaskModalDisplay('show');
+							setCurrentTask({
+								id: Date.now(),
+								title: '',
+								description: '',
+								status: status,
+								img: '',
+							});
 						}}
 						className="!w-14 h-7 bg-ghostWhite rounded-md"
 					/>
@@ -72,8 +88,11 @@ const TasksContainer = ({ title, status }: Props) => {
 								<TaskItem
 									key={task.id}
 									task={task}
-									onEdit={data => console.log(data)}
-									onDelete={taskId => onDeleteTask(taskId)}
+									onEdit={data => {
+										setCurrentTask(data);
+										setAddTaskModalDisplay('show');
+									}}
+									onDelete={taskId => deleteTask(taskId)}
 								/>
 							))}
 						</div>
@@ -91,7 +110,12 @@ const TasksContainer = ({ title, status }: Props) => {
 							addTask(data);
 							setAddTaskModalDisplay('hide');
 						}}
-						status={taskStatus}
+						onEditTask={data => {
+							editTask(data);
+							setAddTaskModalDisplay('hide');
+						}}
+						mode={IsEmpty(currentTask.title) ? 'ADD' : 'EDIT'}
+						currentTask={currentTask}
 					/>
 				</Modal>
 			)}

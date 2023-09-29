@@ -1,11 +1,12 @@
-import { useState } from 'react';
 import Button from '../Button';
 import Task from '../../entities/Task';
 import { FieldValues, useForm } from 'react-hook-form';
 
 interface Props {
 	onAddTask: (data: Task) => void;
-	status: number;
+	onEditTask: (data: Task) => void;
+	currentTask: Task;
+	mode?: 'ADD' | 'EDIT';
 }
 
 interface FormData {
@@ -14,8 +15,7 @@ interface FormData {
 	img: string;
 }
 
-const AddTaskForm = ({ onAddTask, status }: Props) => {
-	const [selectedStatus, setSelectedStatus] = useState(status);
+const AddTaskForm = ({ onAddTask, onEditTask, currentTask, mode = 'ADD' }: Props) => {
 	const {
 		register,
 		handleSubmit,
@@ -23,13 +23,17 @@ const AddTaskForm = ({ onAddTask, status }: Props) => {
 	} = useForm<FormData>();
 
 	const onSubmit = (data: FieldValues) => {
-		onAddTask({
-			id: Date.now(),
-			title: data.title,
+		const task = {
+			id: currentTask.id,
+			title : data.title,
 			description: data.description,
-			status: selectedStatus,
+			status: currentTask.status,
 			img: data.img,
-		})
+		};
+		if(mode === 'ADD')
+			onAddTask(task);
+		else
+			onEditTask(task);
 	};
 
 	return (
@@ -40,6 +44,7 @@ const AddTaskForm = ({ onAddTask, status }: Props) => {
 			<div className="title-form-control grid gap-1.5 w-full ">
 				<label className="text-sm text-delftBlue">عنوان</label>
 				<input
+					defaultValue={currentTask.title ?? ''}
 					type="text"
 					placeholder="عنوان را وارد کنید"
 					className={`
@@ -52,6 +57,7 @@ const AddTaskForm = ({ onAddTask, status }: Props) => {
 			<div className="desc-form-control grid gap-1.5 w-full">
 				<label className="text-sm text-delftBlue">توضیحات</label>
 				<textarea
+					defaultValue={currentTask.description ?? ''}
 					className={`
 						border !border-solid rounded-xl outline-none py-3 px-4 focus:border-delftBlue
 						${errors.description ? 'border-red' : 'border-[#E0E5F2]'}
@@ -64,47 +70,26 @@ const AddTaskForm = ({ onAddTask, status }: Props) => {
 			<div className="img-form-control grid gap-1.5 w-full ">
 				<label className="text-sm text-delftBlue">آدرس عکس</label>
 				<input
+					defaultValue={currentTask.img ?? ''}
 					type="text"
 					className="border !border-solid border-[#E0E5F2] rounded-xl py-3 px-4 focus:border-delftBlue"
 					placeholder="آدرس عکس را وارد کنید"
 					{...register('img')}
 				/>
 			</div>
-			<div className="status-form-control flex items-center w-full gap-1.5">
-				<label className="text-sm text-delftBlue">وضعیت</label>
-				<span
-					className={`
-							staus flex items-center justify-center w-max py-1 px-2 rounded-md text-[9px] text-white bg-hunyadiYellow cursor-pointer
-							${selectedStatus !== 0 ? 'opacity-50 hover:opacity-70' : 'opacity-100'}
-						`}
-					onClick={() => setSelectedStatus(0)}
-				>
-					در انتظار تایید
-				</span>
-				<span
-					className={`
-							staus flex items-center justify-center w-max py-1 px-2 rounded-md text-[9px] text-white bg-neonBlue cursor-pointer
-							${selectedStatus !== 1 ? 'opacity-50 hover:opacity-70' : 'opacity-100'}
-						`}
-					onClick={() => setSelectedStatus(1)}
-				>
-					در حال انجام
-				</span>
-				<span
-					className={`
-							staus flex items-center justify-center w-max py-1 px-2 rounded-md text-[9px] text-white bg-jade cursor-pointer
-							${selectedStatus !== 2 ? 'opacity-50 hover:opacity-70' : 'opacity-100'}
-						`}
-					onClick={() => setSelectedStatus(2)}
-				>
-					انجام شده
-				</span>
-			</div>
-			<Button
-				type="primary"
-				color='delftBlue'
-				text="ثبت"
-			/>
+			{mode === 'ADD' ? (
+				<Button
+					type="primary"
+					color="delftBlue"
+					text="ثبت"
+				/>
+			) : mode === 'EDIT' ? (
+				<Button
+					type="primary"
+					color="jade"
+					text="ویرایش"
+				/>
+			) : null}
 		</form>
 	);
 };
