@@ -1,6 +1,6 @@
-import axios from 'axios';
 import Task from '../../entities/Task';
 import Button from '../Button';
+import apiClient from '../../services/api-client';
 
 interface Props {
 	task: Task;
@@ -10,7 +10,7 @@ interface Props {
 
 const TaskItem = ({ task, onEdit, onDelete }: Props) => {
 	function deleteTask() {
-		axios.delete(`http://localhost:3500/tasks/${task.id}`).then(() => onDelete(task.id));
+		apiClient.delete(`/tasks/${task.id}`).then(() => onDelete(task.id));
 	}
 
 	return (
