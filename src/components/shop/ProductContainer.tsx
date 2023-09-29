@@ -4,6 +4,7 @@ import ProductItem from './ProductItem';
 import threndsProductsService from '../../services/thrends-products-service';
 import viewsProductService from '../../services/views-product-service';
 import useProducts from '../../hooks/useProducts';
+import Loader from '../Loader';
 
 interface Props {
 	title: string;
@@ -45,9 +46,7 @@ const ProductContainer = ({ title, area }: Props) => {
 				</div>
 			</div>
 			{isLoading && (
-				<div className="flex items-center justify-center w-full h-full">
-					<span className="flex w-16 h-16 border-4 border-solid border-transparent border-t-delftBlue rounded-full animate-spin"></span>
-				</div>
+				<Loader />
 			)}
 			{error && <p className="text-red">{error}</p>}
 			<div className="product-container grid grid-cols-3 gap-[15px_1%]">
