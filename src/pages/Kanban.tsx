@@ -14,22 +14,22 @@ const Kanban = () => {
 		apiClient.get<Task[]>('/tasks').then(response => setTasks(response.data));
 	}, []);
 
+	function filterTask(status: number): Array<Task> {
+		const filteredTasks = [];
+		for (const task of tasks) if (task.status === status) filteredTasks.push(task);
+		return filteredTasks;
+	}
+
 	function pendingTasks(): Array<Task> {
-		const pendingTasks = [];
-		for (const task of tasks) if (task.status === 0) pendingTasks.push(task);
-		return pendingTasks;
+		return filterTask(0)
 	}
 
 	function runningTasks(): Array<Task> {
-		const runningTasks = [];
-		for (const task of tasks) if (task.status === 1) runningTasks.push(task);
-		return runningTasks;
+		return filterTask(1)
 	}
 
 	function doneTasks(): Array<Task> {
-		const doneTasks = [];
-		for (const task of tasks) if (task.status === 2) doneTasks.push(task);
-		return doneTasks;
+		return filterTask(2)
 	}
 
 	function addTask({ id, title, img, description, status }: Task) {
