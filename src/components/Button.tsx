@@ -1,52 +1,42 @@
 interface Props {
-	type?: 'icon' | 'primary' | 'outline-primary' | 'white' | 'whiteSimple' | 'blueSimple';
-	color?: string;
+	type ?: 'primary' | 'outline' | 'icon' | 'simple',
 	text: string;
+	color: string;
 	onClick?: () => void;
 	fluid?: boolean;
 	disabled?: boolean;
+	classes ?: string;
 }
 
-const Button = ({ type = 'primary', color, text, onClick, fluid = false, disabled = false}: Props) => {
+const Button = ({ type = 'primary', text, color, onClick, fluid = false, disabled = false, classes = ''}: Props) => {
 	return (
 		<button
 			className={`
-				flex items-center justify-center
+				flex items-center justify-center outline-none
 				${fluid ? 'w-full' : 'w-max'}
 				${
-					type === 'icon' ?
-						'border-none outline-none p-1'
+					type === 'primary' || type === 'outline' ?
+						`py-1.5 px-6 border border-solid border-${color} rounded-lg`
 					:
-					type === 'primary' || type === 'outline-primary' || type === 'white' ?
-						'py-1.5 px-6 border border-solid rounded-lg'
-					:
-					type === 'whiteSimple' || type === 'blueSimple' ?
-						'p1'
+					type === 'icon' || type === 'simple' ?
+						'border-none p-1'
 					:
 						''
 				}
 				${
+					type === 'primary' ?
+						`bg-${color} text-white`
+					:
+					type === 'outline' ?
+						`bg-white text-${color}`
+					:
 					type === 'icon' ?
 						`text-${color}`
-					:
-					type === 'whiteSimple' ?
-						'text-white'
-					:
-					type === 'blueSimple' ?
-						'text-delftBlue'
-					:
-					type === 'primary' ?
-						'bg-delftBlue text-white py-2.5 border-delftBlue'
-					:
-					type === 'outline-primary' ?
-						"bg-white text-delftBlue py-2.5 border-delftBlue"
-					:
-					type === 'white' ?
-						'bg-white text-delftBlue py-2.5 border-white'
 					:
 						''
 				}
 				${disabled ? 'opacity-60' : 'opacity-95 hover:opacity-100'}
+				${classes}
 			`}
 			onClick={onClick}
 			disabled={disabled}

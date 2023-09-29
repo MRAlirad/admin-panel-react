@@ -6,6 +6,7 @@
 	.img-box {
 		@apply flex items-center justify-center overflow-hidden;
 	}
+
 	img {
 		@apply w-full h-full object-contain;
 	}

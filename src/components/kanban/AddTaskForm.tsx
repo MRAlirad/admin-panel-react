@@ -105,6 +105,7 @@ const AddTaskForm = ({ onAddTask, status }: Props) => {
 			</div>
 			<Button
 				type="primary"
+				color='delftBlue'
 				text="ثبت"
 			/>
 		</form>
