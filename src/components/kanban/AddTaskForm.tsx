@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import Button from '../Button';
 import Task from '../../entities/Task';
-import apiClient from '../../services/api-client';
 import { FieldValues, useForm } from 'react-hook-form';
 
 interface Props {
@@ -24,15 +23,13 @@ const AddTaskForm = ({ onAddTask, status }: Props) => {
 	} = useForm<FormData>();
 
 	const onSubmit = (data: FieldValues) => {
-		const newTask = {
+		onAddTask({
 			id: Date.now(),
 			title: data.title,
 			description: data.description,
 			status: selectedStatus,
 			img: data.img,
-		};
-
-		apiClient.post('/tasks', newTask).then(res => onAddTask(res.data));
+		})
 	};
 
 	return (
