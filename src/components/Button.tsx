@@ -43,7 +43,7 @@ const Button = ({ type = 'primary', text, color = 'delftBlue', onClick, fluid = 
 		>
 			{
 				type === 'icon' ?
-					<i className={`material-icons  material-icons-${text.split(' ')[1] ?? 'round'}`}>{text.split(' ')[0]}</i>
+					<i className={`material-icons material-icons-${text.split(' ')[1] ?? 'round'}`}>{text.split(' ')[0]}</i>
 				: 
 					text
 			}
