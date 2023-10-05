@@ -30,7 +30,7 @@ const Button = ({ type = 'primary', text, color = 'delftBlue', onClick, fluid = 
 					type === 'outline' ?
 						`bg-white text-${color}`
 					:
-					type === 'icon' ?
+					type === 'icon' || type === 'simple' ?
 						`text-${color}`
 					:
 						''
