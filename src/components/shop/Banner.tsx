@@ -8,11 +8,18 @@ const Banner = () => {
 				<p className="desc text-sm">
 					لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از
 				</p>
-				<div className="action-box">
+				<div className="action-box flex items-center gap-5">
 					<Button
 						type="primary"
 						color="white"
 						text="ببین و بگرد"
+						className="!text-delftBlue"
+						onClick={() => {}}
+					/>
+					<Button
+						type="simple"
+						color='white'
+						text="ویدئو رو ببین"
 						onClick={() => {}}
 					/>
 				</div>
