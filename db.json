@@ -122,5 +122,55 @@
 			"group": "sport",
 			"favourite": false
 		}
+	],
+	"history" : [
+		{
+			"id": 123,
+			"img" : "/src/assets/pics/History.png",
+			"title" : "لورم ایپسوم",
+			"description" : "لورم ایپسوم متن",
+			"price" : 1000,
+			"time" : "30 ثانیه قبل"
+		},
+		{
+			"id": 234,
+			"img" : "/src/assets/pics/History.png",
+			"title" : "لورم ایپسوم",
+			"description" : "لورم ایپسوم متن",
+			"price" : 1000,
+			"time" : "30 ثانیه قبل"
+		},
+		{
+			"id": 345,
+			"img" : "/src/assets/pics/History.png",
+			"title" : "لورم ایپسوم",
+			"description" : "لورم ایپسوم متن",
+			"price" : 1000,
+			"time" : "30 ثانیه قبل"
+		},
+		{
+			"id": 456,
+			"img" : "/src/assets/pics/History.png",
+			"title" : "لورم ایپسوم",
+			"description" : "لورم ایپسوم متن",
+			"price" : 1000,
+			"time" : "30 ثانیه قبل"
+		},
+		{
+			"id": 567,
+			"img" : "/src/assets/pics/History.png",
+			"title" : "لورم ایپسوم",
+			"description" : "لورم ایپسوم متن",
+			"price" : 1000,
+			"time" : "30 ثانیه قبل"
+		},
+		{
+			"id": 678,
+			"img" : "/src/assets/pics/History.png",
+			"title" : "لورم ایپسوم",
+			"description" : "لورم ایپسوم متن",
+			"price" : 1000,
+			"time" : "30 ثانیه قبل"
+		}
 	]
 }
