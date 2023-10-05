@@ -12,12 +12,13 @@ interface Props {
 }
 
 const ProductContainer = ({ title, area }: Props) => {
-	const {products, error, isLoading, selectedGroup, setProducts, setSelectedGroup} = useProducts(area)
+	const { products, error, isLoading, selectedGroup, setProducts, setSelectedGroup } = useProducts(area);
 
 	const itemToggleFavourite = (product: Product) => {
 		const updatedProduct = { ...product, favourite: !product.favourite };
 		const request = area === 'views' ? viewsProductService : threndsProductsService;
-		request.update<Product>(updatedProduct)
+		request
+			.update<Product>(updatedProduct)
 			.then(() => setProducts(products.map(p => (p.id === product.id ? updatedProduct : p))))
 			.catch(error => {
 				alert(error.message);
@@ -45,9 +46,7 @@ const ProductContainer = ({ title, area }: Props) => {
 					))}
 				</div>
 			</div>
-			{isLoading && (
-				<Loader />
-			)}
+			{isLoading && <Loader />}
 			{error && <p className="text-red">{error}</p>}
 			<div className="product-container grid grid-cols-3 gap-[15px_1%]">
 				{!error &&
