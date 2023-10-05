@@ -6,13 +6,14 @@ interface Props {
 	fluid?: boolean;
 	disabled?: boolean;
 	className ?: string;
+	size ?: string;
 }
 
-const Button = ({ type = 'primary', text, color = 'delftBlue', onClick, fluid = false, disabled = false, className = ''}: Props) => {
+const Button = ({ type = 'primary', text, color = 'delftBlue', onClick, fluid = false, disabled = false, className = '', size = 'text-sm'}: Props) => {
 	return (
 		<button
 			className={`
-				flex items-center justify-center outline-none
+				flex items-center justify-center outline-none ${size}
 				${fluid ? 'w-full' : 'w-max'}
 				${
 					type === 'primary' || type === 'outline' ?
