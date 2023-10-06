@@ -1,26 +1,43 @@
-// import LineChart from '../components/charts/Line';
 import Header from '../components/dashboard/Header';
+import BarChart from '../components/charts/Bar';
 
 const Dashboard = () => {
-	// const labels = ['a', 'b', 'c', 'd', 'e', 'f']
-	// const data = [
-	// 	{
-	// 		label: '1',
-	// 		data: [1, 2, 3, 4, 5, 6],
-	// 		borderColor: 'red',
-	// 		backgroundColor: 'black',
-	// 	},
-	// 	{
-	// 		label: '2',
-	// 		data: [2, 2, 1, 6, 5, 9],
-	// 		borderColor: 'red',
-	// 		backgroundColor: 'black',
-	// 	},
-	// ]
+	const weeklyIncome = {
+		labels: ['19', '20', '21', '22', '23', '24', '25'],
+		data: [
+			{
+				label: '1',
+				data: [5, 5, 5, 4, 5, 6, 5],
+				backgroundColor: '#775FFC',
+				borderRadius: 100,
+				barPercentage: 0.2,
+			},
+			{
+				label: '1',
+				data: [5, 5, 5, 4, 5, 6, 5],
+				backgroundColor: '#6AD2FF',
+				borderRadius: 100,
+				barPercentage: 0.2,
+			},
+			{
+				label: '1',
+				data: [5, 5, 5, 4, 5, 6, 5],
+				backgroundColor: '#EFF4FB',
+				borderRadius: 100,
+				barPercentage: 0.2,
+			},
+		],
+	};
 	return (
-		<div className="dashboad-page grid grid-cols-6">
+		<div className="dashboad-page grid grid-cols-12 gap-2.5">
 			<Header />
-			{/* <LineChart labels={labels} datasets={data}/> */}
+			<div className="card col-[1/7] h-60">
+				<BarChart
+					type="STACKED"
+					labels={weeklyIncome.labels}
+					datasets={weeklyIncome.data}
+				/>
+			</div>
 		</div>
 	);
 };

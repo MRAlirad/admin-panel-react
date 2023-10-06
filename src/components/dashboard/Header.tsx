@@ -2,7 +2,7 @@ import HeaderItem from './HeaderItem';
 
 const Header = () => {
 	return (
-		<div className="header grid grid-cols-6 gap-2.5 col-[1/7]">
+		<div className="header grid grid-cols-6 gap-2.5 col-[1/13]">
 			<HeaderItem
 				icon="bar_chart"
 				title="درآمد"
