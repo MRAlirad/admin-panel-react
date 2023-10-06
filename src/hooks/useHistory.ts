@@ -8,7 +8,7 @@ const useTasks = () => {
 	const [error, setError] = useState('');
 	const [isLoading, setIsLoading] = useState(false);
 
-	useEffect(() => {
+	const getHistories = () => {
 		setIsLoading(true);
 		setError('');
 
@@ -24,9 +24,16 @@ const useTasks = () => {
 				setIsLoading(false);
 			});
 		return () => cancel();
+	};
+	const refresh = () => {
+		getHistories();
+	};
+
+	useEffect(() => {
+		getHistories();
 	}, []);
 
-	return { histories, error, isLoading, setHistories, setError };
+	return { histories, error, isLoading, setHistories, setError, refresh };
 };
 
 export default useTasks;

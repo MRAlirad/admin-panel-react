@@ -4,20 +4,23 @@ import ProductContainer from '../components/shop/ProductContainer';
 
 const Shop = () => {
 	return (
-		<div className="grid grid-cols-[2fr_1fr] grid-rows-[max-content_max-content] gap-x-3 gap-y-10 cursor-pointer hover: ">
-			<Banner />
-			<div></div>
-			<div className="product-containers grid gap-y-8">
-				<ProductContainer
-					title="ترندهای روز"
-					area='thrends'
-				/>
-				<ProductContainer
-					title="بازدیدهای اخیر"
-					area='views'
-				/>
+		<div className="grid grid-cols-[2fr_1fr] gap-x-3">
+			<div className='flex flex-col gap-10'>
+				<Banner />
+				<div className="product-containers grid gap-y-8">
+					<ProductContainer
+						title="ترندهای روز"
+						area="thrends"
+					/>
+					<ProductContainer
+						title="بازدیدهای اخیر"
+						area="views"
+					/>
+				</div>
 			</div>
-			<HistoryContainer />
+			<div>
+				<HistoryContainer />
+			</div>
 		</div>
 	);
 };

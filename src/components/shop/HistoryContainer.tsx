@@ -4,7 +4,7 @@ import Loader from '../Loader';
 import HistoryItem from './HistoryItem';
 
 const HistoryContainer = () => {
-	const { histories, error, isLoading } = useHistory();
+	const { histories, error, isLoading, refresh } = useHistory();
 
 	return (
 		<section className="history-section card flex flex-col gap-4 h-max p-4">
@@ -15,6 +15,7 @@ const HistoryContainer = () => {
 					color="delftBlue"
 					text="refresh"
 					size="text-xl"
+					onClick={refresh}
 				/>
 			</div>
 			{isLoading && <Loader />}
