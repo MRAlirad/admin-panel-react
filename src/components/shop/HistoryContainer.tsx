@@ -21,7 +21,7 @@ const HistoryContainer = () => {
 			{isLoading && <Loader />}
 			{error && <p className="text-red">{error}</p>}
 			<div className="history-container">
-				{!error && !isLoading && histories.map(history => <HistoryItem history={history} />)}
+				{!error && !isLoading && histories.map(history => <HistoryItem key={history.id} history={history} />)}
 			</div>
 		</section>
 	);
