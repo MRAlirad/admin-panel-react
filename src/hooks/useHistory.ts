@@ -3,7 +3,7 @@ import History from '../entities/History';
 import historyService from '../services/history-service';
 import { CanceledError } from '../services/api-client';
 
-const useTasks = () => {
+const useHistory = () => {
 	const [histories, setHistories] = useState<History[]>([]);
 	const [error, setError] = useState('');
 	const [isLoading, setIsLoading] = useState(false);
@@ -36,4 +36,4 @@ const useTasks = () => {
 	return { histories, error, isLoading, setHistories, setError, refresh };
 };
 
-export default useTasks;
+export default useHistory;
