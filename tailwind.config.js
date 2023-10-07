@@ -14,7 +14,8 @@ export default {
                 jade : '#01B574',
                 neonBlue : '#3965FF',
                 hunyadiYellow : '#FFB547',
-                red : '#E31A1A'
+                red : '#E31A1A',
+                paleAzure: '#6AD2FF'
             }
         },
     },
