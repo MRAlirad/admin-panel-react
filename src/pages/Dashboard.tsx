@@ -1,5 +1,6 @@
 import Header from '../components/dashboard/Header';
 import BarChart from '../components/charts/Bar';
+import Button from '../components/Button';
 
 const Dashboard = () => {
 	const weeklyIncome = {
@@ -31,7 +32,17 @@ const Dashboard = () => {
 	return (
 		<div className="dashboad-page grid grid-cols-12 gap-2.5">
 			<Header />
-			<div className="card col-[1/7] h-60">
+			<div className="card col-[1/7] grid grid-rows-[max-content_1fr] gap-5 py-6 h-60">
+				<div className="title-box flex items-center justify-between px-[5%]">
+					<h3 className="title text-xl text-delftBlue">درآمد هفتگی</h3>
+					<Button
+						type="icon"
+						text="refresh"
+						size="text-xl"
+						color="blue"
+						className="!bg-ghostWhite"
+					/>
+				</div>
 				<BarChart
 					type="STACKED"
 					labels={weeklyIncome.labels}
