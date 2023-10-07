@@ -1,6 +1,7 @@
 import Header from '../components/dashboard/Header';
 import Income from '../components/dashboard/Income';
 import Expence from '../components/dashboard/Expence';
+import SystemFile from '../components/dashboard/SystemFile';
 
 const Dashboard = () => {
 	return (
@@ -8,6 +9,7 @@ const Dashboard = () => {
 			<Header />
 			<Income />
 			<Expence />
+			<SystemFile />
 		</div>
 	);
 };
