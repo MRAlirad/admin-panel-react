@@ -13,11 +13,11 @@ const Button = ({ type = 'primary', text, color = 'delftBlue', onClick, fluid = 
 	return (
 		<button
 			className={`
-				flex items-center justify-center outline-none ${size}
+				flex items-center justify-center outline-none rounded-lg ${size}
 				${fluid ? 'w-full' : 'w-max'}
 				${
 					type === 'primary' || type === 'outline' ?
-						`py-1.5 px-6 border border-solid border-${color} rounded-lg`
+						`py-1.5 px-6 border border-solid border-${color}`
 					:
 					type === 'icon' || type === 'simple' ?
 						'border-none p-1'
@@ -36,7 +36,7 @@ const Button = ({ type = 'primary', text, color = 'delftBlue', onClick, fluid = 
 					:
 						''
 				}
-				${disabled ? 'opacity-60' : 'opacity-95 hover:opacity-100'}
+				${disabled ? 'opacity-60' : 'opacity-90 hover:opacity-100'}
 				${className}
 			`}
 			onClick={onClick}
