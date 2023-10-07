@@ -44,6 +44,9 @@ const BarChart = ({ type = 'SIMPLE', labels, datasets }: Props) => {
 				},
 			},
 		},
+		interaction: {
+			intersect: false,
+		},
 	};
 	return (
 		<div className="w-full h-full">
