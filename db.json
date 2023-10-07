@@ -123,54 +123,80 @@
 			"favourite": false
 		}
 	],
-	"history" : [
+	"history": [
 		{
 			"id": 123,
-			"img" : "/src/assets/pics/History.png",
-			"title" : "لورم ایپسوم",
-			"description" : "لورم ایپسوم متن",
-			"price" : 1000,
-			"time" : "30 ثانیه قبل"
+			"img": "/src/assets/pics/History.png",
+			"title": "لورم ایپسوم",
+			"description": "لورم ایپسوم متن",
+			"price": 1000,
+			"time": "30 ثانیه قبل"
 		},
 		{
 			"id": 234,
-			"img" : "/src/assets/pics/History.png",
-			"title" : "لورم ایپسوم",
-			"description" : "لورم ایپسوم متن",
-			"price" : 1000,
-			"time" : "30 ثانیه قبل"
+			"img": "/src/assets/pics/History.png",
+			"title": "لورم ایپسوم",
+			"description": "لورم ایپسوم متن",
+			"price": 1000,
+			"time": "30 ثانیه قبل"
 		},
 		{
 			"id": 345,
-			"img" : "/src/assets/pics/History.png",
-			"title" : "لورم ایپسوم",
-			"description" : "لورم ایپسوم متن",
-			"price" : 1000,
-			"time" : "30 ثانیه قبل"
+			"img": "/src/assets/pics/History.png",
+			"title": "لورم ایپسوم",
+			"description": "لورم ایپسوم متن",
+			"price": 1000,
+			"time": "30 ثانیه قبل"
 		},
 		{
 			"id": 456,
-			"img" : "/src/assets/pics/History.png",
-			"title" : "لورم ایپسوم",
-			"description" : "لورم ایپسوم متن",
-			"price" : 1000,
-			"time" : "30 ثانیه قبل"
+			"img": "/src/assets/pics/History.png",
+			"title": "لورم ایپسوم",
+			"description": "لورم ایپسوم متن",
+			"price": 1000,
+			"time": "30 ثانیه قبل"
 		},
 		{
 			"id": 567,
-			"img" : "/src/assets/pics/History.png",
-			"title" : "لورم ایپسوم",
-			"description" : "لورم ایپسوم متن",
-			"price" : 1000,
-			"time" : "30 ثانیه قبل"
+			"img": "/src/assets/pics/History.png",
+			"title": "لورم ایپسوم",
+			"description": "لورم ایپسوم متن",
+			"price": 1000,
+			"time": "30 ثانیه قبل"
 		},
 		{
 			"id": 678,
-			"img" : "/src/assets/pics/History.png",
-			"title" : "لورم ایپسوم",
-			"description" : "لورم ایپسوم متن",
-			"price" : 1000,
-			"time" : "30 ثانیه قبل"
+			"img": "/src/assets/pics/History.png",
+			"title": "لورم ایپسوم",
+			"description": "لورم ایپسوم متن",
+			"price": 1000,
+			"time": "30 ثانیه قبل"
 		}
-	]
+	],
+	"weeklyIncome": {
+		"labels": ["19", "20", "21", "22", "23", "24", "25"],
+		"data": [
+			{
+				"label": "1",
+				"data": [5, 5, 5, 4, 5, 6, 5],
+				"backgroundColor": "#775FFC",
+				"borderRadius": 100,
+				"barPercentage": 0.2
+			},
+			{
+				"label": "1",
+				"data": [5, 5, 5, 4, 5, 6, 5],
+				"backgroundColor": "#6AD2FF",
+				"borderRadius": 100,
+				"barPercentage": 0.2
+			},
+			{
+				"label": "1",
+				"data": [5, 5, 5, 4, 5, 6, 5],
+				"backgroundColor": "#EFF4FB",
+				"borderRadius": 100,
+				"barPercentage": 0.2
+			}
+		]
+	}
 }
