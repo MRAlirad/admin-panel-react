@@ -42,6 +42,9 @@ const LineChart = ({ labels, datasets }: Props) => {
 				grid: {
 					display: false,
 				},
+				ticks: {
+					color :'#A3AED0',
+				},
 			},
 		},
 		interaction: {
