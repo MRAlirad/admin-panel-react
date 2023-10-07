@@ -1,13 +1,4 @@
-import {
-	Chart as ChartJS,
-	CategoryScale,
-	LinearScale,
-	PointElement,
-	LineElement,
-	Title,
-	Tooltip,
-	Legend,
-} from 'chart.js';
+import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend } from 'chart.js';
 import { Line } from 'react-chartjs-2';
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
@@ -17,6 +8,7 @@ interface Data {
 	data: number[];
 	borderColor: string;
 	backgroundColor: string;
+	tension: number,
 }
 
 interface Props {
@@ -30,22 +22,38 @@ const LineChart = ({ labels, datasets }: Props) => {
 		datasets,
 	};
 	const options = {
-		responsive: true,
+		maintainAspectRatio: false,
+		radius: 0,
 		plugins: {
 			legend: {
-				position: 'top' as const,
+				display: false,
 			},
-			title: {
-				display: true,
-				text: 'Chart.js Line Chart',
+		},
+		scales: {
+			y: {
+				display: false,
+				beginAtZero: true,
 			},
+			x: {
+				border: {
+					display: false,
+				},
+				grid: {
+					display: false,
+				},
+			},
+		},
+		interaction: {
+			intersect: false,
 		},
 	};
 	return (
-		<Line
-			data={data}
-			options={options}
-		/>
+		<div className="w-full h-full">
+			<Line
+				data={data}
+				options={options}
+			/>
+		</div>
 	);
 };
 

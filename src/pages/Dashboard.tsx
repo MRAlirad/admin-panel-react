@@ -1,6 +1,7 @@
 import Header from '../components/dashboard/Header';
 import BarChart from '../components/charts/Bar';
 import Button from '../components/Button';
+import LineChart from '../components/charts/Line';
 
 const Dashboard = () => {
 	const weeklyIncome = {
@@ -30,6 +31,26 @@ const Dashboard = () => {
 		],
 	};
 
+	const profit = {
+		labels: ['فروردین', 'اردیبهشت', 'خرداد', 'تیر', 'مرداد', 'شهریور', 'مهر'],
+		data: [
+			{
+				label: 'lastMonth',
+				data: [8, 7, 5, 7, 4, 6, 3],
+				backgroundColor: '#6AD2FF',
+				borderColor: '#6AD2FF',
+				tension: 0.5,
+			},
+			{
+				label: 'currentMonth',
+				data: [13, 10, 7, 12, 9, 8, 7],
+				backgroundColor: '#775FFC',
+				borderColor: '#775FFC',
+				tension: 0.5,
+			},
+		],
+	};
+
 	return (
 		<div className="dashboad-page grid grid-cols-12 gap-2.5">
 			<Header />
@@ -50,8 +71,8 @@ const Dashboard = () => {
 					datasets={weeklyIncome.data}
 				/>
 			</div>
-			<div className="card col-[7/13] grid grid-rows-[max-content_1fr] gap-5 py-6">
-				<div className="title-box flex items-start justify-between px-[5%]">
+			<div className="card col-[7/13] grid grid-rows-[max-content_1fr] gap-5 py-6 px-[5%]">
+				<div className="title-box flex items-start justify-between">
 					<div className='flex flex-col'>
 						<span className='flex items-center gap-1.5 text-xs text-powderBlue bg-ghostWhite w-max py-1 px-4 rounded-md mb-1'>
 							<i className={`material-icons material-icons-round`}>calendar_today</i>
@@ -74,6 +95,10 @@ const Dashboard = () => {
 						className="!bg-ghostWhite"
 					/>
 				</div>
+				<LineChart
+					labels={profit.labels}
+					datasets={profit.data}
+				/>
 			</div>
 		</div>
 	);
