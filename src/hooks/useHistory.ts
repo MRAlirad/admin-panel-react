@@ -25,6 +25,7 @@ const useHistory = () => {
 			});
 		return () => cancel();
 	};
+
 	const refresh = () => {
 		getHistories();
 	};

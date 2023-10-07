@@ -1,7 +1,8 @@
-import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend } from 'chart.js';
+import { Chart, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend } from 'chart.js';
 import { Bar } from 'react-chartjs-2';
 
-ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
+Chart.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
+Chart.defaults.font.family = 'vazir FD';
 
 interface Data {
 	label: string;
