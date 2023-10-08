@@ -3,7 +3,7 @@ import Income from '../components/dashboard/Income';
 import Expence from '../components/dashboard/Expence';
 import SystemFile from '../components/dashboard/SystemFile';
 import Traffic from '../components/dashboard/Traffic';
-import ExaminationTable from '../components/dashboard/ExaminationTable';
+// import ExaminationTable from '../components/dashboard/ExaminationTable';
 
 const Dashboard = () => {
 	return (
@@ -13,7 +13,7 @@ const Dashboard = () => {
 			<Expence />
 			<SystemFile />
 			<Traffic />
-			<ExaminationTable />
+			{/* <ExaminationTable /> */}
 		</div>
 	);
 };
