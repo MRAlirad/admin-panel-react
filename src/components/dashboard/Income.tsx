@@ -2,7 +2,7 @@ import Button from '../Button';
 import BarChart from '../charts/Bar';
 
 const Income = () => {
-	const weeklyIncome = {
+	const incom = {
 		labels: ['19', '20', '21', '22', '23', '24', '25'],
 		data: [
 			{
@@ -43,8 +43,8 @@ const Income = () => {
 			</div>
 			<BarChart
 				type="STACKED"
-				labels={weeklyIncome.labels}
-				datasets={weeklyIncome.data}
+				labels={incom.labels}
+				datasets={incom.data}
 			/>
 		</div>
 	);

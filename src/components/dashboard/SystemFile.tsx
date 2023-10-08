@@ -29,7 +29,7 @@ const SystemFile = () => {
 				datasets={data.datasets}
 				labels={data.labels}
 			/>
-			<div className="percent-box flex items-center justify-around">
+			<div className="percent-box flex items-center justify-around shadow-[0_18px_40px_0_#7090B01F] rounded-md p-2">
 				<div className="system grid grid-cols-[max-content_max-content] justify-items-center gap-x-0.5">
 					<span className="text-xs text-powderBlue">سیستم</span>
 					<span className="text-paleAzure flex items-center justify-center text-[8px]">

@@ -7,9 +7,6 @@ Chart.defaults.font.family = 'vazir FD';
 interface Data {
 	label: string;
 	data: number[];
-	// backgroundColor?: string;
-	// borderRadius?: number;
-	// barPercentage?: number;
 }
 
 interface Props {
