@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 // import useHistory from '../../hooks/useHistory';
 import Button from '../Button';
-// import Loader from '../Loader';
+import Loader from '../Loader';
 import History from '../../entities/History';
 import HistoryItem from './HistoryItem';
 import axios from 'axios';
@@ -14,7 +14,7 @@ const HistoryContainer = () => {
 			.then(res => res.data)
 		;
 	}
-	const {data : histories, error} = useQuery<History[], Error>({
+	const {data : histories, error, isLoading} = useQuery<History[], Error>({
 		queryKey: ['history'],
 		queryFn : FetchHistory
 	})
@@ -31,7 +31,7 @@ const HistoryContainer = () => {
 					// onClick={refresh}
 				/>
 			</div>
-			{/* {isLoading && <Loader />} */}
+			{isLoading && <Loader />}
 			{error && <p className="text-red">{error.message}</p>}
 			<div className="history-container">
 				{
