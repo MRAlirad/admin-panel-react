@@ -1,3 +1,5 @@
+import Loader from "./Loader";
+
 interface Props {
 	type ?: 'primary' | 'outline' | 'icon' | 'simple',
 	text: string;
@@ -7,9 +9,10 @@ interface Props {
 	disabled?: boolean;
 	className ?: string;
 	size ?: string;
+	loading?: boolean;
 }
 
-const Button = ({ type = 'primary', text, color = 'delftBlue', onClick, fluid = false, disabled = false, className = '', size = 'text-sm'}: Props) => {
+const Button = ({ type = 'primary', text, color = 'delftBlue', onClick, fluid = false, disabled = false, className = '', size = 'text-sm', loading}: Props) => {
 	return (
 		<button
 			className={`
@@ -36,13 +39,16 @@ const Button = ({ type = 'primary', text, color = 'delftBlue', onClick, fluid = 
 					:
 						''
 				}
-				${disabled ? 'opacity-60' : 'opacity-90 hover:opacity-100'}
+				${disabled || loading ? 'opacity-60' : 'opacity-90 hover:opacity-100'}
 				${className}
 			`}
 			onClick={onClick}
-			disabled={disabled}
+			disabled={disabled || loading}
 		>
 			{
+				loading ?
+					<Loader size='TINY' />
+				:
 				type === 'icon' ?
 					<i className={`material-icons material-icons-${text.split(' ')[1] ?? 'round'}`}>{text.split(' ')[0]}</i>
 				: 
