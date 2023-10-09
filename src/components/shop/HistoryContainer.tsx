@@ -7,7 +7,7 @@ import HistoryItem from './HistoryItem';
 const HistoryContainer = () => {
 	// const { histories, error, isLoading, refresh } = useHistory();
 
-	const {data : histories, error, isLoading} = useHistory()
+	const {data:histories, error, isLoading, refetch, isRefetching} = useHistory()
 
 	return (
 		<section className="history-section card flex flex-col gap-4 h-max p-4">
@@ -18,7 +18,8 @@ const HistoryContainer = () => {
 					color="delftBlue"
 					text="refresh"
 					size="text-xl"
-					// onClick={refresh}
+					disabled={isRefetching}
+					onClick={refetch}
 				/>
 			</div>
 			{isLoading && <Loader />}
