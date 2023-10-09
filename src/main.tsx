@@ -6,7 +6,13 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import router from './routes.tsx';
 import './index.css';
 
-const queryClient = new QueryClient()
+const queryClient = new QueryClient({
+	defaultOptions: {
+		queries: {
+			staleTime: 10 * 1000, // 10s
+		}
+	}
+})
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
 	<React.StrictMode>
