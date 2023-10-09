@@ -1,9 +1,9 @@
 import TaskItem from './TaskItem';
-import Task from '../../entities/Task';
+// import Task from '../../entities/Task';
 import Button from '../Button';
 import useTasks from '../../hooks/useTasks';
 import Loader from '../Loader';
-import tasksService from '../../services/tasks-service';
+// import tasksService from '../../services/tasks-service';
 import Modal from '../Modal';
 import AddTaskForm from './AddTaskForm';
 import { useState } from 'react';
@@ -15,7 +15,7 @@ interface Props {
 }
 
 const TasksContainer = ({ title, status }: Props) => {
-	const {tasks, setTasks, error, isLoading} = useTasks(status);
+	const {data:tasks, error, isLoading} = useTasks(status);
 	const [addTaskModalDisplay, setAddTaskModalDisplay] = useState('hide');
 	const [currentTask, setCurrentTask] = useState({
 		id: Date.now(),
@@ -25,33 +25,33 @@ const TasksContainer = ({ title, status }: Props) => {
 		img: '',
 	})
 
-	const addTask = (task: Task)=> {
-		tasksService
-			.post(task)
-			.then(()=> setTasks([task, ...tasks]))
-			.catch((error)=> alert(error))
-		;
-	}
+	// const addTask = (task: Task)=> {
+	// 	tasksService
+	// 		.post(task)
+	// 		.then(()=> setTasks([task, ...tasks]))
+	// 		.catch((error)=> alert(error))
+	// 	;
+	// }
 
-	const editTask = (task: Task)=> {
-		tasksService
-			.update<Task>(task)
-			.then(() => setTasks(tasks.map(t => (t.id === task.id ? task : t))))
-			.catch((error)=> alert(error))
-		;
-	}
+	// const editTask = (task: Task)=> {
+	// 	tasksService
+	// 		.update<Task>(task)
+	// 		.then(() => setTasks(tasks.map(t => (t.id === task.id ? task : t))))
+	// 		.catch((error)=> alert(error))
+	// 	;
+	// }
 
-	const deleteTask = (id : number)=> {
-		tasksService
-			.delete(id)
-			.then(()=> {
-				setTasks(tasks.filter(task => task.id !== id))
-			})
-			.catch((error)=> {
-				alert(error);
-			})
-		;
-	}
+	// const deleteTask = (id : number)=> {
+	// 	tasksService
+	// 		.delete(id)
+	// 		.then(()=> {
+	// 			setTasks(tasks.filter(task => task.id !== id))
+	// 		})
+	// 		.catch((error)=> {
+	// 			alert(error);
+	// 		})
+	// 	;
+	// }
 
 	return (
 		<>
@@ -80,9 +80,9 @@ const TasksContainer = ({ title, status }: Props) => {
 						<Loader />
 					:
 					error ?
-						<p className="text-red text-lg text-center font-bold">{error}</p>
+						<p className="text-red text-lg text-center font-bold">{error.message}</p>
 					:
-					tasks.length > 0 ?
+					tasks?.length > 0 ?
 						<div className="tasks-container grid gap-2">
 							{tasks.map(task => (
 								<TaskItem
@@ -92,7 +92,10 @@ const TasksContainer = ({ title, status }: Props) => {
 										setCurrentTask(data);
 										setAddTaskModalDisplay('show');
 									}}
-									onDelete={taskId => deleteTask(taskId)}
+									onDelete={taskId => {
+										console.log(taskId);
+										// deleteTask(taskId)
+									}}
 								/>
 							))}
 						</div>
@@ -107,11 +110,13 @@ const TasksContainer = ({ title, status }: Props) => {
 				>
 					<AddTaskForm
 						onAddTask={data => {
-							addTask(data);
+							console.log(data);
+							// addTask(data);
 							setAddTaskModalDisplay('hide');
 						}}
 						onEditTask={data => {
-							editTask(data);
+							console.log(data);
+							// editTask(data);
 							setAddTaskModalDisplay('hide');
 						}}
 						mode={IsEmpty(currentTask.title) ? 'ADD' : 'EDIT'}
