@@ -18,7 +18,7 @@ const HistoryItem = ({ history }: Props) => {
 				<p className="desc text-powderBlue font-medium text-sm line-clamp-1">{history.description}</p>
 			</div>
 			<span className="price text-delftBlue text-sm">{history.price} تومان</span>
-			<span className="time text-powderBlue text-sm">{history.time}</span>
+			<span className="time text-powderBlue text-xs">{history.time}</span>
 		</section>
 	);
 };

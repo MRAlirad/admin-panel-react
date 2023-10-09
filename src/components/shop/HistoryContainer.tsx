@@ -1,10 +1,23 @@
-import useHistory from '../../hooks/useHistory';
+import { useQuery } from '@tanstack/react-query';
+// import useHistory from '../../hooks/useHistory';
 import Button from '../Button';
-import Loader from '../Loader';
+// import Loader from '../Loader';
+import History from '../../entities/History';
 import HistoryItem from './HistoryItem';
+import axios from 'axios';
 
 const HistoryContainer = () => {
-	const { histories, error, isLoading, refresh } = useHistory();
+	// const { histories, error, isLoading, refresh } = useHistory();
+	const FetchHistory = async ()=> {
+		return axios
+			.get<History[]>("http://localhost:3500/history")
+			.then(res => res.data)
+		;
+	}
+	const {data : histories} = useQuery({
+		queryKey: ['history'],
+		queryFn : FetchHistory
+	})
 
 	return (
 		<section className="history-section card flex flex-col gap-4 h-max p-4">
@@ -15,13 +28,15 @@ const HistoryContainer = () => {
 					color="delftBlue"
 					text="refresh"
 					size="text-xl"
-					onClick={refresh}
+					// onClick={refresh}
 				/>
 			</div>
-			{isLoading && <Loader />}
-			{error && <p className="text-red">{error}</p>}
+			{/* {isLoading && <Loader />} */}
+			{/* {error && <p className="text-red">{error}</p>} */}
 			<div className="history-container">
-				{!error && !isLoading && histories.map(history => <HistoryItem key={history.id} history={history} />)}
+				{
+				// !error && !isLoading && 
+				histories?.map(history => <HistoryItem key={history.id} history={history} />)}
 			</div>
 		</section>
 	);
