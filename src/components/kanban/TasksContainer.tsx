@@ -27,7 +27,7 @@ const TasksContainer = ({ title, status }: Props) => {
 		img: '',
 	});
 
-	const addTask = useMutation({
+	const addTask = useMutation<Task, Error, Task>({
 		mutationFn : async (task: Task)=> {
 			return apiClient
 				.post<Task>('/tasks', task)
@@ -40,6 +40,9 @@ const TasksContainer = ({ title, status }: Props) => {
 			});
 			// queryClient.setQueriesData<Task[]>(['tasks'], totalTasks => [addedTask, ...(totalTasks || [])])
 		},
+		onError: ()=> {
+			;
+		}
 	});
 
 	const editTask = useMutation({
