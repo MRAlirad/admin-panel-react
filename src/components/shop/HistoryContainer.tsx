@@ -14,7 +14,7 @@ const HistoryContainer = () => {
 			.then(res => res.data)
 		;
 	}
-	const {data : histories} = useQuery({
+	const {data : histories, error} = useQuery<History[], Error>({
 		queryKey: ['history'],
 		queryFn : FetchHistory
 	})
@@ -32,7 +32,7 @@ const HistoryContainer = () => {
 				/>
 			</div>
 			{/* {isLoading && <Loader />} */}
-			{/* {error && <p className="text-red">{error}</p>} */}
+			{error && <p className="text-red">{error.message}</p>}
 			<div className="history-container">
 				{
 				// !error && !isLoading && 
