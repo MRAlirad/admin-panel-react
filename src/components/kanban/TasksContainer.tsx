@@ -36,11 +36,24 @@ const TasksContainer = ({ title, status }: Props) => {
 				.then(res => res.data)
 			;
 		},
-		onSuccess: ()=> {
+		onSuccess: (addedTask)=> {
 			queryClient.invalidateQueries({
-				queryKey: ['tasks'],
+				queryKey: ['tasks',{status: addedTask.status}],
 			});
 			// queryClient.setQueriesData<Task[]>(['tasks'], totalTasks => [addedTask, ...(totalTasks || [])])
+		},
+	});
+	const editTask = useMutation({
+		mutationFn : async (task: Task)=> {
+			return apiClient
+				.patch<Task>(`/tasks/${task.id}`, task)
+				.then(res => res.data)
+			;
+		},
+		onSuccess: (addedTask)=> {
+			queryClient.invalidateQueries({
+				queryKey: ['tasks',{status: addedTask.status}],
+			});
 		},
 	});
 
@@ -125,8 +138,7 @@ const TasksContainer = ({ title, status }: Props) => {
 							setAddTaskModalDisplay('hide');
 						}}
 						onEditTask={data => {
-							console.log(data);
-							// editTask(data);
+							editTask.mutate(data);
 							setAddTaskModalDisplay('hide');
 						}}
 						mode={IsEmpty(currentTask.title) ? 'ADD' : 'EDIT'}
