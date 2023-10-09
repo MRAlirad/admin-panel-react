@@ -38,10 +38,11 @@ const TasksContainer = ({ title, status }: Props) => {
 			queryClient.invalidateQueries({
 				queryKey: ['tasks',{status: addedTask.status}],
 			});
+			setAddTaskModalDisplay('hide');
 			// queryClient.setQueriesData<Task[]>(['tasks'], totalTasks => [addedTask, ...(totalTasks || [])])
 		},
 		onError: ()=> {
-			;
+			alert('مشکلی پیش آمده است. لطفا دوباره امتحان کنید!');
 		}
 	});
 
@@ -56,6 +57,7 @@ const TasksContainer = ({ title, status }: Props) => {
 			queryClient.invalidateQueries({
 				queryKey: ['tasks',{status: editedTask.status}],
 			});
+			setAddTaskModalDisplay('hide');
 		},
 	});
 
@@ -130,14 +132,14 @@ const TasksContainer = ({ title, status }: Props) => {
 					<AddTaskForm
 						onAddTask={data => {
 							addTask.mutate(data);
-							setAddTaskModalDisplay('hide');
 						}}
 						onEditTask={data => {
 							editTask.mutate(data);
-							setAddTaskModalDisplay('hide');
 						}}
 						mode={IsEmpty(currentTask.title) ? 'ADD' : 'EDIT'}
 						currentTask={currentTask}
+						isAdding={addTask.isLoading}
+						isEditing={editTask.isLoading}
 					/>
 				</Modal>
 			)}
