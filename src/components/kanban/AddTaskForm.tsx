@@ -7,6 +7,8 @@ interface Props {
 	onEditTask: (data: Task) => void;
 	currentTask: Task;
 	mode?: 'ADD' | 'EDIT';
+	isAdding?: boolean;
+	isEditing?: boolean;
 }
 
 interface FormData {
@@ -15,7 +17,7 @@ interface FormData {
 	img: string;
 }
 
-const AddTaskForm = ({ onAddTask, onEditTask, currentTask, mode = 'ADD' }: Props) => {
+const AddTaskForm = ({ onAddTask, onEditTask, currentTask, mode = 'ADD', isAdding = false, isEditing = false }: Props) => {
 	const {
 		register,
 		handleSubmit,
@@ -82,12 +84,14 @@ const AddTaskForm = ({ onAddTask, onEditTask, currentTask, mode = 'ADD' }: Props
 					type="primary"
 					color="delftBlue"
 					text="ثبت"
+					loading={isAdding}
 				/>
 			) : mode === 'EDIT' ? (
 				<Button
 					type="primary"
 					color="jade"
 					text="ویرایش"
+					loading={isEditing}
 				/>
 			) : null}
 		</form>
