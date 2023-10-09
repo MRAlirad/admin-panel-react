@@ -50,20 +50,27 @@ const TasksContainer = ({ title, status }: Props) => {
 				.then(res => res.data)
 			;
 		},
-		onSuccess: (addedTask)=> {
+		onSuccess: (editedTask)=> {
 			queryClient.invalidateQueries({
-				queryKey: ['tasks',{status: addedTask.status}],
+				queryKey: ['tasks',{status: editedTask.status}],
 			});
 		},
 	});
 
-	// const editTask = (task: Task)=> {
-	// 	tasksService
-	// 		.update<Task>(task)
-	// 		.then(() => setTasks(tasks.map(t => (t.id === task.id ? task : t))))
-	// 		.catch((error)=> alert(error))
-	// 	;
-	// }
+	const deleteTask = useMutation({
+		mutationFn : async (task: Task)=> {
+			return apiClient
+				.delete<Task>(`/tasks/${task.id}`)
+				.then(res => res.data)
+			;
+		},
+		onSuccess: (_, deletedTask)=> {
+			queryClient.invalidateQueries({
+				queryKey: ['tasks',{status: deletedTask.status}],
+			});
+		},
+	});
+
 
 	// const deleteTask = (id : number)=> {
 	// 	tasksService
@@ -116,9 +123,8 @@ const TasksContainer = ({ title, status }: Props) => {
 										setCurrentTask(data);
 										setAddTaskModalDisplay('show');
 									}}
-									onDelete={taskId => {
-										console.log(taskId);
-										// deleteTask(taskId)
+									onDelete={task => {
+										deleteTask.mutate(task);
 									}}
 								/>
 							))}

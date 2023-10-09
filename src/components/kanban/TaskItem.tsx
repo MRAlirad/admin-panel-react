@@ -4,7 +4,7 @@ import Button from '../Button';
 interface Props {
 	task: Task;
 	onEdit: (data: Task) => void;
-	onDelete: (id: number) => void;
+	onDelete: (data: Task) => void;
 }
 
 const TaskItem = ({ task, onEdit, onDelete }: Props) => {
@@ -26,7 +26,7 @@ const TaskItem = ({ task, onEdit, onDelete }: Props) => {
 						type="icon"
 						text="delete outlined"
 						color="red"
-						onClick={() => onDelete(task.id)}
+						onClick={() => onDelete(task)}
 					/>
 				</div>
 			</div>
