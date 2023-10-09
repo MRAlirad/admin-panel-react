@@ -1,15 +1,13 @@
 import TaskItem from './TaskItem';
-// import Task from '../../entities/Task';
+import Task from '../../entities/Task';
 import Button from '../Button';
 import useTasks from '../../hooks/useTasks';
 import Loader from '../Loader';
-// import tasksService from '../../services/tasks-service';
 import Modal from '../Modal';
 import AddTaskForm from './AddTaskForm';
 import { useState } from 'react';
 import { IsEmpty } from '../../helpers/DataType';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import Task from '../../entities/Task';
 import apiClient from '../../services/api-client';
 
 interface Props {
@@ -43,6 +41,7 @@ const TasksContainer = ({ title, status }: Props) => {
 			// queryClient.setQueriesData<Task[]>(['tasks'], totalTasks => [addedTask, ...(totalTasks || [])])
 		},
 	});
+
 	const editTask = useMutation({
 		mutationFn : async (task: Task)=> {
 			return apiClient
@@ -70,19 +69,6 @@ const TasksContainer = ({ title, status }: Props) => {
 			});
 		},
 	});
-
-
-	// const deleteTask = (id : number)=> {
-	// 	tasksService
-	// 		.delete(id)
-	// 		.then(()=> {
-	// 			setTasks(tasks.filter(task => task.id !== id))
-	// 		})
-	// 		.catch((error)=> {
-	// 			alert(error);
-	// 		})
-	// 	;
-	// }
 
 	return (
 		<>
