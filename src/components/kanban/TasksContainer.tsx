@@ -8,6 +8,9 @@ import Modal from '../Modal';
 import AddTaskForm from './AddTaskForm';
 import { useState } from 'react';
 import { IsEmpty } from '../../helpers/DataType';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import Task from '../../entities/Task';
+import apiClient from '../../services/api-client';
 
 interface Props {
 	title: string;
@@ -16,6 +19,7 @@ interface Props {
 
 const TasksContainer = ({ title, status }: Props) => {
 	const {data:tasks, error, isLoading} = useTasks(status);
+	const queryClient = useQueryClient();
 	const [addTaskModalDisplay, setAddTaskModalDisplay] = useState('hide');
 	const [currentTask, setCurrentTask] = useState({
 		id: Date.now(),
@@ -23,15 +27,22 @@ const TasksContainer = ({ title, status }: Props) => {
 		description: '',
 		status: status,
 		img: '',
-	})
+	});
 
-	// const addTask = (task: Task)=> {
-	// 	tasksService
-	// 		.post(task)
-	// 		.then(()=> setTasks([task, ...tasks]))
-	// 		.catch((error)=> alert(error))
-	// 	;
-	// }
+	const addTask = useMutation({
+		mutationFn : async (task: Task)=> {
+			return apiClient
+				.post<Task>('/tasks', task)
+				.then(res => res.data)
+			;
+		},
+		onSuccess: ()=> {
+			queryClient.invalidateQueries({
+				queryKey: ['tasks'],
+			});
+			// queryClient.setQueriesData<Task[]>(['tasks'], totalTasks => [addedTask, ...(totalTasks || [])])
+		},
+	});
 
 	// const editTask = (task: Task)=> {
 	// 	tasksService
@@ -110,8 +121,7 @@ const TasksContainer = ({ title, status }: Props) => {
 				>
 					<AddTaskForm
 						onAddTask={data => {
-							console.log(data);
-							// addTask(data);
+							addTask.mutate(data);
 							setAddTaskModalDisplay('hide');
 						}}
 						onEditTask={data => {
