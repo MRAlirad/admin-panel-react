@@ -7,7 +7,7 @@ function App() {
 		<div className="admin-panel-app bg-ghostWhite min-h-screen grid grid-cols-[14%_1fr] grid-rows-[max-content_1fr]">
 			<Sidebar />
 			<Header />
-			<main className='p-5'>
+			<main className="p-5">
 				<Outlet />
 			</main>
 		</div>
