@@ -1,5 +1,5 @@
 # admin-panel-react
 
-run "npm install" to install dependecies in terminal
+run "npm install" to install dependencies
 </br>
-run "npm install dev" to build and "npm run backend" to run backend in terminal
+run "npm run dev" to build the app and "npm run backend" to run backend
