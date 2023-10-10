@@ -17,8 +17,8 @@ const useAddtask = ({ onAddTask = ()=> {}, onErrorAddTask = ()=> {} }: Props) =>
 			queryClient.invalidateQueries({
 				queryKey: ['tasks', { status: addedTask.status }],
 			});
-			onAddTask();
 			// queryClient.setQueriesData<Task[]>(['tasks'], totalTasks => [addedTask, ...(totalTasks || [])])
+			onAddTask();
 		},
 		onError: () => {
 			onErrorAddTask();

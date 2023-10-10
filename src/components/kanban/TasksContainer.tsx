@@ -10,6 +10,7 @@ import { IsEmpty } from '../../helpers/DataType';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import apiClient from '../../services/api-client';
 import useAddtask from '../../hooks/tasks/useAddTask';
+import useEditTask from '../../hooks/tasks/useEditTask';
 
 interface Props {
 	title: string;
@@ -32,19 +33,9 @@ const TasksContainer = ({ title, status }: Props) => {
 		onErrorAddTask: ()=> alert('مشکلی پیش آمده است. لطفا دوباره امتحان کنید!'),
 	});
 
-	const editTask = useMutation({
-		mutationFn : async (task: Task)=> {
-			return apiClient
-				.patch<Task>(`/tasks/${task.id}`, task)
-				.then(res => res.data)
-			;
-		},
-		onSuccess: (editedTask)=> {
-			queryClient.invalidateQueries({
-				queryKey: ['tasks',{status: editedTask.status}],
-			});
-			setAddTaskModalDisplay('hide');
-		},
+	const editTask = useEditTask({
+		onEditTask: ()=> setAddTaskModalDisplay('hide'),
+		onErrorEditTask: ()=> alert('مشکلی پیش آمده است. لطفا دوباره امتحان کنید!'),
 	});
 
 	const deleteTask = useMutation({
