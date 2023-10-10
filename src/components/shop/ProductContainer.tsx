@@ -1,10 +1,12 @@
 import productCategory from '../../entities/ProductCategory';
-import Product from '../../entities/Product';
+// import Product from '../../entities/Product';
 import ProductItem from './ProductItem';
-import threndsProductsService from '../../services/thrends-products-service';
-import viewsProductService from '../../services/views-product-service';
-import useProducts from '../../hooks/useProducts';
+// import threndsProductsService from '../../services/thrends-products-service';
+// import viewsProductService from '../../services/views-product-service';
+// import useProducts from '../../hooks/useProducts';
 import Loader from '../Loader';
+import useFetchProducts from '../../hooks/product/useFetchProducts';
+import { useState } from 'react';
 
 interface Props {
 	title: string;
@@ -12,18 +14,19 @@ interface Props {
 }
 
 const ProductContainer = ({ title, area }: Props) => {
-	const { products, error, isLoading, selectedGroup, setProducts, setSelectedGroup } = useProducts(area);
+	const [selectedGroup, setSelectedGroup] = useState('');
+	const { data: products, isLoading, error } = useFetchProducts(area, selectedGroup);
 
-	const itemToggleFavourite = (product: Product) => {
-		const updatedProduct = { ...product, favourite: !product.favourite };
-		const request = area === 'views' ? viewsProductService : threndsProductsService;
-		request
-			.update<Product>(updatedProduct)
-			.then(() => setProducts(products.map(p => (p.id === product.id ? updatedProduct : p))))
-			.catch(error => {
-				alert(error.message);
-			});
-	};
+	// const itemToggleFavourite = (product: Product) => {
+	// 	const updatedProduct = { ...product, favourite: !product.favourite };
+	// 	const request = area === 'views' ? viewsProductService : threndsProductsService;
+	// 	request
+	// 		.update<Product>(updatedProduct)
+	// 		.then(() => setProducts(products.map(p => (p.id === product.id ? updatedProduct : p))))
+	// 		.catch(error => {
+	// 			alert(error.message);
+	// 		});
+	// };
 
 	return (
 		<div className="product-segment grid gap-3">
@@ -46,19 +49,27 @@ const ProductContainer = ({ title, area }: Props) => {
 					))}
 				</div>
 			</div>
-			{isLoading && <Loader />}
-			{error && <p className="text-red">{error}</p>}
-			<div className="product-container grid grid-cols-3 gap-[15px_1%]">
-				{!error &&
-					!isLoading &&
-					products.map(product => (
-						<ProductItem
-							key={product.id}
-							product={product}
-							onToggleFavourite={itemToggleFavourite}
-						/>
-					))}
-			</div>
+			{isLoading ? (
+				<Loader />
+			) : error ? (
+				<p className="text-red">{error.message}</p>
+			) : products?.length > 0 ? (
+				<div className="product-container grid grid-cols-3 gap-[15px_1%]">
+					{!error &&
+						!isLoading &&
+						products?.map(product => (
+							<ProductItem
+								key={product.id}
+								product={product}
+								onToggleFavourite={() => {
+									// itemToggleFavourite()
+								}}
+							/>
+						))}
+				</div>
+			) : (
+				<p className="no-task-text text-lg text-center font-bold">محصولی وجود ندارد</p>
+			)}
 		</div>
 	);
 };
