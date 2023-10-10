@@ -9,6 +9,7 @@ import { useState } from 'react';
 import { IsEmpty } from '../../helpers/DataType';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import apiClient from '../../services/api-client';
+import useAddtask from '../../hooks/tasks/useAddTask';
 
 interface Props {
 	title: string;
@@ -26,24 +27,9 @@ const TasksContainer = ({ title, status }: Props) => {
 		status: status,
 		img: '',
 	});
-
-	const addTask = useMutation<Task, Error, Task>({
-		mutationFn : async (task: Task)=> {
-			return apiClient
-				.post<Task>('/tasks', task)
-				.then(res => res.data)
-			;
-		},
-		onSuccess: (addedTask)=> {
-			queryClient.invalidateQueries({
-				queryKey: ['tasks',{status: addedTask.status}],
-			});
-			setAddTaskModalDisplay('hide');
-			// queryClient.setQueriesData<Task[]>(['tasks'], totalTasks => [addedTask, ...(totalTasks || [])])
-		},
-		onError: ()=> {
-			alert('مشکلی پیش آمده است. لطفا دوباره امتحان کنید!');
-		}
+	const addTask = useAddtask({
+		onAddTask: ()=> setAddTaskModalDisplay('hide'),
+		onErrorAddTask: ()=> alert('مشکلی پیش آمده است. لطفا دوباره امتحان کنید!'),
 	});
 
 	const editTask = useMutation({
