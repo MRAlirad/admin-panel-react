@@ -5,7 +5,7 @@ import historyService from '../../services/historyService';
 const useFetchHistory = () => {
 	return useQuery<History[], Error>({
 		queryKey: ['history'],
-		queryFn: historyService.getAll,
+		queryFn: ()=> historyService.get(),
 	});
 };
 
