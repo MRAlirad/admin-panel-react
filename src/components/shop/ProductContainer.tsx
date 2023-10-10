@@ -3,6 +3,7 @@ import ProductItem from './ProductItem';
 import Loader from '../Loader';
 import useFetchProducts from '../../hooks/product/useFetchProducts';
 import { useState } from 'react';
+import useEditProduct from '../../hooks/product/useEditProduct';
 
 interface Props {
 	title: string;
@@ -12,6 +13,11 @@ interface Props {
 const ProductContainer = ({ title, area }: Props) => {
 	const [selectedGroup, setSelectedGroup] = useState('');
 	const { data: products, isLoading, error } = useFetchProducts(area, selectedGroup);
+	const itemToggleFavourite = useEditProduct({
+		area: area,
+		group: selectedGroup,
+		onError: () => alert('مشکلی پیش آمده است. لطفا دوباره امتحان کنید!'),
+	});
 
 	return (
 		<div className="product-segment grid gap-3">
@@ -47,7 +53,10 @@ const ProductContainer = ({ title, area }: Props) => {
 								key={product.id}
 								product={product}
 								onToggleFavourite={() => {
-									// itemToggleFavourite()
+									itemToggleFavourite.mutate({
+										...product,
+										favourite: !product.favourite,
+									});
 								}}
 							/>
 						))}
