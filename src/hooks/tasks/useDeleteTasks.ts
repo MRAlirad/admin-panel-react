@@ -1,6 +1,6 @@
 import { useQueryClient, useMutation } from '@tanstack/react-query';
 import Task from '../../entities/Task';
-import apiClient from '../../services/api-client';
+import taskService from '../../services/taskService';
 
 interface Props {
 	onDelete?: () => void;
@@ -10,9 +10,7 @@ interface Props {
 const useDeleteTask = ({ onDelete = () => {}, onError = () => {} }: Props) => {
 	const queryClient = useQueryClient();
 	return useMutation({
-		mutationFn: async (task: Task) => {
-			return apiClient.delete<Task>(`/tasks/${task.id}`).then(res => res.data);
-		},
+		mutationFn: async (task: Task) => taskService.delete(task.id),
 		onSuccess: (_, deletedTask) => {
 			queryClient.invalidateQueries({
 				queryKey: ['tasks', { status: deletedTask.status }],
