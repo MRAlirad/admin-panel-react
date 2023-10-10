@@ -1,7 +1,7 @@
 import TaskItem from './TaskItem';
 import Task from '../../entities/Task';
 import Button from '../Button';
-import useTasks from '../../hooks/useTasks';
+import useFetchTasks from '../../hooks/tasks/useFetchTasks';
 import Loader from '../Loader';
 import Modal from '../Modal';
 import AddTaskForm from './AddTaskForm';
@@ -14,11 +14,11 @@ import useEditTask from '../../hooks/tasks/useEditTask';
 
 interface Props {
 	title: string;
-	status : number;
+	status: number;
 }
 
 const TasksContainer = ({ title, status }: Props) => {
-	const {data:tasks, error, isLoading} = useTasks(status);
+	const { data: tasks, error, isLoading } = useFetchTasks(status);
 	const queryClient = useQueryClient();
 	const [addTaskModalDisplay, setAddTaskModalDisplay] = useState('hide');
 	const [currentTask, setCurrentTask] = useState({
@@ -29,25 +29,22 @@ const TasksContainer = ({ title, status }: Props) => {
 		img: '',
 	});
 	const addTask = useAddtask({
-		onAddTask: ()=> setAddTaskModalDisplay('hide'),
-		onErrorAddTask: ()=> alert('مشکلی پیش آمده است. لطفا دوباره امتحان کنید!'),
+		onAddTask: () => setAddTaskModalDisplay('hide'),
+		onErrorAddTask: () => alert('مشکلی پیش آمده است. لطفا دوباره امتحان کنید!'),
 	});
 
 	const editTask = useEditTask({
-		onEditTask: ()=> setAddTaskModalDisplay('hide'),
-		onErrorEditTask: ()=> alert('مشکلی پیش آمده است. لطفا دوباره امتحان کنید!'),
+		onEditTask: () => setAddTaskModalDisplay('hide'),
+		onErrorEditTask: () => alert('مشکلی پیش آمده است. لطفا دوباره امتحان کنید!'),
 	});
 
 	const deleteTask = useMutation({
-		mutationFn : async (task: Task)=> {
-			return apiClient
-				.delete<Task>(`/tasks/${task.id}`)
-				.then(res => res.data)
-			;
+		mutationFn: async (task: Task) => {
+			return apiClient.delete<Task>(`/tasks/${task.id}`).then(res => res.data);
 		},
-		onSuccess: (_, deletedTask)=> {
+		onSuccess: (_, deletedTask) => {
 			queryClient.invalidateQueries({
-				queryKey: ['tasks',{status: deletedTask.status}],
+				queryKey: ['tasks', { status: deletedTask.status }],
 			});
 		},
 	});
@@ -61,7 +58,7 @@ const TasksContainer = ({ title, status }: Props) => {
 						type="icon"
 						text="add"
 						color="blue"
-						onClick={()=> {
+						onClick={() => {
 							setAddTaskModalDisplay('show');
 							setCurrentTask({
 								id: Date.now(),
@@ -74,32 +71,29 @@ const TasksContainer = ({ title, status }: Props) => {
 						className="!w-14 h-7 bg-ghostWhite rounded-md"
 					/>
 				</div>
-				{
-					isLoading ?
-						<Loader />
-					:
-					error ?
-						<p className="text-red text-lg text-center font-bold">{error.message}</p>
-					:
-					tasks?.length > 0 ?
-						<div className="tasks-container grid gap-2">
-							{tasks.map(task => (
-								<TaskItem
-									key={task.id}
-									task={task}
-									onEdit={data => {
-										setCurrentTask(data);
-										setAddTaskModalDisplay('show');
-									}}
-									onDelete={task => {
-										deleteTask.mutate(task);
-									}}
-								/>
-							))}
-						</div>
-					:
+				{isLoading ? (
+					<Loader />
+				) : error ? (
+					<p className="text-red text-lg text-center font-bold">{error.message}</p>
+				) : tasks?.length > 0 ? (
+					<div className="tasks-container grid gap-2">
+						{tasks.map(task => (
+							<TaskItem
+								key={task.id}
+								task={task}
+								onEdit={data => {
+									setCurrentTask(data);
+									setAddTaskModalDisplay('show');
+								}}
+								onDelete={task => {
+									deleteTask.mutate(task);
+								}}
+							/>
+						))}
+					</div>
+				) : (
 					<p className="no-task-text text-lg text-center font-bold">تسکی وجود ندارد</p>
-				}
+				)}
 			</div>
 			{addTaskModalDisplay === 'show' && (
 				<Modal

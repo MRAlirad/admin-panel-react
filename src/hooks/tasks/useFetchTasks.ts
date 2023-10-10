@@ -1,24 +1,19 @@
-import { useQuery } from "@tanstack/react-query";
-import Task from "../entities/Task"
-import apiClient from "../services/api-client"
+import { useQuery } from '@tanstack/react-query';
+import Task from '../../entities/Task';
+import apiClient from '../../services/api-client';
 
-const useTasks = (status:number) => {
-	const FetchTasks = async ()=> {
-		return apiClient
-			.get<Task[]>(`/tasks?status=${status}`)
-			.then(res => res.data)
-		;
+const useFetchTasks = (status: number) => {
+	const FetchTasks = async () => {
+		return apiClient.get<Task[]>(`/tasks?status=${status}`).then(res => res.data);
 	};
 
 	return useQuery<Task[], Error>({
-		queryKey : ['tasks', {status}],
-		queryFn : FetchTasks,
+		queryKey: ['tasks', { status }],
+		queryFn: FetchTasks,
 	});
-}
+};
 
-export default useTasks;
-
-
+export default useFetchTasks;
 
 // import { useState, useEffect } from 'react';
 // import Task from '../entities/Task';
