@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import apiClient from '../../services/api-client';
 import Task from '../../entities/Task';
+import taskService from '../../services/taskService';
 
 interface Props {
 	onEdit?: () => void;
@@ -10,9 +10,7 @@ interface Props {
 const useEditTask = ({ onEdit = () => {}, onError = () => {} }: Props) => {
 	const queryClient = useQueryClient();
 	return useMutation({
-		mutationFn: async (task: Task) => {
-			return apiClient.patch<Task>(`/tasks/${task.id}`, task).then(res => res.data);
-		},
+		mutationFn: async (task: Task) => taskService.update(task),
 		onSuccess: editedTask => {
 			queryClient.invalidateQueries({
 				queryKey: ['tasks', { status: editedTask.status }],
