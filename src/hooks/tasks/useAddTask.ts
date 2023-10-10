@@ -3,11 +3,11 @@ import Task from '../../entities/Task';
 import apiClient from '../../services/api-client';
 
 interface Props {
-	onAddTask?: () => void;
-	onErrorAddTask?: () => void;
+	onAdd?: () => void;
+	onError?: () => void;
 }
 
-const useAddtask = ({ onAddTask = ()=> {}, onErrorAddTask = ()=> {} }: Props) => {
+const useAddtask = ({ onAdd = ()=> {}, onError = ()=> {} }: Props) => {
 	const queryClient = useQueryClient();
 	return useMutation<Task, Error, Task>({
 		mutationFn: async (task: Task) => {
@@ -18,10 +18,10 @@ const useAddtask = ({ onAddTask = ()=> {}, onErrorAddTask = ()=> {} }: Props) =>
 				queryKey: ['tasks', { status: addedTask.status }],
 			});
 			// queryClient.setQueriesData<Task[]>(['tasks'], totalTasks => [addedTask, ...(totalTasks || [])])
-			onAddTask();
+			onAdd();
 		},
 		onError: () => {
-			onErrorAddTask();
+			onError();
 		},
 	});
 };

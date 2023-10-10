@@ -3,11 +3,11 @@ import apiClient from '../../services/api-client';
 import Task from '../../entities/Task';
 
 interface Props {
-	onEditTask?: () => void;
-	onErrorEditTask?: () => void;
+	onEdit?: () => void;
+	onError?: () => void;
 }
 
-const useEditTask = ({ onEditTask = () => {}, onErrorEditTask = () => {} }: Props) => {
+const useEditTask = ({ onEdit = () => {}, onError = () => {} }: Props) => {
 	const queryClient = useQueryClient();
 	return useMutation({
 		mutationFn: async (task: Task) => {
@@ -17,10 +17,10 @@ const useEditTask = ({ onEditTask = () => {}, onErrorEditTask = () => {} }: Prop
 			queryClient.invalidateQueries({
 				queryKey: ['tasks', { status: editedTask.status }],
 			});
-			onEditTask();
+			onEdit();
 		},
 		onError: () => {
-			onErrorEditTask();
+			onError();
 		},
 	});
 };

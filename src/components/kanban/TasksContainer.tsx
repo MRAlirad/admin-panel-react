@@ -26,13 +26,13 @@ const TasksContainer = ({ title, status }: Props) => {
 		img: '',
 	});
 	const addTask = useAddtask({
-		onAddTask: () => setAddTaskModalDisplay('hide'),
-		onErrorAddTask: () => alert('مشکلی پیش آمده است. لطفا دوباره امتحان کنید!'),
+		onAdd: () => setAddTaskModalDisplay('hide'),
+		onError: () => alert('مشکلی پیش آمده است. لطفا دوباره امتحان کنید!'),
 	});
 
 	const editTask = useEditTask({
-		onEditTask: () => setAddTaskModalDisplay('hide'),
-		onErrorEditTask: () => alert('مشکلی پیش آمده است. لطفا دوباره امتحان کنید!'),
+		onEdit: () => setAddTaskModalDisplay('hide'),
+		onError: () => alert('مشکلی پیش آمده است. لطفا دوباره امتحان کنید!'),
 	});
 
 	const deleteTask = useDeleteTask({
