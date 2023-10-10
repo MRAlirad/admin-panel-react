@@ -7,8 +7,9 @@ interface Props {
 	onError?: () => void;
 }
 
-const useAddtask = ({ onAdd = ()=> {}, onError = ()=> {} }: Props) => {
+const useAddtask = ({ onAdd = () => {}, onError = () => {} }: Props) => {
 	const queryClient = useQueryClient();
+
 	return useMutation<Task, Error, Task>({
 		mutationFn: async (task: Task) => {
 			return apiClient.post<Task>('/tasks', task).then(res => res.data);

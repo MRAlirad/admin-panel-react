@@ -16,7 +16,6 @@ interface Props {
 }
 
 const TasksContainer = ({ title, status }: Props) => {
-	const { data: tasks, error, isLoading } = useFetchTasks(status);
 	const [addTaskModalDisplay, setAddTaskModalDisplay] = useState('hide');
 	const [currentTask, setCurrentTask] = useState({
 		id: Date.now(),
@@ -25,16 +24,16 @@ const TasksContainer = ({ title, status }: Props) => {
 		status: status,
 		img: '',
 	});
+
+	const { data: tasks, error, isLoading } = useFetchTasks(status);
 	const addTask = useAddtask({
 		onAdd: () => setAddTaskModalDisplay('hide'),
 		onError: () => alert('مشکلی پیش آمده است. لطفا دوباره امتحان کنید!'),
 	});
-
 	const editTask = useEditTask({
 		onEdit: () => setAddTaskModalDisplay('hide'),
 		onError: () => alert('مشکلی پیش آمده است. لطفا دوباره امتحان کنید!'),
 	});
-
 	const deleteTask = useDeleteTask({
 		onError: () => alert('مشکلی پیش آمده است. لطفا دوباره امتحان کنید!'),
 	});
