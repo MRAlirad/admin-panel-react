@@ -1,13 +1,10 @@
-// import useHistory from '../../hooks/useHistory';
-import useHistory from '../../hooks/useHistory';
+import useFetchHistory from '../../hooks/history/useFetchHistory';
 import Button from '../Button';
 import Loader from '../Loader';
 import HistoryItem from './HistoryItem';
 
 const HistoryContainer = () => {
-	// const { histories, error, isLoading, refresh } = useHistory();
-
-	const {data:histories, error, isLoading, refetch, isRefetching} = useHistory()
+	const { data: histories, error, isLoading, refetch, isRefetching } = useFetchHistory();
 
 	return (
 		<section className="history-section card flex flex-col gap-4 h-max p-4">
@@ -26,8 +23,14 @@ const HistoryContainer = () => {
 			{error && <p className="text-red">{error.message}</p>}
 			<div className="history-container">
 				{
-				// !error && !isLoading && 
-				histories?.map(history => <HistoryItem key={history.id} history={history} />)}
+					// !error && !isLoading &&
+					histories?.map(history => (
+						<HistoryItem
+							key={history.id}
+							history={history}
+						/>
+					))
+				}
 			</div>
 		</section>
 	);
