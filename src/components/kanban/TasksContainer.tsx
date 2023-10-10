@@ -36,8 +36,8 @@ const TasksContainer = ({ title, status }: Props) => {
 	});
 
 	const deleteTask = useDeleteTask({
-		onError: ()=> alert('مشکلی پیش آمده است. لطفا دوباره امتحان کنید!'),
-	})
+		onError: () => alert('مشکلی پیش آمده است. لطفا دوباره امتحان کنید!'),
+	});
 
 	return (
 		<>
