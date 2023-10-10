@@ -1,5 +1,4 @@
 import TaskItem from './TaskItem';
-import Task from '../../entities/Task';
 import Button from '../Button';
 import useFetchTasks from '../../hooks/tasks/useFetchTasks';
 import Loader from '../Loader';
@@ -7,10 +6,9 @@ import Modal from '../Modal';
 import AddTaskForm from './AddTaskForm';
 import { useState } from 'react';
 import { IsEmpty } from '../../helpers/DataType';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
-import apiClient from '../../services/api-client';
 import useAddtask from '../../hooks/tasks/useAddTask';
 import useEditTask from '../../hooks/tasks/useEditTask';
+import useDeleteTask from '../../hooks/tasks/useDeleteTasks';
 
 interface Props {
 	title: string;
@@ -19,7 +17,6 @@ interface Props {
 
 const TasksContainer = ({ title, status }: Props) => {
 	const { data: tasks, error, isLoading } = useFetchTasks(status);
-	const queryClient = useQueryClient();
 	const [addTaskModalDisplay, setAddTaskModalDisplay] = useState('hide');
 	const [currentTask, setCurrentTask] = useState({
 		id: Date.now(),
@@ -38,16 +35,9 @@ const TasksContainer = ({ title, status }: Props) => {
 		onErrorEditTask: () => alert('مشکلی پیش آمده است. لطفا دوباره امتحان کنید!'),
 	});
 
-	const deleteTask = useMutation({
-		mutationFn: async (task: Task) => {
-			return apiClient.delete<Task>(`/tasks/${task.id}`).then(res => res.data);
-		},
-		onSuccess: (_, deletedTask) => {
-			queryClient.invalidateQueries({
-				queryKey: ['tasks', { status: deletedTask.status }],
-			});
-		},
-	});
+	const deleteTask = useDeleteTask({
+		onError: ()=> alert('مشکلی پیش آمده است. لطفا دوباره امتحان کنید!'),
+	})
 
 	return (
 		<>
