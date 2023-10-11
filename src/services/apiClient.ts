@@ -25,7 +25,7 @@ class APIClient<T> {
 		return axiosInstance.post<T>(this.endpoint, data).then(res => res.data);
 	};
 
-	update<T extends Entity>(entity: T) {
+	update = async <T extends Entity>(entity: T) => {
 		return axiosInstance.patch(`${this.endpoint}/${entity.id}`, entity).then(res => res.data);
 	}
 
