@@ -1,10 +1,14 @@
 import { useQuery } from '@tanstack/react-query';
-import apiClient from '../../services/api-client';
 import Product from '../../entities/Product';
+import threndsProductService from '../../services/threndsProductService';
+import viewsProductService from '../../services/viewsProductService';
 
 const useFetchProducts = (area: string, group: string) => {
 	const FetchProducts = async () => {
-		return apiClient.get<Product[]>(`/${area}${group ? `?group=${group}` : ''}`).then(res => res.data);
+		if(area === 'thrends')
+			return threndsProductService.get(group ? 'group' : '', group);
+		else
+			return viewsProductService.get(group ? 'group' : '', group);
 	};
 
 	return useQuery<Product[], Error>({
