@@ -1,6 +1,7 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import Product from '../../entities/Product';
-import apiClient from '../../services/api-client';
+import threndsProductService from '../../services/threndsProductService';
+import viewsProductService from '../../services/viewsProductService';
 
 interface Props {
 	area: string;
@@ -14,7 +15,10 @@ const useEditProduct = ({ area, group, onEdit = () => {}, onError = () => {} }: 
 
 	return useMutation({
 		mutationFn: async (product: Product) => {
-			return apiClient.patch<Product>(`${area}/${product.id}`, product);
+			if(area === 'thrends')
+				return threndsProductService.update(product);
+			else
+				return viewsProductService.update(product);
 		},
 		onSuccess: () => {
 			queryClient.invalidateQueries({
