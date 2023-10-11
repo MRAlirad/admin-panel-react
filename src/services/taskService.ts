@@ -1,4 +1,4 @@
-import APIClient from "./apiClient";
-import Task from "../entities/Task";
+import APIClient from './apiClient';
+import Task from '../entities/Task';
 
-export default new APIClient<Task>('/tasks')
+export default new APIClient<Task>('/tasks');
