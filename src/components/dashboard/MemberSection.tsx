@@ -1,12 +1,17 @@
+import { useState } from 'react';
 import useFetchMember from '../../hooks/members/useFetchMembers';
 import Button from '../Button';
 import Loader from '../Loader';
+import AddEditMemberForm from './AddEditMemberForm';
 import MemberItem from './MemberItem';
+import useAddMember from '../../hooks/members/useAddMember';
 
 const MemberSection = () => {
 	const { data: members, error, isLoading } = useFetchMember();
+	const addMember = useAddMember({});
+	const [formDisplay, setFormDisplay] = useState('hide');
 	return (
-		<div className="members-section card col-[7/10] grid grid-rows-[max-content_1fr] gap-4 p-4">
+		<div className="members-section relative overflow-hidden card col-[7/10] grid grid-rows-[max-content_1fr] gap-4 p-4">
 			<div className="title-box flex items-center justify-between">
 				<h3 className="text-base text-delftBlue font-bold">اعضای تیم</h3>
 				<Button
@@ -15,6 +20,7 @@ const MemberSection = () => {
 					color="delftBlue"
 					size="text-xl"
 					className="bg-ghostWhite"
+					onClick={() => setFormDisplay('show')}
 				/>
 			</div>
 			{isLoading ? (
@@ -22,7 +28,7 @@ const MemberSection = () => {
 			) : error ? (
 				<p className="text-red text-lg text-center font-bold">{error.message}</p>
 			) : members?.length > 0 ? (
-				<div className="members-container flex flex-col gap-3">
+				<div className="members-container flex flex-col gap-3 max-h-[250px] overflow-y-auto">
 					{members?.map(member => (
 						<MemberItem
 							key={member.id}
@@ -32,6 +38,15 @@ const MemberSection = () => {
 				</div>
 			) : (
 				<p className="no-task-text text-lg text-center font-bold">اعضایی وجود ندارد</p>
+			)}
+			{formDisplay === 'show' && (
+				<AddEditMemberForm
+					onClose={() => setFormDisplay('hide')}
+					onAddMember={data => {
+						addMember.mutate(data);
+						setFormDisplay('hide');
+					}}
+				/>
 			)}
 		</div>
 	);
