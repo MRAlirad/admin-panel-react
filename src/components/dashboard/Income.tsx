@@ -30,7 +30,7 @@ const Income = () => {
 	};
 
 	return (
-		<div className="card col-[1/7] grid grid-rows-[max-content_1fr] gap-5 py-6">
+		<div className="income-section card col-[1/7] grid grid-rows-[max-content_1fr] gap-5 py-6">
 			<div className="title-box flex items-center justify-between px-[5%]">
 				<h3 className="title text-xl text-delftBlue font-bold">درآمد هفتگی</h3>
 				<Button
