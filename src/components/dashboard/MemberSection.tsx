@@ -6,12 +6,21 @@ import AddEditMemberForm from './AddEditMemberForm';
 import MemberItem from './MemberItem';
 import useAddMember from '../../hooks/members/useAddMember';
 import useDeleteMember from '../../hooks/members/useDeleteMember';
+import { IsEmpty } from '../../helpers/DataType';
+import useEditMember from '../../hooks/members/useEditMember';
 
 const MemberSection = () => {
-	const { data: members, error, isLoading } = useFetchMember();
 	const [formDisplay, setFormDisplay] = useState('hide');
-
+	const [currentMember, setCurrentMember] =  useState({
+		id: Date.now(),
+		name: '',
+		role: '',
+		img: '',
+	})
+	
+	const { data: members, error, isLoading } = useFetchMember();
 	const addMember = useAddMember({});
+	const editMember = useEditMember({});
 	const deleteMember = useDeleteMember({});
 	return (
 		<div className="members-section relative overflow-hidden card col-[7/10] grid grid-rows-[max-content_1fr] gap-4 p-4">
@@ -23,7 +32,15 @@ const MemberSection = () => {
 					color="delftBlue"
 					size="text-xl"
 					className="bg-ghostWhite"
-					onClick={() => setFormDisplay('show')}
+					onClick={() => {
+						setFormDisplay('show');
+						setCurrentMember({
+							id: Date.now(),
+							name: '',
+							role: '',
+							img: '',
+						});
+					}}
 				/>
 			</div>
 			{isLoading ? (
@@ -39,6 +56,10 @@ const MemberSection = () => {
 							onDelete={data => {
 								deleteMember.mutate(data);
 							}}
+							onEdit={data => {
+								setCurrentMember(data);
+								setFormDisplay('show');
+							}}
 						/>
 					))}
 				</div>
@@ -52,6 +73,14 @@ const MemberSection = () => {
 						addMember.mutate(data);
 						setFormDisplay('hide');
 					}}
+					onEditMember={data => {
+						editMember.mutate(data);
+						setFormDisplay('hide');
+					}}
+					mode={IsEmpty(currentMember.name) ? 'ADD' : 'EDIT'}
+					currentMember={currentMember}
+					isAdding={addMember.isLoading}
+					isEditing={editMember.isLoading}
 				/>
 			)}
 		</div>

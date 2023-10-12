@@ -5,9 +5,22 @@ import Member from '../../entities/Member';
 interface Props {
 	onClose: () => void;
 	onAddMember: (data: Member) => void;
+	onEditMember: (data: Member) => void;
+	currentMember: Member;
+	mode?: 'ADD' | 'EDIT';
+	isAdding?: boolean;
+	isEditing?: boolean;
 }
 
-const AddEditMemberForm = ({ onAddMember, onClose }: Props) => {
+const AddEditMemberForm = ({
+	onClose,
+	onAddMember,
+	onEditMember,
+	currentMember,
+	mode = 'ADD',
+	isAdding = false,
+	isEditing = false,
+}: Props) => {
 	const {
 		register,
 		handleSubmit,
@@ -16,12 +29,14 @@ const AddEditMemberForm = ({ onAddMember, onClose }: Props) => {
 
 	const onSubmit = (data: FieldValues) => {
 		const member = {
-			id: Date.now(),
+			id: currentMember.id,
 			name: data.name,
 			role: data.role,
 			img: data.img,
 		};
-		onAddMember(member);
+
+		if (mode === 'ADD') onAddMember(member);
+		else onEditMember(member);
 	};
 	return (
 		<form
@@ -36,6 +51,7 @@ const AddEditMemberForm = ({ onAddMember, onClose }: Props) => {
 				<div className="name-form-control grid gap-1 w-full ">
 					<label className="text-sm text-delftBlue">نام و نام خانوادگی</label>
 					<input
+						defaultValue={currentMember.name ?? ''}
 						type="text"
 						placeholder="نام را وارد کنید"
 						className={`border !border-solid  p-1 text-sm rounded-md focus:border-delftBlue ${
@@ -47,6 +63,7 @@ const AddEditMemberForm = ({ onAddMember, onClose }: Props) => {
 				<div className="role-form-control grid gap-1 w-full ">
 					<label className="text-sm text-delftBlue">سمت</label>
 					<input
+						defaultValue={currentMember.role ?? ''}
 						type="text"
 						placeholder="سمت را وارد کنید"
 						className={`border !border-solid  p-1 text-sm rounded-md focus:border-delftBlue ${
@@ -58,6 +75,7 @@ const AddEditMemberForm = ({ onAddMember, onClose }: Props) => {
 				<div className="img-form-control grid gap-1 w-full ">
 					<label className="text-sm text-delftBlue">آدرس عکس</label>
 					<input
+						defaultValue={currentMember.img ?? ''}
 						type="text"
 						placeholder="آدرس عکس را وارد کنید"
 						className={
@@ -66,13 +84,23 @@ const AddEditMemberForm = ({ onAddMember, onClose }: Props) => {
 						{...register('img')}
 					/>
 				</div>
-				<Button
-					type="primary"
-					color="delftBlue"
-					text="افزودن"
-					className="mx-auto"
-					// loading={isAdding}
-				/>
+				{mode === 'ADD' ? (
+					<Button
+						type="primary"
+						color="delftBlue"
+						text="افزودن"
+						loading={isAdding}
+                        className='mx-auto'
+					/>
+				) : mode === 'EDIT' ? (
+					<Button
+						type="primary"
+						color="jade"
+						text="ویرایش"
+						loading={isEditing}
+                        className='mx-auto'
+					/>
+				) : null}
 			</div>
 		</form>
 	);

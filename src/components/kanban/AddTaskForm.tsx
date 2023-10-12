@@ -11,7 +11,14 @@ interface Props {
 	isEditing?: boolean;
 }
 
-const AddTaskForm = ({ onAddTask, onEditTask, currentTask, mode = 'ADD', isAdding = false, isEditing = false }: Props) => {
+const AddTaskForm = ({
+	onAddTask,
+	onEditTask,
+	currentTask,
+	mode = 'ADD',
+	isAdding = false,
+	isEditing = false,
+}: Props) => {
 	const {
 		register,
 		handleSubmit,
@@ -21,15 +28,14 @@ const AddTaskForm = ({ onAddTask, onEditTask, currentTask, mode = 'ADD', isAddin
 	const onSubmit = (data: FieldValues) => {
 		const task = {
 			id: currentTask.id,
-			title : data.title,
+			title: data.title,
 			description: data.description,
 			status: currentTask.status,
 			img: data.img,
 		};
-		if(mode === 'ADD')
-			onAddTask(task);
-		else
-			onEditTask(task);
+
+		if (mode === 'ADD') onAddTask(task);
+		else onEditTask(task);
 	};
 
 	return (

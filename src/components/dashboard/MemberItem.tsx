@@ -4,9 +4,10 @@ import Member from '../../entities/Member';
 interface Props {
 	member: Member;
 	onDelete: (data: Member) => void;
+	onEdit: (data: Member) => void;
 }
 
-const MemberItem = ({ member, onDelete }: Props) => {
+const MemberItem = ({ member, onDelete, onEdit }: Props) => {
 	return (
 		<div className="member-item card grid grid-cols-[max-content_1fr_max-content] items-center gap-2 rounded-xl py-2.5 pl-1 pr-3">
 			<div className="img-box w-10 h-10 rounded-full">
@@ -24,6 +25,7 @@ const MemberItem = ({ member, onDelete }: Props) => {
 					type="icon"
 					text="edit"
 					color="delftBlue"
+                    onClick={() => onEdit(member)}
 				/>
 				<Button
 					type="icon"
