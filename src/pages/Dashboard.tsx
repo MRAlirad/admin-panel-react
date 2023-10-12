@@ -4,6 +4,7 @@ import Expence from '../components/dashboard/Expence';
 import SystemFile from '../components/dashboard/SystemFile';
 import Traffic from '../components/dashboard/Traffic';
 import MemberSection from '../components/dashboard/MemberSection';
+import SecurityControl from '../components/dashboard/SecurityControl';
 
 const Dashboard = () => {
 	return (
@@ -14,6 +15,7 @@ const Dashboard = () => {
 			<SystemFile />
 			<Traffic />
 			<MemberSection />
+			<SecurityControl />
 		</div>
 	);
 };
