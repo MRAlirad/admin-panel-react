@@ -1,11 +1,11 @@
-import TaskItem from './TaskItem';
-import Button from '../Button';
-import useFetchTasks from '../../hooks/tasks/useFetchTasks';
-import Loader from '../Loader';
-import Modal from '../Modal';
-import AddTaskForm from './AddTaskForm';
 import { useState } from 'react';
 import { IsEmpty } from '../../helpers/DataType';
+import TaskItem from './TaskItem';
+import AddTaskForm from './AddTaskForm';
+import Button from '../Button';
+import Loader from '../Loader';
+import Modal from '../Modal';
+import useFetchTasks from '../../hooks/tasks/useFetchTasks';
 import useAddtask from '../../hooks/tasks/useAddTask';
 import useEditTask from '../../hooks/tasks/useEditTask';
 import useDeleteTask from '../../hooks/tasks/useDeleteTasks';

@@ -16,8 +16,8 @@ const Modal = ({ title, onClose, children }: Props) => {
 					<Button
 						type="icon"
 						text="close"
-						onClick={onClose}
 						color="red"
+						onClick={onClose}
 					/>
 				</div>
 				<div className="modal-container overflow-y-auto overflow-x-hidden">{children}</div>

@@ -1,6 +1,6 @@
-import Button from '../Button';
-import Task from '../../entities/Task';
 import { FieldValues, useForm } from 'react-hook-form';
+import Task from '../../entities/Task';
+import Button from '../Button';
 
 interface Props {
 	onAddTask: (data: Task) => void;
