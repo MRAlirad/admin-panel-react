@@ -11,18 +11,12 @@ interface Props {
 	isEditing?: boolean;
 }
 
-interface FormData {
-	title: string;
-	description: string;
-	img: string;
-}
-
 const AddTaskForm = ({ onAddTask, onEditTask, currentTask, mode = 'ADD', isAdding = false, isEditing = false }: Props) => {
 	const {
 		register,
 		handleSubmit,
 		formState: { errors },
-	} = useForm<FormData>();
+	} = useForm<Task>();
 
 	const onSubmit = (data: FieldValues) => {
 		const task = {
@@ -83,7 +77,7 @@ const AddTaskForm = ({ onAddTask, onEditTask, currentTask, mode = 'ADD', isAddin
 				<Button
 					type="primary"
 					color="delftBlue"
-					text="ثبت"
+					text="افزودن"
 					loading={isAdding}
 				/>
 			) : mode === 'EDIT' ? (
