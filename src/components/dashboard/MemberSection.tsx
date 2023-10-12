@@ -5,11 +5,14 @@ import Loader from '../Loader';
 import AddEditMemberForm from './AddEditMemberForm';
 import MemberItem from './MemberItem';
 import useAddMember from '../../hooks/members/useAddMember';
+import useDeleteMember from '../../hooks/members/useDeleteMember';
 
 const MemberSection = () => {
 	const { data: members, error, isLoading } = useFetchMember();
-	const addMember = useAddMember({});
 	const [formDisplay, setFormDisplay] = useState('hide');
+
+	const addMember = useAddMember({});
+	const deleteMember = useDeleteMember({});
 	return (
 		<div className="members-section relative overflow-hidden card col-[7/10] grid grid-rows-[max-content_1fr] gap-4 p-4">
 			<div className="title-box flex items-center justify-between">
@@ -33,6 +36,9 @@ const MemberSection = () => {
 						<MemberItem
 							key={member.id}
 							member={member}
+							onDelete={data => {
+								deleteMember.mutate(data);
+							}}
 						/>
 					))}
 				</div>

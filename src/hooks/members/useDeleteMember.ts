@@ -1,22 +1,21 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import Member from '../../entities/Member';
 import memberService from '../../services/memberService';
+import Member from '../../entities/Member';
 
 interface Props {
-	onAdd?: () => void;
+	onDelete?: () => void;
 	onError?: () => void;
 }
 
-const useAddMember = ({ onAdd = () => {}, onError = () => {} }: Props) => {
+const useDeleteMember = ({ onDelete = () => {}, onError = () => {} }: Props) => {
 	const queryClient = useQueryClient();
-
-	return useMutation<Member, Error, Member>({
-		mutationFn: async (member: Member) => memberService.post(member),
+	return useMutation({
+		mutationFn: async (member: Member) => memberService.delete(member.id),
 		onSuccess: () => {
 			queryClient.invalidateQueries({
-				queryKey: ['members'],
+				queryKey: ['members']
 			});
-			onAdd();
+			onDelete();
 		},
 		onError: () => {
 			onError();
@@ -24,4 +23,4 @@ const useAddMember = ({ onAdd = () => {}, onError = () => {} }: Props) => {
 	});
 };
 
-export default useAddMember;
+export default useDeleteMember;
