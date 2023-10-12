@@ -15,7 +15,7 @@ const Space = () => {
 			<h3 className="text-delftBlue text-xl font-bold mt-3 mb-1">فضای شما</h3>
 			<p className="text-powderBlue text-sm text-center">لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت</p>
 			<div className="progress-box mt-auto w-full">
-				<ProgressBar percent={70} />
+				<ProgressBar />
 			</div>
 		</div>
 	);

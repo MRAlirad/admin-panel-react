@@ -1,4 +1,3 @@
-import { useRef } from 'react';
 
 // interface Props {
 // 	remain?: number;
