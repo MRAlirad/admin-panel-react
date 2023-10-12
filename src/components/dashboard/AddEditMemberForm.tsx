@@ -90,7 +90,7 @@ const AddEditMemberForm = ({
 						color="delftBlue"
 						text="افزودن"
 						loading={isAdding}
-                        className='mx-auto'
+						className="mx-auto"
 					/>
 				) : mode === 'EDIT' ? (
 					<Button
@@ -98,7 +98,7 @@ const AddEditMemberForm = ({
 						color="jade"
 						text="ویرایش"
 						loading={isEditing}
-                        className='mx-auto'
+						className="mx-auto"
 					/>
 				) : null}
 			</div>
