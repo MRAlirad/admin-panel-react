@@ -15,6 +15,10 @@ const Space = () => {
 			<h3 className="text-delftBlue text-xl font-bold mt-3 mb-1">فضای شما</h3>
 			<p className="text-powderBlue text-sm text-center">لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت</p>
 			<div className="progress-box mt-auto w-full">
+				<div className="details flex items-center justify-between text-powderBlue text-xs mb-1">
+					<span className="spend">26.5 گیگابایت</span>
+					<span className="total">20 گیگابایت</span>
+				</div>
 				<ProgressBar />
 			</div>
 		</div>
