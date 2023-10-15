@@ -19,7 +19,7 @@ const Space = () => {
 					<span className="spend">26.5 گیگابایت</span>
 					<span className="total">20 گیگابایت</span>
 				</div>
-				<ProgressBar />
+				<ProgressBar total={23} remain={22} />
 			</div>
 		</div>
 	);
