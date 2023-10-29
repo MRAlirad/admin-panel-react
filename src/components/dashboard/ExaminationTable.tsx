@@ -17,7 +17,7 @@ const ExaminationTable = () => {
 	]
 	return (
 		<div className="card col-[7/13] py-4 px-5">
-			<Table headerLists={headersList} record={record} />
+			<Table headers={headersList} rows={record} />
 		</div>
 	);
 };

@@ -3,6 +3,10 @@
 @tailwind utilities;
 
 @layer components {
+	h2 {
+		@apply text-delftBlue text-lg font-bold
+	}
+
 	.img-box {
 		@apply flex items-center justify-center overflow-hidden;
 	}
@@ -26,6 +30,10 @@
 
 	.card {
 		@apply bg-white rounded-[20px] shadow-[0_18px_40px_0_#7090B01F];
+	}
+
+	.icon-box {
+		@apply flex items-center justify-center overflow-hidden;
 	}
 }
 
