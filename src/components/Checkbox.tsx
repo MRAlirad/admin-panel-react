@@ -27,8 +27,13 @@ const Checkbox = ({ type = 'CHECKED', disabled, checked, onChange }: Props) => {
 				onChange={(e) => handleChange(e)}
 				ref={checkboxRef}
 			/>
-			<Icon icon={isChecked ? 'check_box' : 'check_box_outline_blank'} color='text-blue' size='text-xl' />
-		</div>  
+			{
+				type === 'CHECKED' ?
+					<Icon icon={isChecked ? 'check_box' : 'check_box_outline_blank'} color='text-blue' size='text-xl' />
+				:
+					<Icon icon={isChecked ? 'toggle_on' : 'toggle_off outlined'} color='text-blue' size='text-2xl' />
+			}
+		</div>
 	);
 };
 
