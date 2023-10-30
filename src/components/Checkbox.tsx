@@ -18,9 +18,9 @@ const Checkbox = ({ type = 'CHECKED', disabled, checked, onChange }: Props) => {
 	};
 
 	return (
-		<div className="checkbox-container relative flex items-center justify-center w-6 h-6">
+		<div className={`checkbox-container relative flex items-center justify-center w-6 h-6 ${disabled ? 'text-powderBlue' : 'text-blue'}`}>
 			<input
-				className={`opacity-0 absolute top-0 right-0 w-full h-full cursor-pointer`}
+				className={`opacity-0 absolute top-0 right-0 w-full h-full z-1 ${disabled ? '' : 'cursor-pointer'}`}
 				type="checkbox"
 				disabled={disabled}
 				onChange={(e) => handleChange(e)}
@@ -28,13 +28,13 @@ const Checkbox = ({ type = 'CHECKED', disabled, checked, onChange }: Props) => {
 			{type === 'CHECKED' ? (
 				<Icon
 					icon={isChecked ? 'check_box' : 'check_box_outline_blank'}
-					color="text-blue"
+					color="text-inherit"
 					size="text-xl"
 				/>
 			) : (
 				<Icon
 					icon={isChecked ? 'toggle_on' : 'toggle_off outlined'}
-					color="text-blue"
+					color="text-inherit"
 					size="text-2xl"
 				/>
 			)}
