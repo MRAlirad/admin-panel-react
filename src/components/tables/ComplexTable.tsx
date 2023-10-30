@@ -11,9 +11,10 @@ interface Header {
 }
 
 interface Complex {
+	id : number;
 	name: string;
 	status: number;
-	data: string;
+	date: string;
 	progresss: number;
 }
 
@@ -28,7 +29,7 @@ const ComplexTable = () => {
 			label: 'وضعیت',
 		},
 		{
-			name: 'history',
+			name: 'date',
 			label: 'تاریخ',
 		},
 		{
@@ -38,21 +39,24 @@ const ComplexTable = () => {
 	];
 	const rows: Complex[] = [
 		{
+			id: Math.random(),
 			name: 'لورم ایپسوم',
 			status: 0,
-			data: '24.فرو.1402',
+			date: '24.فرو.1402',
 			progresss: 60,
 		},
 		{
+			id: Math.random(),
 			name: 'لورم ایپسوم',
 			status: 1,
-			data: '24.فرو.1402',
+			date: '24.فرو.1402',
 			progresss: 40,
 		},
 		{
+			id: Math.random(),
 			name: 'لورم ایپسوم',
 			status: 2,
-			data: '24.فرو.1402',
+			date: '24.فرو.1402',
 			progresss: 80,
 		},
 	];
@@ -88,7 +92,7 @@ const ComplexTable = () => {
 				</thead>
 				<tbody>
 					{rows.map((row) => (
-						<tr key={row.name} className='text-center h-11'>
+						<tr key={row.id} className='text-center h-11'>
 							<td>
 								<span className='text-sm font-bold text-delftBlue'>{row.name}</span>
 							</td>
@@ -96,7 +100,7 @@ const ComplexTable = () => {
 								<Status state={row.status} />
 							</td>
 							<td>
-								<span className='text-sm font-bold text-delftBlue'>{row.data}</span>
+								<span className='text-sm font-bold text-delftBlue'>{row.date}</span>
 							</td>
 							<td>
 								<ProgressBar percent={row.progresss} />
