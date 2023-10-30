@@ -61,6 +61,27 @@ const DevelopmentTable = () => {
 			date: '24.فرو.1402',
 			progress: 80,
 		},
+		{
+			id: Math.random(),
+			title: 'لورم ایپسوم',
+			platforms: ['desktop_windows', 'android', 'polymer'],
+			date: '24.فرو.1402',
+			progress: 60,
+		},
+		{
+			id: Math.random(),
+			title: 'لورم ایپسوم',
+			platforms: ['desktop_windows', 'android', 'polymer'],
+			date: '24.فرو.1402',
+			progress: 40,
+		},
+		{
+			id: Math.random(),
+			title: 'لورم ایپسوم',
+			platforms: ['desktop_windows', 'android', 'polymer'],
+			date: '24.فرو.1402',
+			progress: 80,
+		},
 	];
 
 	return (

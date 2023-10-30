@@ -59,6 +59,27 @@ const ComplexTable = () => {
 			date: '24.فرو.1402',
 			progresss: 80,
 		},
+		{
+			id: Math.random(),
+			name: 'لورم ایپسوم',
+			status: 0,
+			date: '24.فرو.1402',
+			progresss: 60,
+		},
+		{
+			id: Math.random(),
+			name: 'لورم ایپسوم',
+			status: 1,
+			date: '24.فرو.1402',
+			progresss: 40,
+		},
+		{
+			id: Math.random(),
+			name: 'لورم ایپسوم',
+			status: 2,
+			date: '24.فرو.1402',
+			progresss: 80,
+		},
 	];
 
 	return (
