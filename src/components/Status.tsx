@@ -1,5 +1,5 @@
 enum State {
-    DEACTIVE = 1,
+	DEACTIVE = 1,
 	FAIL = 0,
 	CONFIRMED = 2,
 }
@@ -15,7 +15,7 @@ interface StateProp {
 }
 
 const statusMap: Record<State, StateProp> = {
-    [State.DEACTIVE]: { label: 'غیرفعال شده', color: 'red', icon: 'cancel' },
+	[State.DEACTIVE]: { label: 'غیرفعال شده', color: 'red', icon: 'cancel' },
 	[State.CONFIRMED]: { label: 'تایید شده', color: 'jade', icon: 'check_circle' },
 	[State.FAIL]: { label: 'خطا', color: 'hunyadiYellow', icon: 'error' },
 };
