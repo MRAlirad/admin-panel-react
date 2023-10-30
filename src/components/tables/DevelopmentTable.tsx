@@ -131,10 +131,10 @@ const DevelopmentTable = () => {
 							<td>
 								<div className="platforms flex itmems-center justify-center gap-1">
 									{row.platforms.map((platform) => (
-										<Icon key={platform} icon={platform} />
-										// <span className="icon-box text-[#E0E5F2] text-lg">
-										// 	<i className="material-icons material-icons-round">{platform}</i>
-										// </span>
+										<Icon
+											key={platform}
+											icon={platform}
+										/>
 									))}
 								</div>
 							</td>

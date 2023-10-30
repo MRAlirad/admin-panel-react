@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useState } from 'react';
 import Icon from './Icon';
 
 interface Props {
@@ -10,7 +10,6 @@ interface Props {
 
 const Checkbox = ({ type = 'CHECKED', disabled, checked, onChange }: Props) => {
 	const [isChecked, setIsChecked] = useState(checked);
-	const checkboxRef = useRef(null);
 
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const isChecked = e.target.checked;
@@ -25,14 +24,20 @@ const Checkbox = ({ type = 'CHECKED', disabled, checked, onChange }: Props) => {
 				type="checkbox"
 				disabled={disabled}
 				onChange={(e) => handleChange(e)}
-				ref={checkboxRef}
 			/>
-			{
-				type === 'CHECKED' ?
-					<Icon icon={isChecked ? 'check_box' : 'check_box_outline_blank'} color='text-blue' size='text-xl' />
-				:
-					<Icon icon={isChecked ? 'toggle_on' : 'toggle_off outlined'} color='text-blue' size='text-2xl' />
-			}
+			{type === 'CHECKED' ? (
+				<Icon
+					icon={isChecked ? 'check_box' : 'check_box_outline_blank'}
+					color="text-blue"
+					size="text-xl"
+				/>
+			) : (
+				<Icon
+					icon={isChecked ? 'toggle_on' : 'toggle_off outlined'}
+					color="text-blue"
+					size="text-2xl"
+				/>
+			)}
 		</div>
 	);
 };
