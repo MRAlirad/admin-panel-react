@@ -12,7 +12,7 @@ const queryClient = new QueryClient({
 			staleTime: 10 * 1000, // 10s
 		}
 	}
-})
+});
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
 	<React.StrictMode>
